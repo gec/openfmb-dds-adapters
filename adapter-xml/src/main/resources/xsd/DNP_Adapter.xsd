@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+    Copyright 2015 Green Energy Corp.
+
+    Licensed to Green Energy Corp (www.greenenergycorp.com) under one or more
+    contributor license agreements. See the NOTICE file distributed with this
+    work for additional information regarding copyright ownership. Green Energy
+    Corp licenses this file to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and limitations under
+    the License.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsL="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="org.openfmb.microgrid.dnp3.xml"
+           xmlns="org.openfmb.microgrid.dnp3.xml"
+           xmlns:apl="APLXML.Base"
+           xmlns:dnp3="APLXML.DNP"
+           xmlns:fmb="org.openfmb.microgrid.config.xml"
+           elementFormDefault="qualified">
+
+    <xs:import namespace="APLXML.Base" schemaLocation="APL.xsd" />
+    <xs:import namespace="APLXML.DNP" schemaLocation="DNP.xsd" />
+    <xs:import namespace="org.openfmb.microgrid.config.xml" schemaLocation="FMB_DDS_Common.xsd" />
+
+    <xs:element name="OpenFMBDNP3">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Publishers" type="fmb:publishersType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Subscribers" type="fmb:subscribersType" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="DNP3Masters" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DNP3Masters">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="DNP3Master" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DNP3Master">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="apl:Log" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="dnp3:Master" maxOccurs="1" minOccurs="1" />
+                <xs:element ref="apl:TCPClient" maxOccurs="1" minOccurs="1" />
+                <xs:element ref="IndexMapping" maxOccurs="1" minOccurs="1" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="IndexMapping">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Binaries" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="mappingSeq" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Analogs" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="mappingSeq" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Counters" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="mappingSeq" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ControlStatuses" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="mappingSeq" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SetpointStatuses" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="mappingSeq" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+
+
+                <xs:element name="ControlFromKeyMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="controlKeyMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ControlFromEndDeviceControlMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="controlDeviceMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SetpointFromKeyMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="setpointKeyMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SetpointFromSetPointMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="setpointSetPointMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="mappingSeq">
+        <xs:sequence>
+            <xs:element name="Mapping" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="readingMapping" />
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="readingMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:readingDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="controlKeyMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:keyControlDesc">
+                <xs:sequence>
+                    <xs:element ref="ControlOptions" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="index" type="xs:unsignedInt" />
+                <xs:attribute name="matchBoolValue" type="xs:boolean"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="controlDeviceMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:deviceControlDesc">
+                <xs:sequence>
+                    <xs:element ref="ControlOptions" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="index" type="xs:unsignedInt" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="setpointKeyMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:keyControlDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="setpointSetPointMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:setpointControlDesc">
+                <xs:attribute name="index" type="xs:unsignedInt"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ControlOptions">
+        <xs:complexType>
+            <xs:attribute name="type" type="ControlType" use="required"/>
+            <xs:attribute name="onTime" type="xs:unsignedShort"/>
+            <xs:attribute name="offTime" type="xs:unsignedShort"/>
+            <xs:attribute name="count" type="xs:unsignedShort"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="ControlType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PULSE" />
+            <xs:enumeration value="PULSE_CLOSE" />
+            <xs:enumeration value="PULSE_TRIP" />
+            <xs:enumeration value="LATCH_ON" />
+            <xs:enumeration value="LATCH_OFF" />
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>

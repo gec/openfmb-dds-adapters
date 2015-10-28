@@ -1,0 +1,266 @@
+<!--
+
+    Copyright 2015 Green Energy Corp.
+
+    Licensed to Green Energy Corp (www.greenenergycorp.com) under one or more
+    contributor license agreements. See the NOTICE file distributed with this
+    work for additional information regarding copyright ownership. Green Energy
+    Corp licenses this file to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and limitations under
+    the License.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsL="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="org.openfmb.microgrid.modbus.xml"
+           xmlns="org.openfmb.microgrid.modbus.xml"
+           xmlns:fmb="org.openfmb.microgrid.config.xml"
+           elementFormDefault="qualified">
+
+    <xs:import namespace="org.openfmb.microgrid.config.xml" schemaLocation="FMB_DDS_Common.xsd" />
+
+
+    <xs:element name="OpenFMBModbus">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Publishers" type="fmb:publishersType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Subscribers" type="fmb:subscribersType" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ModbusMasters" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ModbusMasters">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ModbusMaster" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ModbusMaster">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="TCPClient" minOccurs="1" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="Address" type="xs:string" use="required"/>
+                        <xs:attribute name="Port" type="xs:int" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Protocol" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Stack" minOccurs="1" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="Address" type="xs:unsignedByte"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Polls" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="DiscreteInputMap" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="CoilStatusMap" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="InputRegisterMap" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="HoldingRegisterMap" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="WriteCoilFromKeyMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="writeCoilKeyMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="WriteCoilFromEndDeviceControlMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="writeCoilDeviceMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="WriteRegisterFromKeyMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="writeRegisterKeyMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="WriteRegisterFromSetPointMappings" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" type="writeRegisterSetPointMapping" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="writeCoilKeyMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:keyControlDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="writeCoilDeviceMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:deviceControlDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+                <xs:attribute name="writeBoolValue" type="xs:boolean" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="writeRegisterKeyMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:keyControlDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+                <xs:attribute name="matchBoolValue" type="xs:boolean" use="optional"/>
+                <xs:attribute name="constIntValue" type="xs:long" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="writeRegisterSetPointMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:setpointControlDesc">
+                <xs:attribute name="index" type="xs:unsignedInt"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="booleanMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:readingDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="numericMapping">
+        <xs:complexContent>
+            <xs:extension base="fmb:readingDesc">
+                <xs:attribute name="index" type="xs:unsignedInt" />
+                <xs:attribute name="type" type="Conversion"/>
+                <xs:attribute name="bitMask" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="DiscreteInputMap">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Mapping">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="booleanMapping" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CoilStatusMap">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Mapping">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="booleanMapping" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="InputRegisterMap">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Mapping">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="numericMapping" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="HoldingRegisterMap">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Mapping">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="numericMapping" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="Conversion">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SInt16"/>
+            <xs:enumeration value="UInt16"/>
+            <xs:enumeration value="SInt32LE"/>
+            <xs:enumeration value="UInt32LE"/>
+            <xs:enumeration value="SInt32BE"/>
+            <xs:enumeration value="UInt32BE"/>
+            <xs:enumeration value="Float32LE"/>
+            <xs:enumeration value="Float32BE"/>
+            <xs:enumeration value="Float64LE"/>
+            <xs:enumeration value="Float64BE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:element name="Protocol">
+        <xs:complexType>
+            <xs:attribute name="Type" type="ProtocolType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="ProtocolType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="RTU"/>
+            <xs:enumeration value="TCPIP"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DataType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DiscreteInput"/>
+            <xs:enumeration value="CoilStatus"/>
+            <xs:enumeration value="InputRegister"/>
+            <xs:enumeration value="HoldingRegister"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="Polls">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Poll">
+                    <xs:complexType>
+                        <xs:attribute name="Type" type="DataType" use="required"/>
+                        <xs:attribute name="Start" type="xs:int" use="required"/>
+                        <xs:attribute name="Count" type="xs:int" use="required"/>
+                        <xs:attribute name="IntervalMs" type="xs:int" use="required"/>
+                        <xs:attribute name="TimeoutMs" type="xs:int" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+</xs:schema>
