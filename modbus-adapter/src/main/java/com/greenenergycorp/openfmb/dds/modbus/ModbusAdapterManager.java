@@ -89,8 +89,13 @@ public class ModbusAdapterManager {
             return ControlMappingReader.load(xml, masterHandle.getCommandHandler());
 
         } else if (protocolType == ProtocolType.TCPIP) {
+            if (xml.getStack() == null || xml.getStack().getAddress() == null) {
+                throw new IllegalArgumentException("Stack address configuration must be present");
+            }
 
-            final MasterHandle masterHandle = modbusManager.addTcpMaster(address, port, adapter, commsObserver, channelObserver, modbusPolls);
+            final Short modbusAddress = xml.getStack().getAddress();
+
+            final MasterHandle masterHandle = modbusManager.addTcpMaster(address, port, modbusAddress.byteValue(), adapter, commsObserver, channelObserver, modbusPolls);
 
             return ControlMappingReader.load(xml, masterHandle.getCommandHandler());
 
