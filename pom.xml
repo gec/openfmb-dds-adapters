@@ -54,6 +54,25 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>totalgrid-snapshot</id>
+            <name>totalgrid-snapshot</name>
+            <url>https://repo.totalgrid.org/artifactory/totalgrid-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>totalgrid-release</id>
+            <name>totalgrid-release</name>
+            <url>https://repo.totalgrid.org/artifactory/totalgrid-release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <profiles>
         <profile>
             <id>slf4j-simple</id>
