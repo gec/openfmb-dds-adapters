@@ -22,13 +22,24 @@ import com.greenenergycorp.openfmb.mapping.MeasValue;
 
 import java.util.List;
 
+/**
+ * Represents a sequence of transformations that result in an (optional) value.
+ */
 public class TransformChain implements MeasTransform {
     private final List<MeasTransform> transforms;
 
+    /**
+     * @param transforms Sequence of transforms to perform on input values.
+     */
     public TransformChain(List<MeasTransform> transforms) {
         this.transforms = transforms;
     }
 
+    /**
+     * Transform an input value by iteratively passing it through the sequence of transformation steps.
+     * @param value Input value.
+     * @return Result value, null if no value is produced.
+     */
     public MeasValue transform(MeasValue value) {
 
         MeasValue current = value;

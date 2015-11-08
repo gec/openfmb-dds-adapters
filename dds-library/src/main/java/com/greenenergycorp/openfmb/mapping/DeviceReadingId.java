@@ -18,20 +18,34 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
+/**
+ * ID of an OpenFMB reading for a particular mapped device.
+ */
 public class DeviceReadingId {
     private final String deviceName;
 
     private final ReadingId readingId;
 
+    /**
+     *
+     * @param deviceName Device name from mapping configuration.
+     * @param readingId OpenFMB reading ID.
+     */
     public DeviceReadingId(String deviceName, ReadingId readingId) {
         this.deviceName = deviceName;
         this.readingId = readingId;
     }
 
+    /**
+     * @return Device name from mapping configuration
+     */
     public String getDeviceName() {
         return deviceName;
     }
 
+    /**
+     * @return OpenFMB reading ID
+     */
     public ReadingId getReadingId() {
         return readingId;
     }

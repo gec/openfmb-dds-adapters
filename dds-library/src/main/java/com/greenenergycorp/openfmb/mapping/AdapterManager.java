@@ -27,6 +27,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Component to accept data updates over the DeviceObserver interface and forward them
+ * to the DeviceUpdateManager.
+ *
+ * Utilized a blocking queue to synchronize all updates onto the thread that calls run().
+ */
 public class AdapterManager {
     private final static Logger logger = LoggerFactory.getLogger(AdapterManager.class);
 
@@ -65,6 +71,9 @@ public class AdapterManager {
 
     }
 
+    /**
+     * @return DeviceObserver interface that gathers all data updates
+     */
     public DeviceObserver getObserver() {
         return new DeviceObserver() {
             public void publish(List<ReadingMeasUpdate> readingMeasUpdates, List<KeyMeasUpdate> keyMeasUpdates) {

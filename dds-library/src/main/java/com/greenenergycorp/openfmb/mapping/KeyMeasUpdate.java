@@ -18,19 +18,33 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
+/**
+ * Data update associated with a mapped device and key ID.
+ */
 public class KeyMeasUpdate {
     private final DeviceKeyId id;
     private final MeasValue value;
 
+    /**
+     *
+     * @param id ID of an OpenFMB key field for a particular mapped device.
+     * @param value Data update.
+     */
     public KeyMeasUpdate(DeviceKeyId id, MeasValue value) {
         this.id = id;
         this.value = value;
     }
 
+    /**
+     * @return ID of an OpenFMB key field for a particular mapped device.
+     */
     public DeviceKeyId getId() {
         return id;
     }
 
+    /**
+     * @return Data update.
+     */
     public MeasValue getValue() {
         return value;
     }

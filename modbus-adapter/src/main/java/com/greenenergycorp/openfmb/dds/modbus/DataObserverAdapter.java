@@ -36,6 +36,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implements the Modbus data observer interface to translate and transform data values and then
+ * forward them to the DDS device observer.
+ */
 public class DataObserverAdapter implements ModbusDataObserver {
     private final static Logger logger = LoggerFactory.getLogger(DataObserverAdapter.class);
 

@@ -33,6 +33,9 @@ import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Loads data mapping configuration from XML.
+ */
 public class DataMappingReader {
 
     public static ModbusDataMapping load(final ModbusMaster xml) {

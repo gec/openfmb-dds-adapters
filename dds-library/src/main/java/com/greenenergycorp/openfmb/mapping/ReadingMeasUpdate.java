@@ -18,19 +18,33 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
+/**
+ * Data update associated with a mapped device and reading ID.
+ */
 public class ReadingMeasUpdate {
     private final DeviceReadingId id;
     private final MeasValue value;
 
+    /**
+     *
+     * @param id ID of an OpenFMB reading for a particular mapped device.
+     * @param value Data update.
+     */
     public ReadingMeasUpdate(DeviceReadingId id, MeasValue value) {
         this.id = id;
         this.value = value;
     }
 
+    /**
+     * @return ID of an OpenFMB reading for a particular mapped device.
+     */
     public DeviceReadingId getId() {
         return id;
     }
 
+    /**
+     * @return Data update.
+     */
     public MeasValue getValue() {
         return value;
     }

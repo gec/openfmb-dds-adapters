@@ -20,6 +20,15 @@ package com.greenenergycorp.openfmb.mapping;
 
 import java.io.IOException;
 
+/**
+ * Interface used by control adapters to start heir subscriptions.
+ */
 public interface ControlAdapter {
+
+    /**
+     * Start receiving controls.
+     *
+     * @throws IOException
+     */
     void start() throws IOException;
 }

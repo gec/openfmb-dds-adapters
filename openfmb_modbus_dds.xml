@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenFMBModbus xmlns:fmb="org.openfmb.microgrid.config.xml" xmlns="org.openfmb.microgrid.modbus.xml">
+
+    <Publishers>
+        <fmb:BatteryReadingModule
+                adapterName="PowerHub_Read"
+                logicalDeviceId="NewOrleans.Microgrid.Battery"
+                mRID="NewOrleans.Microgrid.Battery"
+                name="PowerHub ESS"
+                description="PowerHub ESS"/>
+        <fmb:BatteryEventModule
+                adapterName="PowerHub_Event"
+                logicalDeviceId="NewOrleans.Microgrid.Battery"
+                mRID="NewOrleans.Microgrid.Battery"
+                name="PowerHub ESS"
+                description="PowerHub ESS"/>
+    </Publishers>
+
+    <Subscribers>
+        <fmb:BatteryControlModule adapterName="PowerHub_Control" logicalDeviceId="NewOrleans.Microgrid.Battery"/>
+    </Subscribers>
+
+    <ModbusMasters>
+        <ModbusMaster>
+            <TCPClient Address="192.168.100.65" Port="20000"/>
+            <Protocol Type="TCPIP"/>
+            <Stack Address="1"/>
+            <Polls>
+                <Poll Type="InputRegister" Start="10" Count="52" IntervalMs="1000" TimeoutMs="10000"/>
+            </Polls>
+
+            <InputRegisterMap>
+
+                <Mapping index="12" type="UInt16" adapterName="PowerHub_Event" key="mode">
+                    <fmb:transform>
+                        <fmb:match defaultStringValue="unknown">
+                            <fmb:case matchIntegerValue="0" toStringValue="Standby"/>
+                            <fmb:case matchIntegerValue="1" toStringValue="Firm"/>
+                            <fmb:case matchIntegerValue="2" toStringValue="Dispatch"/>
+                            <fmb:case matchIntegerValue="3" toStringValue="Charge"/>
+                            <fmb:case matchIntegerValue="4" toStringValue="Maintain Minimum Battery SoC"/>
+                            <fmb:case matchIntegerValue="5" toStringValue="Sleep"/>
+                            <fmb:case matchIntegerValue="6" toStringValue="Fault"/>
+                            <fmb:case matchIntegerValue="7" toStringValue="Firmware Update"/>
+                            <fmb:case matchIntegerValue="8" toStringValue="Isolated"/>
+                            <fmb:case matchIntegerValue="9" toStringValue="Leaving Isolated"/>
+                            <fmb:case matchIntegerValue="10" toStringValue="Precharge"/>
+                            <fmb:case matchIntegerValue="11" toStringValue="Peak Management"/>
+                            <fmb:case matchIntegerValue="12" toStringValue="Programmed P/Q"/>
+                            <fmb:case matchIntegerValue="13" toStringValue="Islanded"/>
+                            <fmb:case matchIntegerValue="14" toStringValue="Leaving Islanded"/>
+                        </fmb:match>
+                    </fmb:transform>
+                </Mapping>
+
+                <Mapping index="13" type="SInt16" adapterName="PowerHub_Event" key="isCharging">
+                    <fmb:transform>
+                        <fmb:lessThan value="0"/>
+                    </fmb:transform>
+                </Mapping>
+
+                <Mapping index="30" type="SInt16" adapterName="PowerHub_Event" key="stateOfCharge"/>
+
+                <!-- note: rigged for always true -->
+                <Mapping index="13" type="SInt16" adapterName="PowerHub_Event" key="isConnected">
+                    <fmb:transform>
+                        <fmb:scale multiplier="0" offset="1"/>
+                    </fmb:transform>
+                </Mapping>
+
+                <Mapping index="48" type="SInt32BE" adapterName="PowerHub_Read" unit="W" multiplier="kilo" phases="ABC" flowDirection="total">
+                    <fmb:transform>
+                        <fmb:scale multiplier="0.001"/>
+                    </fmb:transform>
+                </Mapping>
+                <Mapping index="50" type="SInt32BE" adapterName="PowerHub_Read" unit="VAr" multiplier="kilo" phases="ABC" flowDirection="total">
+                    <fmb:transform>
+                        <fmb:scale multiplier="0.001"/>
+                    </fmb:transform>
+                </Mapping>
+            </InputRegisterMap>
+
+            <WriteRegisterFromKeyMappings>
+                <Mapping index="0" adapterName="PowerHub_Control" key="isIslanded" matchBoolValue="true" constIntValue="13"/>
+            </WriteRegisterFromKeyMappings>
+
+            <WriteRegisterFromSetPointMappings>
+                <Mapping index="0" adapterName="PowerHub_Control" controlType="SetMode" unit="none" multiplier="none"/>
+                <Mapping index="1" adapterName="PowerHub_Control" controlType="SetRealPower" unit="W" multiplier="kilo">
+                    <fmb:transform>
+                        <fmb:scale multiplier="1000" offset="0.0"/>
+                    </fmb:transform>
+                </Mapping>
+                <Mapping index="2" adapterName="PowerHub_Control" controlType="SetReactivePower" unit="VAr" multiplier="kilo">
+                    <fmb:transform>
+                        <fmb:scale multiplier="1000" offset="0.0"/>
+                    </fmb:transform>
+                </Mapping>
+            </WriteRegisterFromSetPointMappings>
+
+        </ModbusMaster>
+    </ModbusMasters>
+</OpenFMBModbus>

@@ -21,11 +21,21 @@ package com.greenenergycorp.openfmb.mapping;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *  Buffer for tracking updates to key and reading values for a particular mapped device. Keeps the latest value
+ *  and informs the user on updates whether the add represents a change.
+ */
 public class DeviceValueBuffer {
 
     private Map<String, MeasValue> keyValueMap = new HashMap<String, MeasValue>();
     private Map<ReadingId, MeasValue> readingValueMap = new HashMap<ReadingId, MeasValue>();
 
+    /**
+     * Add reading data update.
+     *
+     * @param update Data update for an OpenFMB reading.
+     * @return Whether the buffer is changed as a result of the update (the update was not a duplicate).
+     */
     public boolean addReading(ReadingMeasUpdate update) {
         final ReadingId id = update.getId().getReadingId();
         final MeasValue prevValue = readingValueMap.get(id);
@@ -33,6 +43,12 @@ public class DeviceValueBuffer {
         return prevValue == null || !prevValue.equals(update.getValue());
     }
 
+    /**
+     * Add key data update.
+     *
+     * @param update Data update for a key field.
+     * @return Whether the buffer is changed as a result of the update (the update was not a duplicate).
+     */
     public boolean addKeyValue(KeyMeasUpdate update) {
         final String key = update.getId().getKey();
         final MeasValue prevValue = keyValueMap.get(key);
@@ -40,23 +56,41 @@ public class DeviceValueBuffer {
         return prevValue == null || !prevValue.equals(update.getValue());
     }
 
+    /**
+     * Gets a snapshot of the current values in the buffer.
+     *
+     * @return Snapshot of the current values in the buffer.
+     */
     public ValuesSnapshot current() {
         return new ValuesSnapshot(keyValueMap, readingValueMap);
     }
 
+    /**
+     * Snapshot of the current values in the buffer.
+     */
     public static class ValuesSnapshot {
         private final Map<String, MeasValue> keyValueMap;
         private final Map<ReadingId, MeasValue> readingValueMap;
 
+        /**
+         * @param keyValueMap Map of data updates for key fields.
+         * @param readingValueMap Map of data updates for OpenFMB readings.
+         */
         public ValuesSnapshot(Map<String, MeasValue> keyValueMap, Map<ReadingId, MeasValue> readingValueMap) {
             this.keyValueMap = keyValueMap;
             this.readingValueMap = readingValueMap;
         }
 
+        /**
+         * @return Map of data updates for key fields.
+         */
         public Map<String, MeasValue> getKeyValueMap() {
             return keyValueMap;
         }
 
+        /**
+         * @return Map of data updates for OpenFMB readings.
+         */
         public Map<ReadingId, MeasValue> getReadingValueMap() {
             return readingValueMap;
         }

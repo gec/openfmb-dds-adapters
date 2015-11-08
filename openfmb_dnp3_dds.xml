@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenFMBDNP3 xmlns:dnp3="APLXML.DNP" xmlns:apl="APLXML.Base"
+             xmlns:fmb="org.openfmb.microgrid.config.xml"
+             xmlns="org.openfmb.microgrid.dnp3.xml">
+
+    <Publishers>
+        <fmb:RecloserReadingModule
+                adapterName="GERecloser_Read"
+                logicalDeviceId="NewOrleans.Microgrid.Recloser"
+                mRID="NewOrleans.Microgrid.Recloser"
+                name="GE Multilin F60"
+                description="GE Multilin F60"
+                normalOpen="false"/>
+        <fmb:RecloserEventModule
+                adapterName="GERecloser_Event"
+                logicalDeviceId="NewOrleans.Microgrid.Recloser"
+                mRID="NewOrleans.Microgrid.Recloser"
+                name="GE Multilin F60"
+                description="GE Multilin F60"
+                normalOpen="false"/>
+    </Publishers>
+
+    <Subscribers>
+        <fmb:RecloserControlModule adapterName="GERecloser_Control" logicalDeviceId="NewOrleans.Microgrid.Recloser"/>
+    </Subscribers>
+
+    <DNP3Masters>
+        <DNP3Master>
+            <dnp3:Master>
+                <dnp3:Stack>
+                    <dnp3:LinkLayer RemoteBuffFullTimeoutMS="0" NumRetries="3" AckTimeoutMS="1000" UseConfirmations="false" RemoteAddress="2" LocalAddress="1" IsMaster="true"/>
+                    <dnp3:AppLayer NumRetries="0" MaxFragSize="2048" TimeoutMS="5000"/>
+                </dnp3:Stack>
+                <dnp3:MasterSettings IntegrityPeriodMS="300000" TaskRetryMS="5000" AllowTimeSync="true"/>
+                <dnp3:ScanList>
+                    <dnp3:ExceptionScan PeriodMS="2000" Class3="true" Class2="true" Class1="true"/>
+                </dnp3:ScanList>
+                <dnp3:Unsol Class3="true" Class2="true" Class1="true" Enable="false" DoTask="false"/>
+            </dnp3:Master>
+            <apl:TCPClient Address="192.168.100.220" Port="20000"/>
+
+            <!--
+                Valid log levels:
+
+                  - LOG_DEBUG
+                  - LOG_COMM
+                  - LOG_INTERPRET
+                  - LOG_INFO
+                  - LOG_WARNING
+                  - LOG_ERROR
+                  - LOG_EVENT
+            -->
+            <apl:Log Filter="LOG_INFO"/>
+
+            <IndexMapping>
+                <Binaries>
+                    <Mapping index="0" adapterName="GERecloser_Event" key="SwitchStatus">
+                        <fmb:transform>
+                            <fmb:match defaultBooleanValue="false">
+                                <fmb:case matchBooleanValue="false" toBooleanValue="true"/>
+                                <fmb:case matchBooleanValue="true" toBooleanValue="false"/>
+                            </fmb:match>
+                        </fmb:transform>
+                    </Mapping>
+                    <Mapping index="1" adapterName="GERecloser_Event" key="isBlocked">
+                        <fmb:transform>
+                            <fmb:match defaultBooleanValue="false">
+                                <fmb:case matchBooleanValue="false" toBooleanValue="true"/>
+                                <fmb:case matchBooleanValue="true" toBooleanValue="false"/>
+                            </fmb:match>
+                        </fmb:transform>
+                    </Mapping>
+                </Binaries>
+
+                <ControlFromEndDeviceControlMappings>
+                    <Mapping adapterName="GERecloser_Control" action="trip" type="" index="0">
+                        <ControlOptions type="LATCH_ON" count="1"/>
+                    </Mapping>
+                    <Mapping adapterName="GERecloser_Control" action="close" type="" index="1">
+                        <ControlOptions type="LATCH_ON" count="1"/>
+                    </Mapping>
+                </ControlFromEndDeviceControlMappings>
+            </IndexMapping>
+        </DNP3Master>
+    </DNP3Masters>
+</OpenFMBDNP3>

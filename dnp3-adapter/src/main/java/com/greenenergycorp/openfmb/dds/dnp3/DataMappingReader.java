@@ -34,6 +34,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Loads data mapping configuration from XML.
+ */
 public class DataMappingReader {
     
     public static Dnp3DataMapping load(IndexMapping xml) {

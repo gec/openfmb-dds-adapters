@@ -29,7 +29,11 @@ import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
 
 public class CommonConversions {
 
-
+    /**
+     * Converts XML units to OpenFMB DDS units.
+     * @param xml XML type.
+     * @return DDS type.
+     */
     public static UnitSymbolKind convertFromXml(UnitSymbol xml) {
 
         if (xml == UnitSymbol.AMP) {
@@ -93,6 +97,11 @@ public class CommonConversions {
         }
     }
 
+    /**
+     * Converts XML unit multiplier to OpenFMB DDS unit multiplier.
+     * @param xml XML type.
+     * @return DDS type.
+     */
     public static UnitMultiplierKind convertFromXml(UnitMultiplier xml) {
 
         if (xml == UnitMultiplier.CENTI) {
@@ -122,6 +131,11 @@ public class CommonConversions {
         }
     }
 
+    /**
+     * Converts XML flow direction to OpenFMB DDS flow direction.
+     * @param xml XML type.
+     * @return DDS type.
+     */
     public static FlowDirectionKind convertFromXml(FlowDirection xml) {
 
         if (xml == FlowDirection.FORWARD) {
@@ -171,6 +185,11 @@ public class CommonConversions {
         }
     }
 
+    /**
+     * Converts XML phase to OpenFMB DDS phase.
+     * @param xml XML type.
+     * @return DDS type.
+     */
     public static PhaseCodeKind convertFromXml(PhaseCode xml) {
 
         if (xml == PhaseCode.A) {

@@ -21,11 +21,34 @@ package com.greenenergycorp.openfmb.dds;
 import com.rti.dds.domain.DomainParticipant;
 import com.rti.dds.subscription.DataReader;
 
+/**
+ *  Generic interface for users perform common DDS actions without re-writing code for every type.
+ *
+ * @param <T> DDS data type
+ */
 public interface TypeHandle<T> {
 
+    /**
+     * @return Type name from the type support's get_type_name() method.
+     */
     String typeName();
 
+    /**
+     * Register type with a DDS domain participant.
+     *
+     * @param participant DDS domain participant.
+     */
     void registerType(DomainParticipant participant);
 
+    /**
+     *  Generic method to call take() on a DDS data reader.
+     *
+     * @param parentReader DataReader for the DDS data type.
+     * @param maxSamples DDS "max_samples" parameter, see DDS documentation.
+     * @param sampleStates DDS "sample_states" parameter, see DDS documentation.
+     * @param viewStates DDS "view_states" parameter, see DDS documentation.
+     * @param instanceStates DDS "instance_states" parameter, see DDS documentation.
+     * @return Result containing DDS data type and sample info.
+     */
     ReadResult<T> take(DataReader parentReader, int maxSamples, int sampleStates, int viewStates, int instanceStates);
 }

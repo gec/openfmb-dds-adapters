@@ -26,6 +26,9 @@ import org.totalgrid.modbus.japi.*;
 
 import java.util.List;
 
+/**
+ * Factory for Modbus master protocol adapters.
+ */
 public class ModbusAdapterManager {
     private final DeviceObserver observer;
 
@@ -35,6 +38,12 @@ public class ModbusAdapterManager {
         this.observer = observer;
     }
 
+    /**
+     * Build a Modbus adapter.
+     *
+     * @param xml Modbus XML configuration.
+     * @return Mapping of OpenFMB DDS control IDs to control handlers.
+     */
     ControlHandlerMapping addMaster(final ModbusMaster xml) {
 
         if (xml.getTCPClient() == null) {
@@ -104,6 +113,9 @@ public class ModbusAdapterManager {
         }
     }
 
+    /**
+     * Stop all Modbus stacks.
+     */
     void shutdown() {
         modbusManager.shutdown();
     }

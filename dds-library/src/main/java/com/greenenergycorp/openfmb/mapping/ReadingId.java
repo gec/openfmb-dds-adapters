@@ -24,6 +24,9 @@ import org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
 
+/**
+ * ID describing an entry in an OpenFMB reading sequence.
+ */
 public class ReadingId {
 
     private final UnitSymbolKind unit;
@@ -33,6 +36,14 @@ public class ReadingId {
 
     private final String name;
 
+    /**
+     *
+     * @param unit OpenFMB unit.
+     * @param multiplier OpenFMB multiplier.
+     * @param flowDirection OpenFMB flow direction.
+     * @param phases OpenFMB phase.
+     * @param name OpenFMB reading name.
+     */
     public ReadingId(UnitSymbolKind unit, UnitMultiplierKind multiplier, FlowDirectionKind flowDirection, PhaseCodeKind phases, String name) {
         this.unit = unit;
         this.multiplier = multiplier;
@@ -41,22 +52,37 @@ public class ReadingId {
         this.name = name;
     }
 
+    /**
+     * @return OpenFMB unit.
+     */
     public UnitSymbolKind getUnit() {
         return unit;
     }
 
+    /**
+     * @return OpenFMB multiplier.
+     */
     public UnitMultiplierKind getMultiplier() {
         return multiplier;
     }
 
+    /**
+     * @return OpenFMB flow direction.
+     */
     public FlowDirectionKind getFlowDirection() {
         return flowDirection;
     }
 
+    /**
+     * @return OpenFMB phase.
+     */
     public PhaseCodeKind getPhases() {
         return phases;
     }
 
+    /**
+     * @return OpenFMB reading name.
+     */
     public String getName() {
         return name;
     }

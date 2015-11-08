@@ -20,7 +20,18 @@ package com.greenenergycorp.openfmb.mapping.transform;
 
 import com.greenenergycorp.openfmb.mapping.MeasValue;
 
+/**
+ * Represents a generic transformation of an input MeasValue to and (optional) result MeasValue.
+ */
 public interface MeasTransform {
 
+    /**
+     * Transforms an input MeasValue to a result MeasValue.
+     *
+     * Returns null if the transformation does not produce a result.
+     *
+     * @param value Input value.
+     * @return Output value, null if no result.
+     */
     MeasValue transform(MeasValue value);
 }

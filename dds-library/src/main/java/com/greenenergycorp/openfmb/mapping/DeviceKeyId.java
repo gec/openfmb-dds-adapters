@@ -18,19 +18,33 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
+/**
+ * ID of an OpenFMB key update (DDS struct field) for a particular mapped device.
+ */
 public class DeviceKeyId {
     private final String deviceName;
     private final String key;
 
+    /**
+     *
+     * @param deviceName Device name from mapping configuration.
+     * @param key Name of the key, i.e. the field name of a DDS struct.
+     */
     public DeviceKeyId(String deviceName, String key) {
         this.deviceName = deviceName;
         this.key = key;
     }
 
+    /**
+     * @return Device name from mapping configuration.
+     */
     public String getDeviceName() {
         return deviceName;
     }
 
+    /**
+     * @return Name of the key, i.e. the field name of a DDS struct.
+     */
     public String getKey() {
         return key;
     }

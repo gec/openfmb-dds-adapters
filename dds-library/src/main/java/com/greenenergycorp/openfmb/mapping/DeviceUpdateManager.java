@@ -26,11 +26,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Manages the list of OpenFMB DDS DeviceAdapters and the current values of data coming from the protocol adapters.
+ *
+ * Will publish whenever a value for a device changes.
+ *
+ * Also can publish on demand using the publishAll() method.
+ *
+ */
 public class DeviceUpdateManager implements DeviceObserver {
 
     private final static Logger logger = LoggerFactory.getLogger(DeviceUpdateManager.class);
 
-    private final Map<String, DeviceAdapter> adapterMap; // = new HashMap<String, DeviceAdapter>();
+    private final Map<String, DeviceAdapter> adapterMap;
 
     private final Map<String, DeviceValueBuffer> deviceMap = new HashMap<String, DeviceValueBuffer>();
 
@@ -38,6 +46,12 @@ public class DeviceUpdateManager implements DeviceObserver {
         this.adapterMap = adapterMap;
     }
 
+    /**
+     * Update value buffers with data updates and push DDS messages if there are any changes.
+     *
+     * @param readingMeasUpdates Data updates with an OpenFMB reading ID.
+     * @param keyMeasUpdates Data updates with an OpenFMB field key ID.
+     */
     public void publish(List<ReadingMeasUpdate> readingMeasUpdates, List<KeyMeasUpdate> keyMeasUpdates) {
 
         final HashSet<String> changedDevices = new HashSet<String>();
@@ -96,6 +110,9 @@ public class DeviceUpdateManager implements DeviceObserver {
         }
     }
 
+    /**
+     * Publish to the DDS adapters with the current state of the value buffers.
+     */
     public void publishAll() {
         for (Map.Entry<String, DeviceAdapter> entry: adapterMap.entrySet()) {
             final String device = entry.getKey();

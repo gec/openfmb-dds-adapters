@@ -97,7 +97,6 @@ public class XmlConfigReader {
 
     public static class DnpXmlMarshaller {
 
-        //private final static Logger logger = LoggerFactory.getLogger(DnpXmlMarshaller.class);
         private final JAXBContext jaxbContext;
 
         private DnpXmlMarshaller(JAXBContext jaxbContext) {
@@ -110,17 +109,11 @@ public class XmlConfigReader {
         }
         
         public OpenFMBDNP3 unmarshal(InputStream is) throws JAXBException {
-            //try {
-                final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-                final Object obj = unmarshaller.unmarshal(is);
+            final Object obj = unmarshaller.unmarshal(is);
 
-                return (OpenFMBDNP3)(obj);
-
-            /*} catch (JAXBException e) {
-                logger.error("Could not unmarshal DNP3 XML configuration: " + e);
-                return null;
-            }*/
+            return (OpenFMBDNP3)(obj);
         }
     }
 }

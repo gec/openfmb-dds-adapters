@@ -20,8 +20,16 @@ package com.greenenergycorp.openfmb.mapping;
 
 import java.util.List;
 
+/**
+ * Interface for sources of data updates to publish to DDS output adapters.
+ */
 public interface DeviceObserver {
 
+    /**
+     * Publish data to the observer.
+     *
+     * @param readingMeasUpdates Data updates with an OpenFMB reading ID.
+     * @param keyMeasUpdates Data updates with an OpenFMB field key ID.
+     */
     void publish(List<ReadingMeasUpdate> readingMeasUpdates, List<KeyMeasUpdate> keyMeasUpdates);
-
 }

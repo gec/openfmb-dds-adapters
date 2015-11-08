@@ -28,6 +28,9 @@ import org.totalgrid.dnp3.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Factory for creating DNP3 master stacks.
+ */
 public class Dnp3AdapterManager {
 
     private final static Logger logger = LoggerFactory.getLogger(Dnp3AdapterManager.class);
@@ -35,6 +38,7 @@ public class Dnp3AdapterManager {
     private final StackManager stackManager = new StackManager();
     private final LogAdapter logAdapter = new LogAdapter();
 
+    // This map is necessary to keep the Java garbage collector from deleting objects the JNI points to.
     private final Map<String, AdapterRecord> map = new ConcurrentHashMap<String, AdapterRecord>();
 
     private final DeviceObserver observer;
@@ -44,6 +48,12 @@ public class Dnp3AdapterManager {
         stackManager.AddLogHook(logAdapter);
     }
 
+    /**
+     * Build a DNP3 adapter.
+     *
+     * @param xmlConfig DNP3 XML configuration.
+     * @return Mapping of OpenFMB DDS control IDs to control handlers.
+     */
     ControlHandlerMapping addAdapter(final DNP3Master xmlConfig) {
 
         if (xmlConfig.getTCPClient() == null) {
@@ -85,6 +95,9 @@ public class Dnp3AdapterManager {
         return controlHandlerMapping;
     }
 
+    /**
+     * Stop all DNP3 masters.
+     */
     public void shutdown() {
         stackManager.Shutdown();
         map.clear();

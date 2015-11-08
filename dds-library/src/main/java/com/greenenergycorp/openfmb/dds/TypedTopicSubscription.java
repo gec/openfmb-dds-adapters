@@ -26,17 +26,34 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * Wraps a subscription to a DDS data topic. Handles listening for notifications of incoming data,
+ * reading the data from the DataReader, and delivering the result to the user-provided callback.
+ *
+ * @param <T> DDS data type.
+ */
 public class TypedTopicSubscription<T> {
     private final static Logger logger = LoggerFactory.getLogger(TypedTopicSubscription.class);
 
     private final DataReader reader;
     private final TypeHandle<T> typeHandle;
 
+    /**
+     * @param reader DataReader for the DDS topic/type.
+     * @param typeHandle Type-specific interface for the DDS topic/type.
+     */
     public TypedTopicSubscription(DataReader reader, TypeHandle<T> typeHandle) {
         this.reader = reader;
         this.typeHandle = typeHandle;
     }
 
+    /**
+     *  Starts the listening for arriving data on a topic and delivering read results to the
+     *  subscription handler.
+     *
+     * @param handler Callback handler for incoming data.
+     * @throws IOException
+     */
     public void subscribe(final SubscriptionHandler<T> handler) throws IOException {
 
         reader.set_listener(new DataReaderListener() {

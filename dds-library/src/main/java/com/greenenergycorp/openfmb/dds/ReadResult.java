@@ -22,6 +22,11 @@ import com.rti.dds.subscription.SampleInfo;
 
 import java.util.List;
 
+/**
+ * Generic wrapper for the result from a DDS DataReader.
+ *
+ * @param <T>
+ */
 public class ReadResult<T> {
     private final List<T> results;
     private final List<SampleInfo> sampleInfo;
@@ -31,10 +36,16 @@ public class ReadResult<T> {
         this.sampleInfo = sampleInfo;
     }
 
+    /**
+     * @return List of result payloads.
+     */
     public List<T> getResults() {
         return results;
     }
 
+    /**
+     * @return List of DDS SampleInfos.
+     */
     public List<SampleInfo> getSampleInfo() {
         return sampleInfo;
     }

@@ -20,30 +20,53 @@ package com.greenenergycorp.openfmb.mapping;
 
 import java.util.List;
 
+/**
+ * Contains mappings between control IDs and ControlHandler instances.
+ *
+ * There are three types of control IDs (key, device control, SetPoint) and there is a separate map
+ * for each type.
+ */
 public class ControlHandlerMapping {
 
     private final List<KeyMapping> keyMappings;
     private final List<DeviceControlMapping> deviceMappings;
     private final List<SetPointMapping> setPointMappings;
 
+    /**
+     * @param keyMappings Mapping from OpenFMB control key IDs to control handlers.
+     * @param deviceMappings Mapping from OpenFMB EndDeviceControl IDs to control handlers.
+     * @param setPointMappings Mapping from OpenFMB SetPoint IDs to control handlers.
+     */
     public ControlHandlerMapping(List<KeyMapping> keyMappings, List<DeviceControlMapping> deviceMappings, List<SetPointMapping> setPointMappings) {
         this.keyMappings = keyMappings;
         this.deviceMappings = deviceMappings;
         this.setPointMappings = setPointMappings;
     }
 
+    /**
+     * @return Mapping from OpenFMB control key IDs to control handlers.
+     */
     public List<KeyMapping> getKeyMappings() {
         return keyMappings;
     }
 
+    /**
+     * @return Mapping from OpenFMB EndDeviceControl IDs to control handlers.
+     */
     public List<DeviceControlMapping> getDeviceMappings() {
         return deviceMappings;
     }
 
+    /**
+     * @return Mapping from OpenFMB SetPoint IDs to control handlers.
+     */
     public List<SetPointMapping> getSetPointMappings() {
         return setPointMappings;
     }
 
+    /**
+     * Mapping from OpenFMB control key IDs to control handlers.
+     */
     public static class KeyMapping {
         private final Control.KeyControlId id;
         private final ControlHandler handler;
@@ -62,6 +85,9 @@ public class ControlHandlerMapping {
         }
     }
 
+    /**
+     * Mapping from OpenFMB EndDeviceControl IDs to control handlers.
+     */
     public static class DeviceControlMapping {
         private final Control.EndDeviceControl id;
         private final ControlHandler handler;
@@ -80,6 +106,9 @@ public class ControlHandlerMapping {
         }
     }
 
+    /**
+     * Mapping from OpenFMB SetPoint IDs to control handlers.
+     */
     public static class SetPointMapping {
         private final Control.SetpointId id;
         private final ControlHandler handler;

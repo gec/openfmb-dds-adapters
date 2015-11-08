@@ -35,7 +35,7 @@ import com.rti.dds.topic.TopicQos;
 import java.io.IOException;
 
 /**
- * Wrapper for OpenSplice DDS that contains most of the common initialization
+ * Wrapper for DDS that contains most of the common initialization
  */
 public class DdsParticipant {
 

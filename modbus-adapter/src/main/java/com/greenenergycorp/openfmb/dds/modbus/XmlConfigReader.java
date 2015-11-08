@@ -32,6 +32,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Load Modbus configuration from XML.
+ */
 public class XmlConfigReader {
 
     public static List<ModbusPoll> loadPolls(ModbusMaster xml) {

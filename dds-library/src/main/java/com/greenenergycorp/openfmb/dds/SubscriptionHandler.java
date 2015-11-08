@@ -18,7 +18,19 @@
  */
 package com.greenenergycorp.openfmb.dds;
 
+
+/**
+ * Simplified generic interface for handling callbacks from DDS data
+ * subscriptions.
+ *
+ * @param <T> DDS struct type.
+ */
 public interface SubscriptionHandler<T> {
 
+    /**
+     * Handle the arrival of subscription data.
+     *
+     * @param readResult Subscription data to handle.
+     */
     void handle(ReadResult<T> readResult);
 }

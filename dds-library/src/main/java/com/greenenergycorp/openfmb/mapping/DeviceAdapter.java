@@ -20,6 +20,16 @@ package com.greenenergycorp.openfmb.mapping;
 
 import java.util.Map;
 
+/**
+ * Adapter used to translate updates to OpenFMB readings and DDS struct fields to DDS updates.
+ */
 public interface DeviceAdapter {
+
+    /**
+     * Update OpenFMB readings and key fields.
+     *
+     * @param readingValues Map of reading IDs to value updates.
+     * @param keyValues Map of key IDs to value updates.
+     */
     void update(Map<ReadingId, MeasValue> readingValues, Map<String, MeasValue> keyValues);
 }

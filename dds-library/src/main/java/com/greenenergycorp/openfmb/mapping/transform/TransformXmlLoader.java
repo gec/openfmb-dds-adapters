@@ -24,6 +24,9 @@ import com.greenenergycorp.openfmb.mapping.MeasValue;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Loads a sequence of transformations from an XML Transform element.
+ */
 public class TransformXmlLoader {
 
     public static MeasTransform load(final Transform xml) {

@@ -18,6 +18,14 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
+/**
+ * Callback used by device adapters to handle the translation of DDS controls.
+ */
 public interface ControlHandler {
+
+    /**
+     * Handle DDS control.
+     * @param control DDS control.
+     */
     void handle(Control control);
 }

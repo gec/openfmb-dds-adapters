@@ -25,6 +25,9 @@ import org.totalgrid.dnp3.FilterLevel;
 import org.totalgrid.dnp3.ILogBase;
 import org.totalgrid.dnp3.LogEntry;
 
+/**
+ * Adapts log messages from the C++ stack to Java logging.
+ */
 public class LogAdapter extends ILogBase {
 
     private final static Logger logger = LoggerFactory.getLogger(Dnp3AdapterManager.class);

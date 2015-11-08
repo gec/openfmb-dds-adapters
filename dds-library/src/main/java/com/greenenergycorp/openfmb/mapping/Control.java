@@ -22,10 +22,26 @@ package com.greenenergycorp.openfmb.mapping;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
 
+/**
+ * Abstract base class for OpenFMB controls associated with a particular mapped device.
+ *
+ * The concrete types of OpenFMB controls are:
+ *
+ * - Key controls (values are used by DDS struct fields).
+ * - EndDeviceControls (values are used by the OpenFMB EndDeviceControl type)
+ * - Setpoint controls (values are used by OpenFMB Setpoints)
+ *
+ */
 public abstract class Control {
 
+    /**
+     * @return The device name used to map to a DDS key.
+     */
     public abstract String getDevice();
 
+    /**
+     * ID for key controls (keys refer to DDS struct fields).
+     */
     public static class KeyControlId {
         private final String device;
         private final String key;
@@ -35,10 +51,16 @@ public abstract class Control {
             this.key = key;
         }
 
+        /**
+         * @return The device name used to map to a DDS key.
+         */
         public String getDevice() {
             return device;
         }
 
+        /**
+         * @return The key (DDS struct field) for the value of the control.
+         */
         public String getKey() {
             return key;
         }
@@ -71,6 +93,9 @@ public abstract class Control {
         }
     }
 
+    /**
+     * Key controls with their value.
+     */
     public static class KeyControl extends Control {
         private final KeyControlId id;
         private final MeasValue value;
@@ -80,14 +105,23 @@ public abstract class Control {
             this.value = value;
         }
 
+        /**
+         * @return ID of OpenFMB DDS struct field.
+         */
         public KeyControlId getId() {
             return id;
         }
 
+        /**
+         * @return Value of OpenFMB DDS struct field.
+         */
         public MeasValue getValue() {
             return value;
         }
 
+        /**
+         * @return Device name from mapping configuration
+         */
         public String getDevice() {
             return id.getDevice();
         }
@@ -101,6 +135,9 @@ public abstract class Control {
         }
     }
 
+    /**
+     * Control translated from OpenFMB EndDeviceControl struct.
+     */
     public static class EndDeviceControl extends Control {
         private final String device;
         private final String action;
@@ -112,14 +149,23 @@ public abstract class Control {
             this.type = type;
         }
 
+        /**
+         * @return Device name from mapping configuration
+         */
         public String getDevice() {
             return device;
         }
 
+        /**
+         * @return Action field of EndDeviceControl struct.
+         */
         public String getAction() {
             return action;
         }
 
+        /**
+         * @return Type field of EndDeviceControl struct.
+         */
         public String getType() {
             return type;
         }
@@ -155,6 +201,9 @@ public abstract class Control {
         }
     }
 
+    /**
+     * Control ID translated from OpenFMB SetPoint struct.
+     */
     public static class SetpointId {
         private final String device;
 
@@ -169,18 +218,30 @@ public abstract class Control {
             this.multiplier = multiplier;
         }
 
+        /**
+         * @return Device name from mapping configuration
+         */
         public String getDevice() {
             return device;
         }
 
+        /**
+         * @return Value of OpenFMB control type field.
+         */
         public String getControlType() {
             return controlType;
         }
 
+        /**
+         * @return Value of OpenFMB unit field. See OpenFMB IDL for possible values.
+         */
         public UnitSymbolKind getUnit() {
             return unit;
         }
 
+        /**
+         * @return Value of OpenFMB unit multiplier field. See OpenFMB IDL for possible values.
+         */
         public UnitMultiplierKind getMultiplier() {
             return multiplier;
         }
@@ -219,6 +280,9 @@ public abstract class Control {
         }
     }
 
+    /**
+     * Control translated from OpenFMB SetPoint struct.
+     */
     public static class SetpointControl extends Control {
 
         private final SetpointId id;
@@ -229,14 +293,23 @@ public abstract class Control {
             this.value = value;
         }
 
+        /**
+         * @return OpenFMB SetPoint ID.
+         */
         public SetpointId getId() {
             return id;
         }
 
+        /**
+         * @return Payload data of OpenFMB SetPoint struct.
+         */
         public float getValue() {
             return value;
         }
 
+        /**
+         * @return Device name from mapping configuration
+         */
         public String getDevice() {
             return id.getDevice();
         }

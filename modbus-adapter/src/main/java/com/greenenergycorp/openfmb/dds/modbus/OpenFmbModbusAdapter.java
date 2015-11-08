@@ -42,41 +42,54 @@ public class OpenFmbModbusAdapter {
 
         final String filename = args[0];
 
+        // Build the xml marshaller.
         final XmlConfigReader.ModbusXmlMarshaller xmlMarshaller = XmlConfigReader.ModbusXmlMarshaller.build();
 
+        // Parse the XML into a JAXB object.
         final OpenFMBModbus xmlConfig = xmlMarshaller.unmarshal(new FileInputStream(filename));
 
+        // DDS managing object.
         DdsParticipant participant = DdsParticipant.create();
 
+        // Factory for OpenFMB device adapters.
         final OpenFmbDeviceFactory deviceFactory = new OpenFmbDeviceFactory(participant, participant.createPublisher(), participant.createSubscriber());
 
+        // Map of OpenFMB device adapters from XML configuration.
         final Map<String, DeviceAdapter> adapterMap = OpenFmbXmlLoader.loadPublishers(xmlConfig.getPublishers(), deviceFactory);
 
+        // Update manager that takes data and pushes to DDS adapters.
         final DeviceUpdateManager updateManager = new DeviceUpdateManager(adapterMap);
 
+        // Threading model manager for data updates.
         final AdapterManager adapterManager = new AdapterManager(updateManager);
 
+        // Manager for instances of Modbus masters.
         final ModbusAdapterManager modbusAdapterManager = new ModbusAdapterManager(adapterManager.getObserver());
 
         final List<ControlHandlerMapping> controlHandlerMappings = new ArrayList<ControlHandlerMapping>();
 
         if (xmlConfig.getModbusMasters() != null && xmlConfig.getModbusMasters().getModbusMaster() != null) {
-            for (ModbusMaster masterXml: xmlConfig.getModbusMasters().getModbusMaster()) {
 
+            // Add a Modbus master for every entry in the XML configuration, and collect the control handler mapping.
+            for (ModbusMaster masterXml: xmlConfig.getModbusMasters().getModbusMaster()) {
                 final ControlHandlerMapping controlHandlerMapping = modbusAdapterManager.addMaster(masterXml);
                 controlHandlerMappings.add(controlHandlerMapping);
             }
 
+            // Combine all control handler mappings to a global map.
             final ControlMapping controlMapping = ControlMapping.combine(controlHandlerMappings);
 
+            // Load OpenFMB DDS control adapters (subscribers) from XML.
             final List<ControlAdapter> controlAdapters = new ArrayList<ControlAdapter>();
             final Map<String, String> logicalIdToAdapterName = new HashMap<String, String>();
             OpenFmbXmlLoader.loadSubscribers(controlAdapters, logicalIdToAdapterName, xmlConfig.getSubscribers(), deviceFactory, controlMapping);
 
+            // Start all control subscriptions.
             for (ControlAdapter adapter: controlAdapters) {
                 adapter.start();
             }
 
+            // Start pushing updates to DDS.
             adapterManager.run();
 
             System.out.println("Shutting down...");

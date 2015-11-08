@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implement the DNP3 library's IDataObserver interface to translate/transform data updates and forward them to the
+ * DDS DeviceObserver interface.
+ */
 public class UpdateAdapter extends IDataObserver {
 
     private final static Logger logger = LoggerFactory.getLogger(UpdateAdapter.class);

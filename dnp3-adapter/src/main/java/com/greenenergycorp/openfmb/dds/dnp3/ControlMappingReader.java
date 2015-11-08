@@ -36,6 +36,9 @@ import org.totalgrid.dnp3.Setpoint;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Loads control mapping configuration from XML.
+ */
 public class ControlMappingReader {
 
     private final static Logger logger = LoggerFactory.getLogger(ControlMappingReader.class);

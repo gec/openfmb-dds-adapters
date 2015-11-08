@@ -18,13 +18,45 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
+/**
+ * Abstract class for individual data updates.
+ *
+ * Concrete implementations are boolean, integer (long), double, or string values. All can optionally
+ * be converted to the other formats.
+ */
 public abstract class MeasValue {
 
+    /**
+     * Converts value to boolean.
+     *
+     * @return Boolean value. Null if conversion is not possible.
+     */
     public abstract Boolean asBoolean();
+
+    /**
+     * Converts value to long.
+     *
+     * @return Long value. Null if conversion is not possible.
+     */
     public abstract Long asLong();
+
+    /**
+     * Converts value to double.
+     *
+     * @return Double value. Null if conversion is not possible.
+     */
     public abstract Double asDouble();
+
+    /**
+     * Converts value to string.
+     *
+     * @return String value. Null if conversion is not possible.
+     */
     public abstract String asString();
 
+    /**
+     * Boolean data update.
+     */
     public static class MeasBoolValue extends MeasValue {
         private final boolean value;
 
@@ -78,6 +110,10 @@ public abstract class MeasValue {
         }
     }
 
+
+    /**
+     * Integer data update.
+     */
     public static class MeasIntValue extends MeasValue {
         private final long value;
 
@@ -131,6 +167,9 @@ public abstract class MeasValue {
         }
     }
 
+    /**
+     * Floating-point data update.
+     */
     public static class MeasFloatValue extends MeasValue {
         private final double value;
 
@@ -185,6 +224,9 @@ public abstract class MeasValue {
         }
     }
 
+    /**
+     * String data update.
+     */
     public static class MeasStringValue extends MeasValue {
         private final String value;
 

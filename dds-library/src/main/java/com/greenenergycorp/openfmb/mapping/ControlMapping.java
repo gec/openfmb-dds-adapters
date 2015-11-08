@@ -23,6 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Global mapping of OpenFMB DDS control IDs to multiple control handlers.
+ *
+ * There are three types of control IDs (key, device control, SetPoint) and there is a separate map
+ * for each type.
+ */
 public class ControlMapping {
 
     private final Map<Control.KeyControlId, List<ControlHandler>> keyControlMap;
@@ -35,18 +41,33 @@ public class ControlMapping {
         this.setpointControlMap = setpointControlMap;
     }
 
+    /**
+     * @return Mapping from OpenFMB control key IDs to control handlers.
+     */
     public Map<Control.KeyControlId, List<ControlHandler>> getKeyControlMap() {
         return keyControlMap;
     }
 
+    /**
+     * @return Mapping from OpenFMB EndDeviceControl IDs to control handlers.
+     */
     public Map<Control.EndDeviceControl, List<ControlHandler>> getDeviceControlMap() {
         return deviceControlMap;
     }
 
+    /**
+     * @return Mapping from OpenFMB SetPoint IDs to control handlers.
+     */
     public Map<Control.SetpointId, List<ControlHandler>> getSetpointControlMap() {
         return setpointControlMap;
     }
 
+    /**
+     * Combine handler mappings from multiple protocol adapters into a map of one-to-many relationships.
+     *
+     * @param mappings Mappings between control IDs and control handlers.
+     * @return Global mapping of OpenFMB DDS control IDs to multiple control handlers.
+     */
     public static ControlMapping combine(List<ControlHandlerMapping> mappings) {
 
         final HashMap<Control.KeyControlId, List<ControlHandler>> keyMap = new HashMap<Control.KeyControlId, List<ControlHandler>>();
