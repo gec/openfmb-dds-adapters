@@ -64,4 +64,6 @@ Example:
 External Dependencies
 -------------------
 
-TBD
+[Modbus library](http://github.com/gec/modbus-library)
+
+[OpenDNP3](http://github.com/gec/dnp3) - Note that DNP3 must be built and installed with the Java JNI bindings.
