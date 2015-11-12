@@ -352,7 +352,7 @@ public class ControlMappingReader {
 
                         final BinaryOutput binaryOutput = buildBinaryOutput(controlCode, count, offTime, onTime);
 
-                        acceptor.AcceptCommand(binaryOutput, index, 0, responseAcceptor);
+                        acceptor.AcceptCommand(binaryOutput, index, 0, responseAcceptor, false);
                     }
                 }
             }
@@ -393,7 +393,7 @@ public class ControlMappingReader {
 
                 final BinaryOutput binaryOutput = buildBinaryOutput(controlCode, count, offTime, onTime);
 
-                acceptor.AcceptCommand(binaryOutput, index, 0, responseAcceptor);
+                acceptor.AcceptCommand(binaryOutput, index, 0, responseAcceptor, false);
 
             }
         }
@@ -440,7 +440,7 @@ public class ControlMappingReader {
 
                         final Setpoint setpoint = new Setpoint(value);
 
-                        acceptor.AcceptCommand(setpoint, index, 0, responseAcceptor);
+                        acceptor.AcceptCommand(setpoint, index, 0, responseAcceptor, false);
                     }
                 }
             }
@@ -487,7 +487,7 @@ public class ControlMappingReader {
 
                     final Setpoint setpoint = new Setpoint(value);
 
-                    acceptor.AcceptCommand(setpoint, index, 0, responseAcceptor);
+                    acceptor.AcceptCommand(setpoint, index, 0, responseAcceptor, false);
                 }
             }
         }

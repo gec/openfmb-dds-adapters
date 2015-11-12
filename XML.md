@@ -18,18 +18,18 @@ Common publisher attributes:
 
 Publisher types:
 
-* RecloserEventModule
+* RecloserEventProfile
     * `normalOpen` - Defines the "normalOpen" field in the OpenFMB recloser description. Boolean value.
-* RecloserReadingModule
+* RecloserReadingProfile
     * `normalOpen` - Defines the "normalOpen" field in the OpenFMB recloser description. Boolean value.
-* BatteryEventModule
-* BatteryReadingModule
+* BatteryEventProfile
+* BatteryReadingProfile
 
 Example:
 
 ```xml
 <Publishers>
-    <fmb:BatteryReadingModule
+    <fmb:BatteryReadingProfile
             adapterName="Battery_Read"
             logicalDeviceId="NewOrleans.Microgrid.Battery"
             mRID="NewOrleans.Microgrid.Battery"
@@ -47,14 +47,14 @@ Common subscriber attributes:
 
 Subscriber types:
 
-* RecloserControlModule
-* BatteryControlModule
+* RecloserControlProfile
+* BatteryControlProfile
 
 Example:
 
 ```xml
 <Subscribers>
-    <fmb:BatteryControlModule adapterName="Battery_Control" logicalDeviceId="NewOrleans.Microgrid.Battery"/>
+    <fmb:BatteryControlProfile adapterName="Battery_Control" logicalDeviceId="NewOrleans.Microgrid.Battery"/>
 </Subscribers>
 ```
 

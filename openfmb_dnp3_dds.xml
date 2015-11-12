@@ -4,14 +4,14 @@
              xmlns="org.openfmb.microgrid.dnp3.xml">
 
     <Publishers>
-        <fmb:RecloserReadingModule
+        <fmb:RecloserReadingProfile
                 adapterName="GERecloser_Read"
                 logicalDeviceId="NewOrleans.Microgrid.Recloser"
                 mRID="NewOrleans.Microgrid.Recloser"
                 name="GE Multilin F60"
                 description="GE Multilin F60"
                 normalOpen="false"/>
-        <fmb:RecloserEventModule
+        <fmb:RecloserEventProfile
                 adapterName="GERecloser_Event"
                 logicalDeviceId="NewOrleans.Microgrid.Recloser"
                 mRID="NewOrleans.Microgrid.Recloser"
@@ -21,7 +21,7 @@
     </Publishers>
 
     <Subscribers>
-        <fmb:RecloserControlModule adapterName="GERecloser_Control" logicalDeviceId="NewOrleans.Microgrid.Recloser"/>
+        <fmb:RecloserControlProfile adapterName="GERecloser_Control" logicalDeviceId="NewOrleans.Microgrid.Recloser"/>
     </Subscribers>
 
     <DNP3Masters>

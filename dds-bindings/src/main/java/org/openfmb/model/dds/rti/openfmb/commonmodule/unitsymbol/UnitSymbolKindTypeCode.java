@@ -18,10 +18,10 @@ public class  UnitSymbolKindTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int i=0;
-        EnumMember em[] = new EnumMember[28];
+        EnumMember em[] = new EnumMember[31];
 
         int[] ordinals = UnitSymbolKind.getOrdinals();
-        for (i=0;i<28;i++) {
+        for (i=0;i<31;i++) {
             em[i]=new EnumMember(UnitSymbolKind.valueOf(ordinals[i]).toString(),ordinals[i]);
         }
 

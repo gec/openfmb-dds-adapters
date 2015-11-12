@@ -48,18 +48,20 @@ public class PhaseCodeKind  extends Enum {
     public static final int _CN = 13;
     public static final PhaseCodeKind N = new PhaseCodeKind("N", 14);
     public static final int _N = 14;
-    public static final PhaseCodeKind s1 = new PhaseCodeKind("s1", 15);
-    public static final int _s1 = 15;
-    public static final PhaseCodeKind s12 = new PhaseCodeKind("s12", 16);
-    public static final int _s12 = 16;
-    public static final PhaseCodeKind s12N = new PhaseCodeKind("s12N", 17);
-    public static final int _s12N = 17;
-    public static final PhaseCodeKind s1N = new PhaseCodeKind("s1N", 18);
-    public static final int _s1N = 18;
-    public static final PhaseCodeKind s2 = new PhaseCodeKind("s2", 19);
-    public static final int _s2 = 19;
-    public static final PhaseCodeKind s2N = new PhaseCodeKind("s2N", 20);
-    public static final int _s2N = 20;
+    public static final PhaseCodeKind none = new PhaseCodeKind("none", 15);
+    public static final int _none = 15;
+    public static final PhaseCodeKind s1 = new PhaseCodeKind("s1", 16);
+    public static final int _s1 = 16;
+    public static final PhaseCodeKind s12 = new PhaseCodeKind("s12", 17);
+    public static final int _s12 = 17;
+    public static final PhaseCodeKind s12N = new PhaseCodeKind("s12N", 18);
+    public static final int _s12N = 18;
+    public static final PhaseCodeKind s1N = new PhaseCodeKind("s1N", 19);
+    public static final int _s1N = 19;
+    public static final PhaseCodeKind s2 = new PhaseCodeKind("s2", 20);
+    public static final int _s2 = 20;
+    public static final PhaseCodeKind s2N = new PhaseCodeKind("s2N", 21);
+    public static final int _s2N = 21;
     public static PhaseCodeKind valueOf(int ordinal) {
         switch(ordinal) {
 
@@ -78,12 +80,13 @@ public class PhaseCodeKind  extends Enum {
             case 12: return PhaseCodeKind.C;
             case 13: return PhaseCodeKind.CN;
             case 14: return PhaseCodeKind.N;
-            case 15: return PhaseCodeKind.s1;
-            case 16: return PhaseCodeKind.s12;
-            case 17: return PhaseCodeKind.s12N;
-            case 18: return PhaseCodeKind.s1N;
-            case 19: return PhaseCodeKind.s2;
-            case 20: return PhaseCodeKind.s2N;
+            case 15: return PhaseCodeKind.none;
+            case 16: return PhaseCodeKind.s1;
+            case 17: return PhaseCodeKind.s12;
+            case 18: return PhaseCodeKind.s12N;
+            case 19: return PhaseCodeKind.s1N;
+            case 20: return PhaseCodeKind.s2;
+            case 21: return PhaseCodeKind.s2N;
 
         }
         return null;
@@ -95,7 +98,7 @@ public class PhaseCodeKind  extends Enum {
 
     public static int[] getOrdinals() {
         int i = 0;
-        int[] values = new int[21];
+        int[] values = new int[22];
 
         values[i] = A.ordinal();
         i++;
@@ -126,6 +129,8 @@ public class PhaseCodeKind  extends Enum {
         values[i] = CN.ordinal();
         i++;
         values[i] = N.ordinal();
+        i++;
+        values[i] = none.ordinal();
         i++;
         values[i] = s1.ordinal();
         i++;

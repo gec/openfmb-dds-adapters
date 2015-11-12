@@ -2,13 +2,13 @@
 <OpenFMBModbus xmlns:fmb="org.openfmb.microgrid.config.xml" xmlns="org.openfmb.microgrid.modbus.xml">
 
     <Publishers>
-        <fmb:BatteryReadingModule
+        <fmb:BatteryReadingProfile
                 adapterName="PowerHub_Read"
                 logicalDeviceId="NewOrleans.Microgrid.Battery"
                 mRID="NewOrleans.Microgrid.Battery"
                 name="PowerHub ESS"
                 description="PowerHub ESS"/>
-        <fmb:BatteryEventModule
+        <fmb:BatteryEventProfile
                 adapterName="PowerHub_Event"
                 logicalDeviceId="NewOrleans.Microgrid.Battery"
                 mRID="NewOrleans.Microgrid.Battery"
@@ -17,7 +17,7 @@
     </Publishers>
 
     <Subscribers>
-        <fmb:BatteryControlModule adapterName="PowerHub_Control" logicalDeviceId="NewOrleans.Microgrid.Battery"/>
+        <fmb:BatteryControlProfile adapterName="PowerHub_Control" logicalDeviceId="NewOrleans.Microgrid.Battery"/>
     </Subscribers>
 
     <ModbusMasters>

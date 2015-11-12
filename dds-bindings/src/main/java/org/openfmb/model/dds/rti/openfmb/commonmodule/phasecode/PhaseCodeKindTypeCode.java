@@ -18,10 +18,10 @@ public class  PhaseCodeKindTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int i=0;
-        EnumMember em[] = new EnumMember[21];
+        EnumMember em[] = new EnumMember[22];
 
         int[] ordinals = PhaseCodeKind.getOrdinals();
-        for (i=0;i<21;i++) {
+        for (i=0;i<22;i++) {
             em[i]=new EnumMember(PhaseCodeKind.valueOf(ordinals[i]).toString(),ordinals[i]);
         }
 

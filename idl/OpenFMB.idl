@@ -35,6 +35,7 @@ module commonmodule {
 		    Amp,
 		    deg,
 		    degC,
+		    degF,
 		    Farad,
 		    gram,
 		    hour,
@@ -45,6 +46,7 @@ module commonmodule {
 		    m2,
 		    m3,
 		    min,
+		    mph,
 		    Newton,
 		    none,
 		    ohm,
@@ -59,6 +61,7 @@ module commonmodule {
 		    VArh,
 		    W,
 		    Wh,
+		    WPerM2,
 		    wPerVA
 		};
 	};
@@ -106,6 +109,7 @@ module commonmodule {
 		    C,
 		    CN,
 		    N,
+		    none,
 		    s1,
 		    s12,
 		    s12N,
@@ -273,7 +277,30 @@ module commonmodule {
 		HexBinary16Type qualityFlag;   
 	};
 	//@top-level false
-
+	
+	struct StringMeasurementValue {
+		string value;
+		DateTimeType timestamp;   
+		HexBinary16Type qualityFlag;   
+		string source;
+	};
+	//@top-level false
+	
+	struct StringMeasurement {
+		UuidType mRID;  
+		string description;
+		string measurementType;
+		string name;
+		phasecode::PhaseCodeKind phases;  
+		unitsymbol::UnitSymbolKind unit;  
+		unitmultiplier::UnitMultiplierKind multiplier;  
+		StringMeasurementValue value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthStringMeasurements = 100;
+	typedef sequence<StringMeasurement, MaxLengthStringMeasurements> SequenceOfStringMeasurements;
+	
 };
 
 module batterymodule {
@@ -298,13 +325,13 @@ module batterymodule {
 	};
 	//@top-level false
 
-	struct BatteryControlModule {
+	struct BatteryControlProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		BatterySystem batterySystem; 
 		BatterySystemControl batterySystemControl; 
 	};
-	#pragma keylist BatteryControlModule logicalDeviceID
+	#pragma keylist BatteryControlProfile logicalDeviceID
 
 	struct BatteryStatus {
 		boolean isCharging;  
@@ -317,24 +344,24 @@ module batterymodule {
 	};
 	//@top-level false
 
-	struct BatteryEventModule {
+	struct BatteryEventProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		BatteryStatus batteryStatus; 
 		BatterySystem batterySystem; 
 	};
-	#pragma keylist BatteryEventModule logicalDeviceID
+	#pragma keylist BatteryEventProfile logicalDeviceID
 
 	const unsigned long MaxLengthBatteryReadings = 100;
 	typedef sequence<commonmodule::Reading, MaxLengthBatteryReadings> SequenceOfBatteryReadings;
 
-	struct BatteryReadingModule {
+	struct BatteryReadingProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		BatterySystem batterySystem; 
 		SequenceOfBatteryReadings readings; 
 	};
-	#pragma keylist BatteryReadingModule logicalDeviceID
+	#pragma keylist BatteryReadingProfile logicalDeviceID
 
 
 };
@@ -368,13 +395,13 @@ module generationmodule {
 	};
 	//@top-level false
 
-	struct GenerationControlModule {
+	struct GenerationControlProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		GeneratingUnit generatingUnit; 
 		GenerationControl generationControl; 
 	};
-	#pragma keylist GenerationControlModule logicalDeviceID
+	#pragma keylist GenerationControlProfile logicalDeviceID
 
 	struct GenerationStatus {
 		boolean isAutoOn;  
@@ -385,32 +412,32 @@ module generationmodule {
 	};
 	//@top-level false
 
-	struct GenerationEventModule {
+	struct GenerationEventProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		GeneratingUnit generatingUnit; 
 		GenerationStatus generationStatus; 
 	};
-	#pragma keylist GenerationEventModule logicalDeviceID
+	#pragma keylist GenerationEventProfile logicalDeviceID
 
-	struct GenerationForecastModule {
+	struct GenerationForecastProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		commonmodule::ForecastSchedule forecastSchedule; 
 		GeneratingUnit generatingUnit; 
 	};
-	#pragma keylist GenerationForecastModule logicalDeviceID
+	#pragma keylist GenerationForecastProfile logicalDeviceID
 
 	const unsigned long MaxLengthGenerationReadings = 100;
 	typedef sequence<commonmodule::Reading, MaxLengthGenerationReadings> SequenceOfGenerationReadings;
 
-	struct GenerationReadingModule {
+	struct GenerationReadingProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		GeneratingUnit generatingUnit; 
 		SequenceOfGenerationReadings readings;
 	};
-	#pragma keylist GenerationReadingModule logicalDeviceID
+	#pragma keylist GenerationReadingProfile logicalDeviceID
 
 };
 
@@ -436,34 +463,41 @@ module loadmodule {
 	};
 	//@top-level false
 
-	struct LoadControlModule {
+	struct LoadControlProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		EnergyConsumer energyConsumer; 
 		LoadControl loadControl; 
 	};
-	#pragma keylist LoadControlModule logicalDeviceID
+	#pragma keylist LoadControlProfile logicalDeviceID
 
-	struct LoadForecastModule {
+	struct LoadForecastProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		EnergyConsumer energyConsumer; 
 		commonmodule::ForecastSchedule forecastSchedule; 
 	};
-	#pragma keylist LoadForecastModule logicalDeviceID
+	#pragma keylist LoadForecastProfile logicalDeviceID
 
-	const unsigned long MaxLengthLoadControlReadings = 100;
-	typedef sequence<commonmodule::Reading, MaxLengthLoadControlReadings> SequenceOfLoadControlReadings;
+	const unsigned long MaxLengthLoadReadings = 100;
+	typedef sequence<commonmodule::Reading, MaxLengthLoadReadings> SequenceOfLoadReadings;
 
-	struct LoadReadingModule {
+	struct LoadReadingProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		EnergyConsumer energyConsumer; 
-		SequenceOfLoadControlReadings readings;
+		SequenceOfLoadReadings readings;
 	};
-	#pragma keylist LoadReadingModule logicalDeviceID
+	#pragma keylist LoadReadingProfile logicalDeviceID
 
-
+	struct LoadStatusProfile {
+		string logicalDeviceID; //@key
+		commonmodule::DateTimeType timestamp; 
+		EnergyConsumer energyConsumer; 
+		commonmodule::SequenceOfStringMeasurements measurements;
+	};
+	#pragma keylist LoadStatusProfile logicalDeviceID
+	
 };
 
 module marketmodule {
@@ -568,13 +602,13 @@ module marketmodule {
 	};
 	//@top-level false
 
-	struct InterchangeScheduleModule {
+	struct InterchangeScheduleProfile {
 		string scheduleID; //@key
 		commonmodule::DateTimeType timestamp; 
 		InterchangeSchedule interchangeSchedule; 
 		commonmodule::PowerSystemResource powerSystemResource; 
 	};
-	#pragma keylist InterchangeScheduleModule scheduleID
+	#pragma keylist InterchangeScheduleProfile scheduleID
 
 	const unsigned long MaxLengthMarketMarketFactors = 100;
 	typedef sequence<MarketFactors, MaxLengthMarketMarketFactors> SequenceOfMarketMarketFactors;
@@ -630,13 +664,13 @@ module reclosermodule {
 	};
 	//@top-level false
 
-	struct RecloserControlModule {
+	struct RecloserControlProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		Recloser recloser; 
 		RecloserControl recloserControl; 
 	};
-	#pragma keylist RecloserControlModule logicalDeviceID
+	#pragma keylist RecloserControlProfile logicalDeviceID
 
 	struct RecloserStatus {
 		boolean isBlocked;
@@ -647,24 +681,24 @@ module reclosermodule {
 	};
 	//@top-level false
 
-	struct RecloserEventModule {
+	struct RecloserEventProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		Recloser recloser; 
 		RecloserStatus recloserStatus; 
 	};
-	#pragma keylist RecloserEventModule logicalDeviceID
+	#pragma keylist RecloserEventProfile logicalDeviceID
 
 	const unsigned long MaxLengthRecloserReadings = 100;
 	typedef sequence<commonmodule::Reading, MaxLengthRecloserReadings> SequenceOfRecloserReadings;
 
-	struct RecloserReadingModule {
+	struct RecloserReadingProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		Recloser recloser; 
 		SequenceOfRecloserReadings readings; 
 	};
-	#pragma keylist RecloserReadingModule logicalDeviceID
+	#pragma keylist RecloserReadingProfile logicalDeviceID
 
 };
 
@@ -681,14 +715,22 @@ module resourcemodule {
 	const unsigned long MaxLengthResourceReadings = 100;
 	typedef sequence<commonmodule::Reading, MaxLengthResourceReadings> SequenceOfResourceReadings;
 
-	struct ResourceReadingModule {
+	struct ResourceReadingProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		Meter meter; 
 		SequenceOfResourceReadings readings;
 	};
-	#pragma keylist ResourceReadingModule logicalDeviceID
-
+	#pragma keylist ResourceReadingProfile logicalDeviceID
+	
+	struct ResourceStatusProfile {
+		string logicalDeviceID; //@key
+		commonmodule::DateTimeType timestamp; 
+		commonmodule::PowerSystemResource powerSystemResource;   
+		commonmodule::SequenceOfStringMeasurements measurements;
+	};
+	#pragma keylist ResourceStatusProfile logicalDeviceID
+	
 };
 
 module securitymodule {
@@ -705,12 +747,12 @@ module securitymodule {
 	};
 	//@top-level false
 
-	struct SecurityEventModule {
+	struct SecurityEventProfile {
 		string logicalDeviceID; //@key 
 		commonmodule::DateTimeType timestamp; 
 		SecurityEvent securityEvent; 
 	};
-	#pragma keylist SecurityEventModule logicalDeviceID
+	#pragma keylist SecurityEventProfile logicalDeviceID
 
 };
 
@@ -741,13 +783,13 @@ module solarmodule {
 	};
 	//@top-level false
 
-	struct SolarCapabilityModule {
+	struct SolarCapabilityProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		SolarCapability solarCapability; 
 		SolarInverter solarInverter; 
 	};
-	#pragma keylist SolarCapabilityModule logicalDeviceID
+	#pragma keylist SolarCapabilityProfile logicalDeviceID
 
 	const unsigned long MaxLengthSolarControlSetPoints = 100;
 	typedef sequence<commonmodule::SetPoint, MaxLengthSolarControlSetPoints> SequenceOfSolarControlSetPoints;
@@ -762,40 +804,123 @@ module solarmodule {
 	};
 	//@top-level false
 
-	struct SolarControlModule {
+	struct SolarControlProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp;
 		SolarControl solarControl; 
 		SolarInverter solarInverter; 
 	};
-	#pragma keylist SolarControlModule logicalDeviceID
+	#pragma keylist SolarControlProfile logicalDeviceID
 
-	struct SolarEventModule {
+	struct SolarEventProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		SolarInverter solarInverter; 
 		SolarInverterStatus solarInverterStatus; 
 	};
-	#pragma keylist SolarEventModule logicalDeviceID
+	#pragma keylist SolarEventProfile logicalDeviceID
 
-	struct SolarForecastModule {
+	struct SolarForecastProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		commonmodule::ForecastSchedule forecastSchedule; 
 		SolarInverter solarInverter;
 	};
-	#pragma keylist SolarForecastModule logicalDeviceID
+	#pragma keylist SolarForecastProfile logicalDeviceID
 
 	const unsigned long MaxLengthSolarReadings = 100;
 	typedef sequence<commonmodule::Reading, MaxLengthSolarReadings> SequenceOfSolarReadings;
 
-	struct SolarReadingModule {
+	struct SolarReadingProfile {
 		string logicalDeviceID; //@key
 		commonmodule::DateTimeType timestamp; 
 		SequenceOfSolarReadings readings; 
 		SolarInverter solarInverter; 
 	};
-	#pragma keylist SolarReadingModule logicalDeviceID
+	#pragma keylist SolarReadingProfile logicalDeviceID
+
+};
+
+module weathermodule {
+	struct HumidityData {
+		commonmodule::DateTimeType timestamp;
+		float value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthHumidityData = 100;
+	typedef sequence<HumidityData, MaxLengthHumidityData> SequenceOfHumidityData;
+	
+	struct Humidity {
+		commonmodule::unitsymbol::UnitSymbolKind unit;
+		SequenceOfHumidityData humidityData;
+	};
+	//@top-level false
+	
+	struct SunRadiationData {
+		commonmodule::DateTimeType timestamp;
+		float value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthSunRadiationData = 100;
+	typedef sequence<SunRadiationData, MaxLengthSunRadiationData> SequenceOfSunRadiationData;
+	
+	struct SunRadiation {
+		commonmodule::unitmultiplier::UnitMultiplierKind multiplier;
+		commonmodule::unitsymbol::UnitSymbolKind unit;
+		SequenceOfSunRadiationData sunRadiationData;
+	};
+	//@top-level false
+	
+	struct TemperatureData {
+		commonmodule::DateTimeType timestamp;
+		float value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthTemperatureData = 100;
+	typedef sequence<TemperatureData, MaxLengthTemperatureData> SequenceOfTemperatureData;
+	
+	struct Temperature {
+		commonmodule::unitsymbol::UnitSymbolKind unit;
+		SequenceOfTemperatureData temperatureData;
+	};
+	//@top-level false
+	
+	struct WindData {
+		commonmodule::DateTimeType timestamp;
+		float windDirection;
+		float windSpeed;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthWindData = 100;
+	typedef sequence<WindData, MaxLengthWindData> SequenceOfWindData;
+	
+	struct Wind {
+		commonmodule::unitsymbol::UnitSymbolKind directionUnit;
+		commonmodule::unitsymbol::UnitSymbolKind speedUnit;
+		SequenceOfWindData windData;
+	};
+	//@top-level false
+	
+	struct WeatherData {
+		string version;
+		commonmodule::DateTimeType versionDateTime;
+		Humidity humidity;
+		SunRadiation sunRadiation;
+		Temperature temperature;
+		Wind wind;
+	};
+	//@top-level false
+
+	struct WeatherDataProfile {
+		string logicalDeviceID; //@key
+		commonmodule::DateTimeType timestamp; 
+		WeatherData weatherData;
+	};
+	#pragma keylist WeatherDataProfile logicalDeviceID
 
 };
 

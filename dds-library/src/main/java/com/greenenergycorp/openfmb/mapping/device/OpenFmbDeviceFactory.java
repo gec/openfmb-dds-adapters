@@ -25,10 +25,10 @@ import com.rti.dds.subscription.DataReader;
 import com.rti.dds.subscription.Subscriber;
 import com.rti.dds.topic.Topic;
 import com.greenenergycorp.openfmb.dds.DdsParticipant;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventModuleDataWriter;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryReadingModuleDataWriter;
-import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventModuleDataWriter;
-import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserReadingModuleDataWriter;
+import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryReadingProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserReadingProfileDataWriter;
 
 import java.io.IOException;
 
@@ -38,9 +38,9 @@ public class OpenFmbDeviceFactory {
     private final Publisher publisher;
     private final Subscriber subscriber;
 
-    private Topic recloserEventModuleTopic;
-    private Topic recloserReaderModuleTopic;
-    private Topic recloserControlModuleTopic;
+    private Topic recloserEventProfileTopic;
+    private Topic recloserReaderProfileTopic;
+    private Topic recloserControlProfileTopic;
 
     public OpenFmbDeviceFactory(DdsParticipant participant, Publisher publisher, Subscriber subscriber) {
         this.participant = participant;
@@ -48,104 +48,104 @@ public class OpenFmbDeviceFactory {
         this.subscriber = subscriber;
     }
 
-    public RecloserEventModuleDataWriter getRecloserEventModuleWriter() throws IOException {
+    public RecloserEventProfileDataWriter getRecloserEventProfileWriter() throws IOException {
 
-        final RecloserEventModuleHandle handle = new RecloserEventModuleHandle();
+        final RecloserEventProfileHandle handle = new RecloserEventProfileHandle();
 
-        if (recloserEventModuleTopic == null) {
+        if (recloserEventProfileTopic == null) {
             handle.registerType(participant.getParticipant());
-            recloserEventModuleTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
+            recloserEventProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
         }
 
-        final DataWriter parentWriter = participant.createWriter(publisher, recloserEventModuleTopic);
+        final DataWriter parentWriter = participant.createWriter(publisher, recloserEventProfileTopic);
 
-        RecloserEventModuleDataWriter writer = (RecloserEventModuleDataWriter) parentWriter;
+        RecloserEventProfileDataWriter writer = (RecloserEventProfileDataWriter) parentWriter;
         if (writer == null) {
-            throw new IOException("Could not create RecloserEventModuleDataWriter");
+            throw new IOException("Could not create RecloserEventProfileDataWriter");
         }
 
         return writer;
     }
 
-    public RecloserReadingModuleDataWriter getRecloserReadModuleWriter() throws IOException {
+    public RecloserReadingProfileDataWriter getRecloserReadProfileWriter() throws IOException {
 
-        final RecloserReadingModuleHandle handle = new RecloserReadingModuleHandle();
+        final RecloserReadingProfileHandle handle = new RecloserReadingProfileHandle();
 
-        if (recloserReaderModuleTopic == null) {
+        if (recloserReaderProfileTopic == null) {
             handle.registerType(participant.getParticipant());
-            recloserReaderModuleTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
+            recloserReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
         }
 
-        final DataWriter parentWriter = participant.createWriter(publisher, recloserReaderModuleTopic);
+        final DataWriter parentWriter = participant.createWriter(publisher, recloserReaderProfileTopic);
 
-        RecloserReadingModuleDataWriter writer = (RecloserReadingModuleDataWriter) parentWriter;
+        RecloserReadingProfileDataWriter writer = (RecloserReadingProfileDataWriter) parentWriter;
         if (writer == null) {
-            throw new IOException("Could not create RecloserReadingModuleDataWriter");
+            throw new IOException("Could not create RecloserReadingProfileDataWriter");
         }
 
         return writer;
     }
 
-    public DataReader getRecloserControlModuleReader() throws IOException {
+    public DataReader getRecloserControlProfileReader() throws IOException {
 
-        final RecloserControlModuleHandle handle = new RecloserControlModuleHandle();
+        final RecloserControlProfileHandle handle = new RecloserControlProfileHandle();
 
-        if (recloserControlModuleTopic == null) {
+        if (recloserControlProfileTopic == null) {
             handle.registerType(participant.getParticipant());
-            recloserControlModuleTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
+            recloserControlProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
         }
 
-        return participant.createReader(subscriber, recloserControlModuleTopic);
+        return participant.createReader(subscriber, recloserControlProfileTopic);
     }
 
-    public BatteryEventModuleDataWriter getBatteryEventModuleWriter() throws IOException {
+    public BatteryEventProfileDataWriter getBatteryEventProfileWriter() throws IOException {
 
-        final BatteryEventModuleHandle handle = new BatteryEventModuleHandle();
+        final BatteryEventProfileHandle handle = new BatteryEventProfileHandle();
 
-        if (recloserEventModuleTopic == null) {
+        if (recloserEventProfileTopic == null) {
             handle.registerType(participant.getParticipant());
-            recloserEventModuleTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
+            recloserEventProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
         }
 
-        final DataWriter parentWriter = participant.createWriter(publisher, recloserEventModuleTopic);
+        final DataWriter parentWriter = participant.createWriter(publisher, recloserEventProfileTopic);
 
-        BatteryEventModuleDataWriter writer = (BatteryEventModuleDataWriter) parentWriter;
+        BatteryEventProfileDataWriter writer = (BatteryEventProfileDataWriter) parentWriter;
         if (writer == null) {
-            throw new IOException("Could not create BatteryEventModuleDataWriter");
+            throw new IOException("Could not create BatteryEventProfileDataWriter");
         }
 
         return writer;
     }
 
-    public BatteryReadingModuleDataWriter getBatteryReadModuleWriter() throws IOException {
+    public BatteryReadingProfileDataWriter getBatteryReadProfileWriter() throws IOException {
 
-        final BatteryReadingModuleHandle handle = new BatteryReadingModuleHandle();
+        final BatteryReadingProfileHandle handle = new BatteryReadingProfileHandle();
 
-        if (recloserReaderModuleTopic == null) {
+        if (recloserReaderProfileTopic == null) {
             handle.registerType(participant.getParticipant());
-            recloserReaderModuleTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
+            recloserReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
         }
 
-        final DataWriter parentWriter = participant.createWriter(publisher, recloserReaderModuleTopic);
+        final DataWriter parentWriter = participant.createWriter(publisher, recloserReaderProfileTopic);
 
-        BatteryReadingModuleDataWriter writer = (BatteryReadingModuleDataWriter) parentWriter;
+        BatteryReadingProfileDataWriter writer = (BatteryReadingProfileDataWriter) parentWriter;
         if (writer == null) {
-            throw new IOException("Could not create BatteryReadingModuleDataWriter");
+            throw new IOException("Could not create BatteryReadingProfileDataWriter");
         }
 
         return writer;
     }
 
-    public DataReader getBatteryControlModuleReader() throws IOException {
+    public DataReader getBatteryControlProfileReader() throws IOException {
 
-        final BatteryControlModuleHandle handle = new BatteryControlModuleHandle();
+        final BatteryControlProfileHandle handle = new BatteryControlProfileHandle();
 
-        if (recloserControlModuleTopic == null) {
+        if (recloserControlProfileTopic == null) {
             handle.registerType(participant.getParticipant());
-            recloserControlModuleTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
+            recloserControlProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
         }
 
-        return participant.createReader(subscriber, recloserControlModuleTopic);
+        return participant.createReader(subscriber, recloserControlProfileTopic);
     }
 
 }

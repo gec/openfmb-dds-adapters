@@ -23,12 +23,12 @@ import com.greenenergycorp.openfmb.mapping.ControlAdapter;
 import com.greenenergycorp.openfmb.mapping.ControlMapping;
 import com.greenenergycorp.openfmb.mapping.DeviceAdapter;
 import com.rti.dds.subscription.DataReader;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventModuleDataWriter;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryReadingModuleDataWriter;
+import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryReadingProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem;
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser;
-import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventModuleDataWriter;
-import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserReadingModuleDataWriter;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserReadingProfileDataWriter;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -44,9 +44,9 @@ public class OpenFmbXmlLoader {
         if (xml.getElements() != null) {
             for (Object elem: xml.getElements()) {
 
-                if (elem instanceof RecloserEventModule) {
-                    final RecloserEventModule entry = (RecloserEventModule)elem;
-                    final String name = "RecloserEventModule";
+                if (elem instanceof RecloserEventProfile) {
+                    final RecloserEventProfile entry = (RecloserEventProfile)elem;
+                    final String name = "RecloserEventProfile";
 
                     if (entry.getAdapterName() == null) {
                         throw new IllegalArgumentException(name + " must have adapterName");
@@ -56,16 +56,16 @@ public class OpenFmbXmlLoader {
                     }
                     final Recloser description = getRecloserDescription(entry, name);
 
-                    final RecloserEventModuleDataWriter writer = factory.getRecloserEventModuleWriter();
+                    final RecloserEventProfileDataWriter writer = factory.getRecloserEventProfileWriter();
 
-                    final RecloserEventModuleAdapter recloserEventModuleAdapter =
-                            new RecloserEventModuleAdapter(writer, entry.getLogicalDeviceId(), description);
+                    final RecloserEventProfileAdapter recloserEventProfileAdapter =
+                            new RecloserEventProfileAdapter(writer, entry.getLogicalDeviceId(), description);
 
-                    map.put(entry.getAdapterName(), recloserEventModuleAdapter);
+                    map.put(entry.getAdapterName(), recloserEventProfileAdapter);
 
-                } else if (elem instanceof RecloserReadingModule) {
-                    final RecloserReadingModule entry = (RecloserReadingModule) elem;
-                    final String name = "RecloserReadingModule";
+                } else if (elem instanceof RecloserReadingProfile) {
+                    final RecloserReadingProfile entry = (RecloserReadingProfile) elem;
+                    final String name = "RecloserReadingProfile";
 
                     if (entry.getAdapterName() == null) {
                         throw new IllegalArgumentException(name + " must have adapterName");
@@ -75,16 +75,16 @@ public class OpenFmbXmlLoader {
                     }
                     final Recloser description = getRecloserDescription(entry, name);
 
-                    final RecloserReadingModuleDataWriter writer = factory.getRecloserReadModuleWriter();
+                    final RecloserReadingProfileDataWriter writer = factory.getRecloserReadProfileWriter();
 
-                    final RecloserReadingModuleAdapter recloserReadingModuleAdapter =
-                            new RecloserReadingModuleAdapter(writer, entry.getLogicalDeviceId(), description);
+                    final RecloserReadingProfileAdapter recloserReadingProfileAdapter =
+                            new RecloserReadingProfileAdapter(writer, entry.getLogicalDeviceId(), description);
 
-                    map.put(entry.getAdapterName(), recloserReadingModuleAdapter);
+                    map.put(entry.getAdapterName(), recloserReadingProfileAdapter);
                     
-                } else if (elem instanceof BatteryEventModule) {
-                    final BatteryEventModule entry = (BatteryEventModule)elem;
-                    final String name = "BatteryEventModule";
+                } else if (elem instanceof BatteryEventProfile) {
+                    final BatteryEventProfile entry = (BatteryEventProfile)elem;
+                    final String name = "BatteryEventProfile";
 
                     if (entry.getAdapterName() == null) {
                         throw new IllegalArgumentException(name + " must have adapterName");
@@ -94,16 +94,16 @@ public class OpenFmbXmlLoader {
                     }
                     final BatterySystem description = getBatteryDescription(entry, name);
 
-                    final BatteryEventModuleDataWriter writer = factory.getBatteryEventModuleWriter();
+                    final BatteryEventProfileDataWriter writer = factory.getBatteryEventProfileWriter();
 
-                    final BatteryEventModuleAdapter eventModuleAdapter =
-                            new BatteryEventModuleAdapter(writer, entry.getLogicalDeviceId(), description);
+                    final BatteryEventProfileAdapter eventProfileAdapter =
+                            new BatteryEventProfileAdapter(writer, entry.getLogicalDeviceId(), description);
 
-                    map.put(entry.getAdapterName(), eventModuleAdapter);
+                    map.put(entry.getAdapterName(), eventProfileAdapter);
 
-                } else if (elem instanceof BatteryReadingModule) {
-                    final BatteryReadingModule entry = (BatteryReadingModule) elem;
-                    final String name = "BatteryReadingModule";
+                } else if (elem instanceof BatteryReadingProfile) {
+                    final BatteryReadingProfile entry = (BatteryReadingProfile) elem;
+                    final String name = "BatteryReadingProfile";
 
                     if (entry.getAdapterName() == null) {
                         throw new IllegalArgumentException(name + " must have adapterName");
@@ -113,12 +113,12 @@ public class OpenFmbXmlLoader {
                     }
                     final BatterySystem description = getBatteryDescription(entry, name);
 
-                    final BatteryReadingModuleDataWriter writer = factory.getBatteryReadModuleWriter();
+                    final BatteryReadingProfileDataWriter writer = factory.getBatteryReadProfileWriter();
 
-                    final BatteryReadingModuleAdapter readingModuleAdapter =
-                            new BatteryReadingModuleAdapter(writer, entry.getLogicalDeviceId(), description);
+                    final BatteryReadingProfileAdapter readingProfileAdapter =
+                            new BatteryReadingProfileAdapter(writer, entry.getLogicalDeviceId(), description);
 
-                    map.put(entry.getAdapterName(), readingModuleAdapter);
+                    map.put(entry.getAdapterName(), readingProfileAdapter);
                 }
 
             }
@@ -151,9 +151,9 @@ public class OpenFmbXmlLoader {
 
             for (Object elem: xml.getElements()) {
 
-                if (elem instanceof RecloserControlModule) {
-                    final RecloserControlModule entry = (RecloserControlModule) elem;
-                    final String name = "RecloserControlModule";
+                if (elem instanceof RecloserControlProfile) {
+                    final RecloserControlProfile entry = (RecloserControlProfile) elem;
+                    final String name = "RecloserControlProfile";
 
                     if (entry.getAdapterName() == null) {
                         throw new IllegalArgumentException(name + " must have adapterName");
@@ -162,14 +162,14 @@ public class OpenFmbXmlLoader {
                         throw new IllegalArgumentException(name + " must have logicalDeviceId");
                     }
 
-                    final DataReader reader = factory.getRecloserControlModuleReader();
+                    final DataReader reader = factory.getRecloserControlProfileReader();
 
-                    final RecloserControlModuleAdapter adapter = RecloserControlModuleAdapter.build(reader, logicalIdToAdapterName, controlMapping);
+                    final RecloserControlProfileAdapter adapter = RecloserControlProfileAdapter.build(reader, logicalIdToAdapterName, controlMapping);
                     controlAdapters.add(adapter);
                     
-                } else if (elem instanceof BatteryControlModule) {
-                    final BatteryControlModule entry = (BatteryControlModule) elem;
-                    final String name = "BatteryControlModule";
+                } else if (elem instanceof BatteryControlProfile) {
+                    final BatteryControlProfile entry = (BatteryControlProfile) elem;
+                    final String name = "BatteryControlProfile";
 
                     if (entry.getAdapterName() == null) {
                         throw new IllegalArgumentException(name + " must have adapterName");
@@ -178,9 +178,9 @@ public class OpenFmbXmlLoader {
                         throw new IllegalArgumentException(name + " must have logicalDeviceId");
                     }
 
-                    final DataReader reader = factory.getBatteryControlModuleReader();
+                    final DataReader reader = factory.getBatteryControlProfileReader();
 
-                    final BatteryControlModuleAdapter adapter = BatteryControlModuleAdapter.build(reader, logicalIdToAdapterName, controlMapping);
+                    final BatteryControlProfileAdapter adapter = BatteryControlProfileAdapter.build(reader, logicalIdToAdapterName, controlMapping);
                     controlAdapters.add(adapter);
                 }
             }

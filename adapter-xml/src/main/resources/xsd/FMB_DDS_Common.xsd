@@ -49,7 +49,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="BatteryReadingModule">
+    <xs:element name="BatteryReadingProfile">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="baseDescribedDevice">
@@ -58,7 +58,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="BatteryEventModule">
+    <xs:element name="BatteryEventProfile">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="baseDescribedDevice">
@@ -67,7 +67,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="BatteryControlModule">
+    <xs:element name="BatteryControlProfile">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="baseIdentified">
@@ -76,7 +76,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="RecloserReadingModule">
+    <xs:element name="RecloserReadingProfile">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="recloserDescription">
@@ -85,7 +85,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="RecloserEventModule">
+    <xs:element name="RecloserEventProfile">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="recloserDescription">
@@ -94,7 +94,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="RecloserControlModule">
+    <xs:element name="RecloserControlProfile">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="baseIdentified">
@@ -110,10 +110,10 @@
                     <jaxb:property name="elements"/>
                 </xs:appinfo>
             </xs:annotation>
-            <xs:element ref="RecloserEventModule" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element ref="RecloserReadingModule" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element ref="BatteryEventModule" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element ref="BatteryReadingModule" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="RecloserEventProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="RecloserReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="BatteryEventProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="BatteryReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
         </xs:choice>
     </xs:complexType>
 
@@ -124,8 +124,8 @@
                     <jaxb:property name="elements"/>
                 </xs:appinfo>
             </xs:annotation>
-            <xs:element ref="RecloserControlModule" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element ref="BatteryControlModule" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="RecloserControlProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="BatteryControlProfile" minOccurs="0" maxOccurs="unbounded"/>
         </xs:choice>
     </xs:complexType>
 
