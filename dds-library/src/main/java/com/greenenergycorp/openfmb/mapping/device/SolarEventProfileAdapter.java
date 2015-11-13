@@ -22,32 +22,29 @@ import com.greenenergycorp.openfmb.mapping.DeviceAdapter;
 import com.greenenergycorp.openfmb.mapping.MeasValue;
 import com.greenenergycorp.openfmb.mapping.ReadingId;
 import com.rti.dds.infrastructure.InstanceHandle_t;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventProfile;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventProfileDataWriter;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryStatus;
-import org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.*;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverterStatus;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarEventProfileDataWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-public class BatteryEventProfileAdapter implements DeviceAdapter {
+public class SolarEventProfileAdapter implements DeviceAdapter {
 
-    private final static Logger logger = LoggerFactory.getLogger(BatteryEventProfileAdapter.class);
+    private final static Logger logger = LoggerFactory.getLogger(SolarEventProfileAdapter.class);
 
-    private final BatteryEventProfileDataWriter writer;
+    private final SolarEventProfileDataWriter writer;
     private final String logicalDeviceId;
-    private final BatterySystem deviceDescription;
+    private final SolarInverter deviceDescription;
 
-    public final static String isChargingKey = "isCharging";
     public final static String isConnectedKey = "isConnected";
-    public final static String modeKey = "mode";
-    public final static String stateOfChargeKey = "stateOfCharge";
 
-    public final static String[] keys = { isChargingKey, isConnectedKey, modeKey, stateOfChargeKey };
+    public final static String[] keys = { isConnectedKey };
 
-    public BatteryEventProfileAdapter(BatteryEventProfileDataWriter writer, String logicalDeviceId, BatterySystem deviceDescription) {
+    public SolarEventProfileAdapter(SolarEventProfileDataWriter writer, String logicalDeviceId, SolarInverter deviceDescription) {
         this.writer = writer;
         this.logicalDeviceId = logicalDeviceId;
         this.deviceDescription = deviceDescription;
@@ -56,14 +53,14 @@ public class BatteryEventProfileAdapter implements DeviceAdapter {
 
     public void update(Map<ReadingId, MeasValue> readingValues, Map<String, MeasValue> keyValues) {
 
-        final BatteryEventProfile message = mapToStruct(readingValues, keyValues);
+        final SolarEventProfile message = mapToStruct(readingValues, keyValues);
         if (message != null) {
             writer.write(message, InstanceHandle_t.HANDLE_NIL);
         }
     }
 
 
-    public BatteryEventProfile mapToStruct(Map<ReadingId, MeasValue> readingValues, Map<String, MeasValue> keyValues) {
+    public SolarEventProfile mapToStruct(Map<ReadingId, MeasValue> readingValues, Map<String, MeasValue> keyValues) {
 
         for (String key: keys) {
             if (!keyValues.containsKey(key)) {
@@ -71,48 +68,33 @@ public class BatteryEventProfileAdapter implements DeviceAdapter {
             }
         }
 
-        final BatteryEventProfile module = new BatteryEventProfile();
+        final SolarEventProfile module = new SolarEventProfile();
 
         final long now = System.currentTimeMillis();
 
         module.logicalDeviceID = logicalDeviceId;
         module.timestamp = now;
 
-        module.batterySystem = deviceDescription;
+        module.solarInverter = deviceDescription;
 
-        Boolean isCharging = keyValues.get(isChargingKey).asBoolean();
-        if (isCharging == null) {
-            return null;
-        }
         Boolean isConnected = keyValues.get(isConnectedKey).asBoolean();
         if (isConnected == null) {
             return null;
         }
-        String mode = keyValues.get(modeKey).asString();
-        if (mode == null) {
-            return null;
-        }
-        Double stateOfCharge = keyValues.get(stateOfChargeKey).asDouble();
-        if (stateOfCharge == null) {
-            return null;
-        }
 
-        final BatteryStatus batteryStatus = new BatteryStatus();
-        batteryStatus.isCharging = isCharging;
-        batteryStatus.isConnected = isConnected;
-        batteryStatus.mode = mode;
-        batteryStatus.stateOfCharge = (float)(double)stateOfCharge;
+        final SolarInverterStatus solarStatus = new SolarInverterStatus();
+        solarStatus.isConnected = isConnected;
 
-        batteryStatus.timestamp = now;
-        batteryStatus.value = "";
+        solarStatus.timestamp = now;
+        solarStatus.value = "";
 
         final HexBinary16Type quality = new HexBinary16Type();
         quality.data[0] = 0;
         quality.data[1] = 0;
 
-        batteryStatus.qualityFlag = quality;
+        solarStatus.qualityFlag = quality;
 
-        module.batteryStatus = batteryStatus;
+        module.solarInverterStatus = solarStatus;
 
         return module;
     }

@@ -160,7 +160,6 @@
                     <xs:element ref="ControlOptions" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="index" type="xs:unsignedInt" />
-                <xs:attribute name="matchBoolValue" type="xs:boolean"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

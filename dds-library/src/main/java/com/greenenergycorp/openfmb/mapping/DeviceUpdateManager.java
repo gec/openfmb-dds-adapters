@@ -105,7 +105,11 @@ public class DeviceUpdateManager implements DeviceObserver {
                 final DeviceAdapter deviceAdapter = adapterMap.get(device);
                 if (deviceAdapter != null) {
                     deviceAdapter.update(current.getReadingValueMap(), current.getKeyValueMap());
+                } else {
+                    logger.warn("No device adapter for changed device: " + device);
                 }
+            } else {
+                logger.warn("No device buffer for changed device: " + device);
             }
         }
     }

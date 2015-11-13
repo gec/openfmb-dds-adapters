@@ -103,6 +103,54 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="SolarReadingProfile">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="baseDescribedDevice">
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SolarEventProfile">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="baseDescribedDevice">
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LoadReadingProfile">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="baseDescribedDevice">
+                    <xs:attribute name="operatingLimit" type="xs:string"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResourceReadingProfile">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="baseDescribedDevice">
+                    <xs:sequence>
+                        <xs:element ref="PowerSystemResource" minOccurs="1" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PowerSystemResource">
+        <xs:complexType>
+            <xs:attribute name="mRID" type="xs:string"/>
+            <xs:attribute name="name" type="xs:string"/>
+            <xs:attribute name="description" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="publishersType">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
@@ -114,6 +162,10 @@
             <xs:element ref="RecloserReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="BatteryEventProfile" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="BatteryReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="SolarEventProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="SolarReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="LoadReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="ResourceReadingProfile" minOccurs="0" maxOccurs="unbounded"/>
         </xs:choice>
     </xs:complexType>
 
@@ -152,6 +204,7 @@
             <xs:extension base="baseControlDesc">
                 <xs:attribute name="adapterName" type="xs:string" />
                 <xs:attribute name="key" type="xs:string"/>
+                <xs:attribute name="matchBoolValue" type="xs:boolean" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -176,6 +229,76 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="OpenFMBMapping">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Publishers" type="publishersType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Subscribers" type="subscribersType" minOccurs="0" maxOccurs="1"/>
+
+                <xs:element name="DataMapping" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="readingDesc">
+                                            <xs:attribute name="mapFrom" type="xs:string" />
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="KeyControlMapping" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="keyControlDesc">
+                                            <xs:attribute name="mapTo" type="xs:string" />
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="EndDeviceControlMapping" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="deviceControlDesc">
+                                            <xs:attribute name="mapTo" type="xs:string" />
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SetPointControlMapping" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Mapping" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="setpointControlDesc">
+                                            <xs:attribute name="mapTo" type="xs:string" />
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
 
     <xs:simpleType name="UnitMultiplier">
         <xs:restriction base="xs:string">

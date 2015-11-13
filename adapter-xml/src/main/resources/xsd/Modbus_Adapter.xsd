@@ -119,7 +119,6 @@
         <xs:complexContent>
             <xs:extension base="fmb:keyControlDesc">
                 <xs:attribute name="index" type="xs:unsignedInt" />
-                <xs:attribute name="matchBoolValue" type="xs:boolean" use="optional"/>
                 <xs:attribute name="constIntValue" type="xs:long" use="optional"/>
             </xs:extension>
         </xs:complexContent>

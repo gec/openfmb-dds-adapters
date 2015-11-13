@@ -26,9 +26,17 @@ import com.rti.dds.subscription.DataReader;
 import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryEventProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryReadingProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.PowerSystemResource;
+import org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer;
+import org.openfmb.model.dds.rti.openfmb.loadmodule.LoadReadingProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser;
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserReadingProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter;
+import org.openfmb.model.dds.rti.openfmb.resourcemodule.ResourceReadingProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarEventProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter;
+import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarReadingProfileDataWriter;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,7 +49,7 @@ public class OpenFmbXmlLoader {
 
         final HashMap<String, DeviceAdapter> map = new HashMap<String, DeviceAdapter>();
 
-        if (xml.getElements() != null) {
+        if (xml != null && xml.getElements() != null) {
             for (Object elem: xml.getElements()) {
 
                 if (elem instanceof RecloserEventProfile) {
@@ -119,6 +127,83 @@ public class OpenFmbXmlLoader {
                             new BatteryReadingProfileAdapter(writer, entry.getLogicalDeviceId(), description);
 
                     map.put(entry.getAdapterName(), readingProfileAdapter);
+                    
+                } else if (elem instanceof LoadReadingProfile) {
+                    final LoadReadingProfile entry = (LoadReadingProfile) elem;
+                    final String name = "LoadReadingProfile";
+
+                    if (entry.getAdapterName() == null) {
+                        throw new IllegalArgumentException(name + " must have adapterName");
+                    }
+                    if (entry.getLogicalDeviceId() == null) {
+                        throw new IllegalArgumentException(name + " must have logicalDeviceId");
+                    }
+                    final EnergyConsumer description = getLoadDescription(entry, name);
+
+                    final LoadReadingProfileDataWriter writer = factory.getLoadReadProfileWriter();
+
+                    final LoadReadingProfileAdapter readingProfileAdapter =
+                            new LoadReadingProfileAdapter(writer, entry.getLogicalDeviceId(), description);
+
+                    map.put(entry.getAdapterName(), readingProfileAdapter);
+                    
+                } else if (elem instanceof ResourceReadingProfile) {
+                    final ResourceReadingProfile entry = (ResourceReadingProfile) elem;
+                    final String name = "ResourceReadingProfile";
+
+                    if (entry.getAdapterName() == null) {
+                        throw new IllegalArgumentException(name + " must have adapterName");
+                    }
+                    if (entry.getLogicalDeviceId() == null) {
+                        throw new IllegalArgumentException(name + " must have logicalDeviceId");
+                    }
+                    final Meter description = getResourceDescription(entry, name);
+
+                    final ResourceReadingProfileDataWriter writer = factory.getResourceReadProfileWriter();
+
+                    final ResourceReadingProfileAdapter readingProfileAdapter =
+                            new ResourceReadingProfileAdapter(writer, entry.getLogicalDeviceId(), description);
+
+                    map.put(entry.getAdapterName(), readingProfileAdapter);
+
+                } else if (elem instanceof SolarReadingProfile) {
+                    final SolarReadingProfile entry = (SolarReadingProfile) elem;
+                    final String name = "SolarReadingProfile";
+
+                    if (entry.getAdapterName() == null) {
+                        throw new IllegalArgumentException(name + " must have adapterName");
+                    }
+                    if (entry.getLogicalDeviceId() == null) {
+                        throw new IllegalArgumentException(name + " must have logicalDeviceId");
+                    }
+                    final SolarInverter description = getSolarDescription(entry, name);
+
+                    final SolarReadingProfileDataWriter writer = factory.getSolarReadProfileWriter();
+
+                    final SolarReadingProfileAdapter readingProfileAdapter =
+                            new SolarReadingProfileAdapter(writer, entry.getLogicalDeviceId(), description);
+
+                    map.put(entry.getAdapterName(), readingProfileAdapter);
+
+                } else if (elem instanceof SolarEventProfile) {
+                    final SolarEventProfile entry = (SolarEventProfile) elem;
+                    final String name = "SolarEventProfile";
+
+                    if (entry.getAdapterName() == null) {
+                        throw new IllegalArgumentException(name + " must have adapterName");
+                    }
+                    if (entry.getLogicalDeviceId() == null) {
+                        throw new IllegalArgumentException(name + " must have logicalDeviceId");
+                    }
+                    final SolarInverter description = getSolarDescription(entry, name);
+
+                    final SolarEventProfileDataWriter writer = factory.getSolarEventProfileWriter();
+
+                    final SolarEventProfileAdapter eventProfileAdapter =
+                            new SolarEventProfileAdapter(writer, entry.getLogicalDeviceId(), description);
+
+                    map.put(entry.getAdapterName(), eventProfileAdapter);
+
                 }
 
             }
@@ -129,7 +214,7 @@ public class OpenFmbXmlLoader {
 
     public static void loadSubscribers(List<ControlAdapter> controlAdapters, final Map<String, String> logicalIdToAdapterName, final SubscribersType xml, final OpenFmbDeviceFactory factory, final ControlMapping controlMapping) throws IOException {
 
-        if (xml.getElements() != null) {
+        if (xml != null && xml.getElements() != null) {
 
             for (Object elem: xml.getElements()) {
                 if (elem instanceof BaseIdentified) {
@@ -162,9 +247,7 @@ public class OpenFmbXmlLoader {
                         throw new IllegalArgumentException(name + " must have logicalDeviceId");
                     }
 
-                    final DataReader reader = factory.getRecloserControlProfileReader();
-
-                    final RecloserControlProfileAdapter adapter = RecloserControlProfileAdapter.build(reader, logicalIdToAdapterName, controlMapping);
+                    final RecloserControlProfileAdapter adapter = RecloserControlProfileAdapter.build(factory, logicalIdToAdapterName, controlMapping);
                     controlAdapters.add(adapter);
                     
                 } else if (elem instanceof BatteryControlProfile) {
@@ -180,7 +263,7 @@ public class OpenFmbXmlLoader {
 
                     final DataReader reader = factory.getBatteryControlProfileReader();
 
-                    final BatteryControlProfileAdapter adapter = BatteryControlProfileAdapter.build(reader, logicalIdToAdapterName, controlMapping);
+                    final BatteryControlProfileAdapter adapter = BatteryControlProfileAdapter.build(factory, logicalIdToAdapterName, controlMapping);
                     controlAdapters.add(adapter);
                 }
             }
@@ -225,5 +308,86 @@ public class OpenFmbXmlLoader {
         battery.name = entry.getName();
         battery.description = entry.getDescription();
         return battery;
+    }
+
+    private static EnergyConsumer getLoadDescription(LoadReadingProfile entry, String name) {
+        if (entry.getMRID() == null) {
+            throw new IllegalArgumentException(name + " must have mRID");
+        }
+        if (entry.getName() == null) {
+            throw new IllegalArgumentException(name + " must have name");
+        }
+        if (entry.getDescription() == null) {
+            throw new IllegalArgumentException(name + " must have description");
+        }
+        if (entry.getOperatingLimit() == null) {
+            throw new IllegalArgumentException(name + " must have operating limit");
+        }
+
+        final EnergyConsumer device = new EnergyConsumer();
+        device.mRID = entry.getMRID();
+        device.name = entry.getName();
+        device.description = entry.getDescription();
+        device.operatingLimit = entry.getOperatingLimit();
+        return device;
+    }
+
+
+    private static Meter getResourceDescription(ResourceReadingProfile entry, String name) {
+        if (entry.getMRID() == null) {
+            throw new IllegalArgumentException(name + " must have mRID");
+        }
+        if (entry.getName() == null) {
+            throw new IllegalArgumentException(name + " must have name");
+        }
+        if (entry.getDescription() == null) {
+            throw new IllegalArgumentException(name + " must have description");
+        }
+
+        if (entry.getPowerSystemResource() == null) {
+            throw new IllegalArgumentException(name + " must have PowerSystemResource");
+        }
+
+        if (entry.getPowerSystemResource().getMRID() == null) {
+            throw new IllegalArgumentException(name + " must have PowerSystemResource mRID");
+        }
+        if (entry.getPowerSystemResource().getName() == null) {
+            throw new IllegalArgumentException(name + " must have PowerSystemResource name");
+        }
+        if (entry.getPowerSystemResource().getDescription() == null) {
+            throw new IllegalArgumentException(name + " must have PowerSystemResource description");
+        }
+
+        final org.openfmb.model.dds.rti.openfmb.commonmodule.PowerSystemResource powerSystemResource = new PowerSystemResource();
+        powerSystemResource.mRID = entry.getPowerSystemResource().getMRID();
+        powerSystemResource.name = entry.getPowerSystemResource().getName();
+        powerSystemResource.description = entry.getPowerSystemResource().getDescription();
+        
+        final Meter device = new Meter();
+        device.mRID = entry.getMRID();
+        device.name = entry.getName();
+        device.description = entry.getDescription();
+
+        device.powerSystemResource = powerSystemResource;
+
+        return device;
+    }
+    
+    private static SolarInverter getSolarDescription(BaseDescribedDevice entry, String name) {
+        if (entry.getMRID() == null) {
+            throw new IllegalArgumentException(name + " must have mRID");
+        }
+        if (entry.getName() == null) {
+            throw new IllegalArgumentException(name + " must have name");
+        }
+        if (entry.getDescription() == null) {
+            throw new IllegalArgumentException(name + " must have description");
+        }
+
+        final SolarInverter solar = new SolarInverter();
+        solar.mRID = entry.getMRID();
+        solar.name = entry.getName();
+        solar.description = entry.getDescription();
+        return solar;
     }
 }

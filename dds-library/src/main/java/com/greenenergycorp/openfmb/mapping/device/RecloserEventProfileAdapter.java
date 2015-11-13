@@ -24,10 +24,14 @@ import org.openfmb.model.dds.rti.openfmb.reclosermodule.*;
 import com.greenenergycorp.openfmb.mapping.DeviceAdapter;
 import com.greenenergycorp.openfmb.mapping.MeasValue;
 import com.greenenergycorp.openfmb.mapping.ReadingId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class RecloserEventProfileAdapter implements DeviceAdapter {
+
+    private final static Logger logger = LoggerFactory.getLogger(RecloserEventProfileAdapter.class);
 
     private final RecloserEventProfileDataWriter writer;
 
@@ -64,6 +68,7 @@ public class RecloserEventProfileAdapter implements DeviceAdapter {
 
         Boolean isBlocked = keyValues.get(isBlockedKey).asBoolean();
         if (isBlocked == null) {
+            logger.warn("RecloserEventProfile adapter could not interpret " + isBlockedKey);
             return null;
         }
 
@@ -73,6 +78,7 @@ public class RecloserEventProfileAdapter implements DeviceAdapter {
         }
         final SwitchStatusKind statusEnum = SwitchStatusKind.valueOf(switchStatusInt.intValue());
         if (statusEnum == null) {
+            logger.warn("RecloserEventProfile adapter could not interpret " + switchStatusKey);
             return null;
         }
 

@@ -18,22 +18,6 @@
  */
 package com.greenenergycorp.openfmb.mapping;
 
-import java.io.IOException;
-
-/**
- * Interface used by control adapters to start heir subscriptions.
- */
-public interface ControlAdapter {
-
-    /**
-     * Start receiving controls.
-     *
-     * @throws IOException
-     */
-    void start() throws IOException;
-
-    /**
-     * Stop subscription and clean up objects.
-     */
-    void close();
+public interface NamedControlHandler {
+    void handle(String name, MeasValue value);
 }

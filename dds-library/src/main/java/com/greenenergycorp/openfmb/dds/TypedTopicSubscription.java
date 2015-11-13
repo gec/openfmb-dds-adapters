@@ -38,13 +38,17 @@ public class TypedTopicSubscription<T> {
     private final DataReader reader;
     private final TypeHandle<T> typeHandle;
 
+    private final Subscriber subscriber; // for deleting the reader purposes only
+
     /**
      * @param reader DataReader for the DDS topic/type.
      * @param typeHandle Type-specific interface for the DDS topic/type.
+     * @param subscriber Subscriber parent of the DataReader used to release it.
      */
-    public TypedTopicSubscription(DataReader reader, TypeHandle<T> typeHandle) {
+    public TypedTopicSubscription(DataReader reader, TypeHandle<T> typeHandle, Subscriber subscriber) {
         this.reader = reader;
         this.typeHandle = typeHandle;
+        this.subscriber = subscriber;
     }
 
     /**
@@ -100,5 +104,10 @@ public class TypedTopicSubscription<T> {
             }
         }, StatusKind.DATA_AVAILABLE_STATUS);
 
+    }
+
+    public void close() {
+        reader.delete_contained_entities();
+        subscriber.delete_datareader(reader);
     }
 }
