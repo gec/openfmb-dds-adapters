@@ -19,6 +19,8 @@
 package com.greenenergycorp.openfmb.mapping;
 
 import com.greenenergycorp.openfmb.dds.mapping.xml.*;
+import com.greenenergycorp.openfmb.mapping.transform.MeasTransform;
+import com.greenenergycorp.openfmb.mapping.transform.TransformXmlLoader;
 import com.greenenergycorp.openfmb.mapping.xml.CommonConversions;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind;
@@ -33,7 +35,7 @@ import java.util.Map;
 
 public class NamedDataMappingLoader {
 
-    public static void loadDataMapping(Map<String, DeviceKeyId> keyIdMap, Map<String, DeviceReadingId> readingIdMap, OpenFMBMapping xml) {
+    public static void loadDataMapping(Map<String, KeyUpdateMapping> keyIdMap, Map<String, ReadingUpdateMapping> readingIdMap, OpenFMBMapping xml) {
 
         if (xml.getDataMapping() != null && xml.getDataMapping().getMapping() != null) {
 
@@ -49,16 +51,57 @@ public class NamedDataMappingLoader {
                 }
                 final String adapterName = map.getAdapterName();
 
+                MeasTransform transform = null;
+                if (map.getTransform() != null) {
+                    transform = TransformXmlLoader.load(map.getTransform());
+                }
+
                 if (map.getKey() != null) {
 
-                    keyIdMap.put(measName, new DeviceKeyId(adapterName, map.getKey()));
+                    keyIdMap.put(measName, new KeyUpdateMapping(new DeviceKeyId(adapterName, map.getKey()), transform));
 
                 } else {
                     final ReadingId readingId = loadReadingId(map);
 
-                    readingIdMap.put(measName, new DeviceReadingId(adapterName, readingId));
+                    readingIdMap.put(measName, new ReadingUpdateMapping(new DeviceReadingId(adapterName, readingId), transform));
                 }
             }
+        }
+    }
+
+    public static class KeyUpdateMapping {
+        private final DeviceKeyId id;
+        private final MeasTransform transform;
+
+        public KeyUpdateMapping(DeviceKeyId id, MeasTransform transform) {
+            this.id = id;
+            this.transform = transform;
+        }
+
+        public DeviceKeyId getId() {
+            return id;
+        }
+
+        public MeasTransform getTransform() {
+            return transform;
+        }
+    }
+
+    public static class ReadingUpdateMapping {
+        private final DeviceReadingId id;
+        private final MeasTransform transform;
+
+        public ReadingUpdateMapping(DeviceReadingId id, MeasTransform transform) {
+            this.id = id;
+            this.transform = transform;
+        }
+
+        public DeviceReadingId getId() {
+            return id;
+        }
+
+        public MeasTransform getTransform() {
+            return transform;
         }
     }
 
