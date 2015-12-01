@@ -40,6 +40,7 @@ public class CommonMapping {
         readingType.multiplier = id.getMultiplier();
         readingType.flowDirection = id.getFlowDirection();
         readingType.phases = id.getPhases();
+        readingType.name = id.getName();
 
         final Reading reading = new Reading();
         reading.qualityFlag = quality;

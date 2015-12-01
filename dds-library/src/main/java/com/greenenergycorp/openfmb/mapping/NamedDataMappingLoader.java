@@ -109,7 +109,7 @@ public class NamedDataMappingLoader {
 
         final UnitSymbol unitXml = mapping.getUnit();
         if (unitXml == null) {
-            throw new IllegalArgumentException("Mapping must have key or all of unit, multiplier, flowDirection, and phases");
+            throw new IllegalArgumentException("Mapping must have key or all of name, unit, multiplier, flowDirection, and phases");
         }
         final UnitSymbolKind unit = CommonConversions.convertFromXml(unitXml);
         if (unit == null) {
@@ -118,7 +118,7 @@ public class NamedDataMappingLoader {
 
         final UnitMultiplier multiplierXml = mapping.getMultiplier();
         if (multiplierXml == null) {
-            throw new IllegalArgumentException("Mapping must have key or all of unit, multiplier, flowDirection, and phases");
+            throw new IllegalArgumentException("Mapping must have key or all of name, unit, multiplier, flowDirection, and phases");
         }
         final UnitMultiplierKind multiplier = CommonConversions.convertFromXml(multiplierXml);
         if (multiplier == null) {
@@ -127,7 +127,7 @@ public class NamedDataMappingLoader {
 
         final com.greenenergycorp.openfmb.dds.mapping.xml.FlowDirection flowDirectionXml = mapping.getFlowDirection();
         if (flowDirectionXml == null) {
-            throw new IllegalArgumentException("Mapping must have key or all of unit, multiplier, flowDirection, and phases");
+            throw new IllegalArgumentException("Mapping must have key or all of name, unit, multiplier, flowDirection, and phases");
         }
         final FlowDirectionKind flowDirection = CommonConversions.convertFromXml(flowDirectionXml);
         if (flowDirection == null) {
@@ -136,14 +136,19 @@ public class NamedDataMappingLoader {
 
         final PhaseCode phasesXml = mapping.getPhases();
         if (phasesXml == null) {
-            throw new IllegalArgumentException("Mapping must have key or all of unit, multiplier, flowDirection, and phases");
+            throw new IllegalArgumentException("Mapping must have key or all of name, unit, multiplier, flowDirection, and phases");
         }
         final PhaseCodeKind phases = CommonConversions.convertFromXml(phasesXml);
         if (phases == null) {
             throw new IllegalArgumentException("Phase code mapping " + flowDirectionXml + " did not match DDS enum");
         }
 
-        return new ReadingId(unit, multiplier, flowDirection, phases, "");
+        final String name = mapping.getName();
+        if (name == null) {
+            throw new IllegalArgumentException("Mapping must have key or all of name, unit, multiplier, flowDirection, and phases");
+        }
+
+        return new ReadingId(unit, multiplier, flowDirection, phases, name);
     }
 
     public static class NamedXmlMarshaller {
