@@ -45,9 +45,9 @@ public class RecloserControlProfileAdapter implements ControlAdapter {
         this.handlerMap = handlerMap;
     }
 
-    public static RecloserControlProfileAdapter build(final OpenFmbDeviceFactory factory, final Map<String, String> deviceIdToAdapterName, final ControlMapping handlerMap) throws IOException {
+    public static RecloserControlProfileAdapter build(final OpenFmbDeviceFactory factory, final String topicName, final Map<String, String> deviceIdToAdapterName, final ControlMapping handlerMap) throws IOException {
 
-        final DataReader reader = factory.getRecloserControlProfileReader();
+        final DataReader reader = factory.getRecloserControlProfileReader(topicName);
 
         final TypedTopicSubscription<RecloserControlProfile> subscription =
                 new TypedTopicSubscription<RecloserControlProfile>(reader, new RecloserControlProfileHandle(), factory.getSubscriber());

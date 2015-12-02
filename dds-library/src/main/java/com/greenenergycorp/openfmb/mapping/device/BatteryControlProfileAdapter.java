@@ -42,9 +42,9 @@ public class BatteryControlProfileAdapter implements ControlAdapter {
         this.handlerMap = handlerMap;
     }
 
-    public static BatteryControlProfileAdapter build(final OpenFmbDeviceFactory factory, final Map<String, String> deviceIdToAdapterName, final ControlMapping handlerMap) throws IOException {
+    public static BatteryControlProfileAdapter build(final OpenFmbDeviceFactory factory, final String topicName, final Map<String, String> deviceIdToAdapterName, final ControlMapping handlerMap) throws IOException {
 
-        final DataReader reader = factory.getBatteryControlProfileReader();
+        final DataReader reader = factory.getBatteryControlProfileReader(topicName);
 
         final TypedTopicSubscription<BatteryControlProfile> subscription =
                 new TypedTopicSubscription<BatteryControlProfile>(reader, new BatteryControlProfileHandle(), factory.getSubscriber());

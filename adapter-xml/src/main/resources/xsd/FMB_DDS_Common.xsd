@@ -27,6 +27,7 @@
            jaxb:version="1.0">
 
     <xs:complexType name="baseIdentified">
+        <xs:attribute name="topic" type="xs:string"/>
         <xs:attribute name="adapterName" type="xs:string"/>
         <xs:attribute name="logicalDeviceId" type="xs:string"/>
     </xs:complexType>

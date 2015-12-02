@@ -19,6 +19,7 @@
 package com.greenenergycorp.openfmb.mapping.device;
 
 import com.greenenergycorp.openfmb.dds.DdsParticipant;
+import com.greenenergycorp.openfmb.dds.TypeHandle;
 import com.greenenergycorp.openfmb.dds.handle.*;
 import com.rti.dds.publication.DataWriter;
 import com.rti.dds.publication.Publisher;
@@ -35,6 +36,10 @@ import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarEventProfileDataWriter
 import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarReadingProfileDataWriter;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class OpenFmbDeviceFactory {
 
@@ -42,17 +47,8 @@ public class OpenFmbDeviceFactory {
     private final Publisher publisher;
     private final Subscriber subscriber;
 
-    private Topic recloserEventProfileTopic;
-    private Topic recloserReaderProfileTopic;
-    private Topic recloserControlProfileTopic;
-    private Topic batteryEventProfileTopic;
-    private Topic batteryReaderProfileTopic;
-    private Topic batteryControlProfileTopic;
-
-    private Topic solarReaderProfileTopic;
-    private Topic solarEventProfileTopic;
-    private Topic loadReaderProfileTopic;
-    private Topic resourceReaderProfileTopic;
+    private final Map<String, Topic> topicMap = new HashMap<String, Topic>();
+    private final Set<String> registeredTypes = new HashSet<String>();
 
     public OpenFmbDeviceFactory(DdsParticipant participant, Publisher publisher, Subscriber subscriber) {
         this.participant = participant;
@@ -68,16 +64,33 @@ public class OpenFmbDeviceFactory {
         return subscriber;
     }
 
-    public RecloserEventProfileDataWriter getRecloserEventProfileWriter() throws IOException {
+    private <T> Topic getTopic(String topic, TypeHandle<T> handle) throws IOException {
+        if (topicMap.containsKey(topic)) {
+            return topicMap.get(topic);
+        } else {
+            if (!registeredTypes.contains(handle.typeName())) {
+                handle.registerType(participant.getParticipant());
+                registeredTypes.add(handle.typeName());
+            }
+
+            final Topic registered = participant.registerTopic(topic, handle.typeName(), true);
+            topicMap.put(topic, registered);
+            return registered;
+        }
+    }
+
+    private <T> DataWriter getDataWriter(String topicName, TypeHandle<T> handle) throws IOException {
+
+        final Topic topic = getTopic(topicName, handle);
+
+        return participant.createWriter(publisher, topic);
+    }
+
+    public RecloserEventProfileDataWriter getRecloserEventProfileWriter(String topicName) throws IOException {
 
         final RecloserEventProfileHandle handle = new RecloserEventProfileHandle();
 
-        if (recloserEventProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            recloserEventProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, recloserEventProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         RecloserEventProfileDataWriter writer = (RecloserEventProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -87,16 +100,11 @@ public class OpenFmbDeviceFactory {
         return writer;
     }
 
-    public RecloserReadingProfileDataWriter getRecloserReadProfileWriter() throws IOException {
+    public RecloserReadingProfileDataWriter getRecloserReadProfileWriter(String topicName) throws IOException {
 
         final RecloserReadingProfileHandle handle = new RecloserReadingProfileHandle();
 
-        if (recloserReaderProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            recloserReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, recloserReaderProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         RecloserReadingProfileDataWriter writer = (RecloserReadingProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -106,28 +114,20 @@ public class OpenFmbDeviceFactory {
         return writer;
     }
 
-    public DataReader getRecloserControlProfileReader() throws IOException {
+    public DataReader getRecloserControlProfileReader(String topicName) throws IOException {
 
         final RecloserControlProfileHandle handle = new RecloserControlProfileHandle();
 
-        if (recloserControlProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            recloserControlProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
+        final Topic topic = getTopic(topicName, handle);
 
-        return participant.createReader(subscriber, recloserControlProfileTopic);
+        return participant.createReader(subscriber, topic);
     }
 
-    public BatteryEventProfileDataWriter getBatteryEventProfileWriter() throws IOException {
+    public BatteryEventProfileDataWriter getBatteryEventProfileWriter(String topicName) throws IOException {
 
         final BatteryEventProfileHandle handle = new BatteryEventProfileHandle();
 
-        if (batteryEventProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            batteryEventProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, batteryEventProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         BatteryEventProfileDataWriter writer = (BatteryEventProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -137,16 +137,11 @@ public class OpenFmbDeviceFactory {
         return writer;
     }
 
-    public BatteryReadingProfileDataWriter getBatteryReadProfileWriter() throws IOException {
+    public BatteryReadingProfileDataWriter getBatteryReadProfileWriter(String topicName) throws IOException {
 
         final BatteryReadingProfileHandle handle = new BatteryReadingProfileHandle();
 
-        if (batteryReaderProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            batteryReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, batteryReaderProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         BatteryReadingProfileDataWriter writer = (BatteryReadingProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -156,28 +151,20 @@ public class OpenFmbDeviceFactory {
         return writer;
     }
 
-    public DataReader getBatteryControlProfileReader() throws IOException {
+    public DataReader getBatteryControlProfileReader(String topicName) throws IOException {
 
         final BatteryControlProfileHandle handle = new BatteryControlProfileHandle();
 
-        if (batteryControlProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            batteryControlProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
+        final Topic topic = getTopic(topicName, handle);
 
-        return participant.createReader(subscriber, batteryControlProfileTopic);
+        return participant.createReader(subscriber, topic);
     }
 
-    public ResourceReadingProfileDataWriter getResourceReadProfileWriter() throws IOException {
+    public ResourceReadingProfileDataWriter getResourceReadProfileWriter(String topicName) throws IOException {
 
         final ResourceReadingProfileHandle handle = new ResourceReadingProfileHandle();
 
-        if (resourceReaderProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            resourceReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, resourceReaderProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         ResourceReadingProfileDataWriter writer = (ResourceReadingProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -187,16 +174,11 @@ public class OpenFmbDeviceFactory {
         return writer;
     }
 
-    public LoadReadingProfileDataWriter getLoadReadProfileWriter() throws IOException {
+    public LoadReadingProfileDataWriter getLoadReadProfileWriter(String topicName) throws IOException {
 
         final LoadReadingProfileHandle handle = new LoadReadingProfileHandle();
 
-        if (loadReaderProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            loadReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, loadReaderProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         LoadReadingProfileDataWriter writer = (LoadReadingProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -206,16 +188,11 @@ public class OpenFmbDeviceFactory {
         return writer;
     }
 
-    public SolarReadingProfileDataWriter getSolarReadProfileWriter() throws IOException {
+    public SolarReadingProfileDataWriter getSolarReadProfileWriter(String topicName) throws IOException {
 
         final SolarReadingProfileHandle handle = new SolarReadingProfileHandle();
 
-        if (solarReaderProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            solarReaderProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, solarReaderProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         SolarReadingProfileDataWriter writer = (SolarReadingProfileDataWriter) parentWriter;
         if (writer == null) {
@@ -226,16 +203,11 @@ public class OpenFmbDeviceFactory {
     }
 
 
-    public SolarEventProfileDataWriter getSolarEventProfileWriter() throws IOException {
+    public SolarEventProfileDataWriter getSolarEventProfileWriter(String topicName) throws IOException {
 
         final SolarEventProfileHandle handle = new SolarEventProfileHandle();
 
-        if (solarEventProfileTopic == null) {
-            handle.registerType(participant.getParticipant());
-            solarEventProfileTopic = participant.registerTopic(handle.typeName(), handle.typeName(), true);
-        }
-
-        final DataWriter parentWriter = participant.createWriter(publisher, solarReaderProfileTopic);
+        final DataWriter parentWriter = getDataWriter(topicName, handle);
 
         SolarEventProfileDataWriter writer = (SolarEventProfileDataWriter) parentWriter;
         if (writer == null) {
