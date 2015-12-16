@@ -426,7 +426,7 @@ module generationmodule {
 		commonmodule::ForecastSchedule forecastSchedule; 
 		GeneratingUnit generatingUnit; 
 	};
-	#pragma keylist GenerationForecastProfile logicalDeviceID
+	#pragma keylist GenerationForecastModule logicalDeviceID
 
 	const unsigned long MaxLengthGenerationReadings = 100;
 	typedef sequence<commonmodule::Reading, MaxLengthGenerationReadings> SequenceOfGenerationReadings;
