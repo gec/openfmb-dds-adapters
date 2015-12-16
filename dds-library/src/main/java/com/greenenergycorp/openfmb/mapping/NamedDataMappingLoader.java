@@ -31,11 +31,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class NamedDataMappingLoader {
 
-    public static void loadDataMapping(Map<String, KeyUpdateMapping> keyIdMap, Map<String, ReadingUpdateMapping> readingIdMap, OpenFMBMapping xml) {
+    public static void loadDataMapping(Map<String, List<KeyUpdateMapping>> keyIdMap, Map<String, List<ReadingUpdateMapping>> readingIdMap, OpenFMBMapping xml) {
 
         if (xml.getDataMapping() != null && xml.getDataMapping().getMapping() != null) {
 
@@ -58,12 +60,29 @@ public class NamedDataMappingLoader {
 
                 if (map.getKey() != null) {
 
-                    keyIdMap.put(measName, new KeyUpdateMapping(new DeviceKeyId(adapterName, map.getKey()), transform));
+                    final KeyUpdateMapping keyUpdateMapping = new KeyUpdateMapping(new DeviceKeyId(adapterName, map.getKey()), transform);
+
+                    final List<KeyUpdateMapping> currentList = keyIdMap.get(measName);
+                    if (currentList != null) {
+                        currentList.add(keyUpdateMapping);
+                    } else {
+                        final ArrayList<KeyUpdateMapping> entry = new ArrayList<KeyUpdateMapping>();
+                        entry.add(keyUpdateMapping);
+                        keyIdMap.put(measName, entry);
+                    }
 
                 } else {
                     final ReadingId readingId = loadReadingId(map);
 
-                    readingIdMap.put(measName, new ReadingUpdateMapping(new DeviceReadingId(adapterName, readingId), transform));
+                    final ReadingUpdateMapping readingUpdateMapping = new ReadingUpdateMapping(new DeviceReadingId(adapterName, readingId), transform);
+                    final List<ReadingUpdateMapping> currentList = readingIdMap.get(measName);
+                    if (currentList != null) {
+                        currentList.add(readingUpdateMapping);
+                    } else {
+                        final ArrayList<ReadingUpdateMapping> entry = new ArrayList<ReadingUpdateMapping>();
+                        entry.add(readingUpdateMapping);
+                        readingIdMap.put(measName, entry);
+                    }
                 }
             }
         }
