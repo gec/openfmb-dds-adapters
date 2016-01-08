@@ -11,19 +11,19 @@ or consult the RTI Connext manual.
 
 package org.openfmb.model.dds.rti.openfmb.batterymodule;
 
-import com.rti.dds.infrastructure.*;
-import com.rti.dds.infrastructure.Copyable;
-import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
+import com.rti.dds.infrastructure.Copyable;
 
-public class BatteryControlProfile   implements Copyable, Serializable{
+import java.io.Serializable;
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
+public class BatteryControlProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
+
     public org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem batterySystem = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem)org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem.create();
     public org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystemControl batterySystemControl = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystemControl)org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystemControl.create();
 
     public BatteryControlProfile() {
+
+        super();
 
     }
     public BatteryControlProfile (BatteryControlProfile other) {
@@ -43,8 +43,7 @@ public class BatteryControlProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (batterySystem != null) {
             batterySystem.clear();
         }
@@ -59,18 +58,16 @@ public class BatteryControlProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         BatteryControlProfile otherObj = (BatteryControlProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!batterySystem.equals(otherObj.batterySystem)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class BatteryControlProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += batterySystem.hashCode(); 
         __result += batterySystemControl.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class BatteryControlProfile   implements Copyable, Serializable{
 
         BatteryControlProfile typedSrc = (BatteryControlProfile) src;
         BatteryControlProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.batterySystem = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem) typedDst.batterySystem.copy_from(typedSrc.batterySystem);
         typedDst.batterySystemControl = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystemControl) typedDst.batterySystemControl.copy_from(typedSrc.batterySystemControl);
 
@@ -129,10 +124,8 @@ public class BatteryControlProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(batterySystem.toString("batterySystem ", indent+1));
         strBuffer.append(batterySystemControl.toString("batterySystemControl ", indent+1));
 

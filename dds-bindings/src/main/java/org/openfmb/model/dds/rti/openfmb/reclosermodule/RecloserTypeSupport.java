@@ -150,9 +150,8 @@ public class RecloserTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -178,9 +177,7 @@ public class RecloserTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
 
         if (include_encapsulation) {
@@ -212,9 +209,9 @@ public class RecloserTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.mRID );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.description );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment  +=  CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment);
 
         if (include_encapsulation) {
@@ -271,11 +268,7 @@ public class RecloserTypeSupport extends TypeSupportImpl {
 
             Recloser typedSrc = (Recloser) src;
 
-            dst.writeString(typedSrc.mRID,(255));
-
-            dst.writeString(typedSrc.description,(255));
-
-            dst.writeString(typedSrc.name,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
             dst.writeBoolean(typedSrc.normalOpen);
         }
@@ -341,10 +334,9 @@ public class RecloserTypeSupport extends TypeSupportImpl {
 
             Recloser typedDst = (Recloser) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.mRID = src.readString((255));
-                typedDst.description = src.readString((255));
-                typedDst.name = src.readString((255));
                 typedDst.normalOpen = src.readBoolean();
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -417,12 +409,7 @@ public class RecloserTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
-
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             src.skipBoolean();
 
         }

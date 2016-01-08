@@ -150,11 +150,11 @@ public class ReadingTypeTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -179,11 +179,11 @@ public class ReadingTypeTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -214,14 +214,14 @@ public class ReadingTypeTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.multiplier);
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.unit);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.flowDirection);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.phases);
 
         if (include_encapsulation) {
@@ -278,15 +278,15 @@ public class ReadingTypeTypeSupport extends TypeSupportImpl {
 
             ReadingType typedSrc = (ReadingType) src;
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
             dst.writeString(typedSrc.name,(255));
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.flowDirection, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.flowDirection, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.phases, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.phases, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
 
         if (serialize_encapsulation) {
@@ -351,11 +351,11 @@ public class ReadingTypeTypeSupport extends TypeSupportImpl {
             ReadingType typedDst = (ReadingType) dst;
             typedDst.clear();      
             try{
-                typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.multiplier, src, false, true, endpoint_plugin_qos);     
+                typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.multiplier, src, false, true, endpoint_plugin_qos);     
                 typedDst.name = src.readString((255));
-                typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.unit, src, false, true, endpoint_plugin_qos);     
-                typedDst.flowDirection = (org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind)org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.flowDirection, src, false, true, endpoint_plugin_qos);     
-                typedDst.phases = (org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind)org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.phases, src, false, true, endpoint_plugin_qos);     
+                typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.unit, src, false, true, endpoint_plugin_qos);     
+                typedDst.flowDirection = (org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind)org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.flowDirection, src, false, true, endpoint_plugin_qos);     
+                typedDst.phases = (org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind)org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.phases, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -427,15 +427,15 @@ public class ReadingTypeTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
             src.skipString();
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
         }
 

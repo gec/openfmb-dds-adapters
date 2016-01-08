@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class LoadReadingProfile   implements Copyable, Serializable{
+public class LoadReadingProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer energyConsumer = (org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer)org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer.create();
     public org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadReadings readings = (org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadReadings)org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadReadings.create();
 
     public LoadReadingProfile() {
+
+        super();
 
     }
     public LoadReadingProfile (LoadReadingProfile other) {
@@ -43,8 +43,7 @@ public class LoadReadingProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (energyConsumer != null) {
             energyConsumer.clear();
         }
@@ -59,18 +58,16 @@ public class LoadReadingProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         LoadReadingProfile otherObj = (LoadReadingProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!energyConsumer.equals(otherObj.energyConsumer)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class LoadReadingProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += energyConsumer.hashCode(); 
         __result += readings.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class LoadReadingProfile   implements Copyable, Serializable{
 
         LoadReadingProfile typedSrc = (LoadReadingProfile) src;
         LoadReadingProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.energyConsumer = (org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer) typedDst.energyConsumer.copy_from(typedSrc.energyConsumer);
         typedDst.readings = (org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadReadings) typedDst.readings.copy_from(typedSrc.readings);
 
@@ -129,10 +124,8 @@ public class LoadReadingProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(energyConsumer.toString("energyConsumer ", indent+1));
         strBuffer.append(readings.toString("readings ", indent+1));
 

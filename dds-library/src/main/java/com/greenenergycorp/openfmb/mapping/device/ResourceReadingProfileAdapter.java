@@ -23,7 +23,7 @@ import com.greenenergycorp.openfmb.mapping.MeasValue;
 import com.greenenergycorp.openfmb.mapping.ReadingId;
 import com.rti.dds.infrastructure.InstanceHandle_t;
 import org.openfmb.model.dds.rti.openfmb.commonmodule.Reading;
-import org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.Meter;
 import org.openfmb.model.dds.rti.openfmb.resourcemodule.ResourceReadingProfile;
 import org.openfmb.model.dds.rti.openfmb.resourcemodule.ResourceReadingProfileDataWriter;
 

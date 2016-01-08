@@ -18,11 +18,11 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class ReadingType   implements Copyable, Serializable{
 
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
     public String name=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind flowDirection = (org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind)org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind phases = (org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind)org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind flowDirection = (org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind)org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind phases = (org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind)org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind.create();
 
     public ReadingType() {
 
@@ -44,11 +44,11 @@ public class ReadingType   implements Copyable, Serializable{
 
     public void clear() {
 
-        multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
+        multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
         name=  ""; 
-        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        flowDirection = org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind.create();
-        phases = org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind.create();
+        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        flowDirection = org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind.create();
+        phases = org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind.create();
     }
 
     public boolean equals(Object o) {
@@ -111,11 +111,11 @@ public class ReadingType   implements Copyable, Serializable{
         ReadingType typedSrc = (ReadingType) src;
         ReadingType typedDst = this;
 
-        typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.multiplier.copy_from(typedSrc.multiplier);
+        typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.multiplier.copy_from(typedSrc.multiplier);
         typedDst.name = typedSrc.name;
-        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
-        typedDst.flowDirection = (org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind) typedDst.flowDirection.copy_from(typedSrc.flowDirection);
-        typedDst.phases = (org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind) typedDst.phases.copy_from(typedSrc.phases);
+        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
+        typedDst.flowDirection = (org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind) typedDst.flowDirection.copy_from(typedSrc.flowDirection);
+        typedDst.phases = (org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind) typedDst.phases.copy_from(typedSrc.phases);
 
         return this;
     }

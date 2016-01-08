@@ -240,8 +240,7 @@ public class ContainerTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += get_serialized_sample_max_size(
-            endpoint_data,false,encapsulation_id,currentAlignment);
+        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -303,7 +302,8 @@ public class ContainerTypeSupport extends TypeSupportImpl {
         if (serialize_key) {
 
             Container typedSrc = (Container) src;    
-            serialize(endpoint_data, src, dst, false, CdrEncapsulation.CDR_ENCAPSULATION_ID_CDR_BE, true, endpoint_plugin_qos);
+
+            dst.writeString(typedSrc.logicalDeviceID,(255));
 
         }
 
@@ -379,7 +379,7 @@ public class ContainerTypeSupport extends TypeSupportImpl {
 
             Container typedDst = (Container) dst;
 
-            deserialize_sample(endpoint_data, dst, src, false, true, endpoint_plugin_qos);
+            typedDst.logicalDeviceID = src.readString((255));
 
         }
         if (deserialize_encapsulation) {
@@ -437,9 +437,9 @@ public class ContainerTypeSupport extends TypeSupportImpl {
 
             Container typedDst = (Container) sample;
 
-            deserialize_sample(
-                endpoint_data, sample, src, false,
-                true, endpoint_plugin_qos);
+            typedDst.logicalDeviceID = src.readString((255));
+
+            src.skipLong();
 
         }
 
@@ -448,6 +448,104 @@ public class ContainerTypeSupport extends TypeSupportImpl {
         }
 
         return sample;
+    }
+
+    /* Fill in the key fields of the given instance sample based on the key.
+    */
+    public void key_to_instance(Object endpoint_data,
+    Object instance,
+    Object key) {
+        Container typedDst
+        = (Container) instance;
+        Container typedSrc
+        = (Container) key;
+        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
+
+    }
+
+    /* Fill in the given key based on the key fields of the given instance
+    * sample.
+    */
+    public void instance_to_key(Object endpoint_data,
+    Object key,
+    Object instance) {
+        Container typedDst
+        = (Container)key;
+        Container typedSrc
+        = (Container) instance;
+        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
+
+    }
+
+    /* Fill in the fields of the given KeyHash based on the key field(s)
+    * of the given instance sample.
+    * Important: The fields of the instance ID cannot all be set to zero!
+    */
+    public void instance_to_keyhash(Object endpoint_data,
+    KeyHash_t keyhash,
+    Object instance) {
+        DefaultEndpointData endpointData = (DefaultEndpointData) endpoint_data;
+        CdrOutputStream md5Stream = endpointData.get_stream();
+        CdrBuffer buffer = null;
+
+        if (md5Stream == null) {
+            throw new RETCODE_ERROR("Missing MD5 stream");
+        }
+
+        buffer = md5Stream.getBuffer();
+        buffer.resetBufferToZero();
+
+        md5Stream.resetAndSetDirtyBit(true);
+
+        serialize_key(endpoint_data,instance,md5Stream,false,CdrEncapsulation.CDR_ENCAPSULATION_ID_CDR_BE,true,null);
+
+        if (endpointData.get_serialized_key_max_size() > KeyHash_t.KEY_HASH_MAX_LENGTH) {
+            md5Stream.computeMD5(keyhash.value);
+        } else {
+            System.arraycopy(buffer.getBuffer(), 0, 
+            keyhash.value, 0,
+            buffer.currentPosition());
+            System.arraycopy(KeyHash_t.ZERO_KEYHASH.value,buffer.currentPosition(),
+            keyhash.value,buffer.currentPosition(),
+            KeyHash_t.KEY_HASH_MAX_LENGTH - buffer.currentPosition());
+        }
+
+        keyhash.length = KeyHash_t.KEY_HASH_MAX_LENGTH;
+    }
+
+    public void serialized_sample_to_keyhash(
+        Object endpoint_data,
+        CdrInputStream src,
+        KeyHash_t keyhash,
+        boolean include_encapsulation,
+        Object endpoint_plugin_qos)
+    {
+        int position = 0;
+
+        DefaultEndpointData endpointData = (DefaultEndpointData) endpoint_data;
+        Object sample = null;
+
+        sample = endpointData.get_sample();
+
+        if (sample == null) {
+            throw new RETCODE_ERROR("Missing intermediate sample");
+        }
+
+        Container typedDst = (Container) sample;
+
+        if (include_encapsulation) {
+            src.deserializeAndSetCdrEncapsulation();
+
+            position = src.resetAlignment();
+        }
+
+        typedDst.logicalDeviceID = src.readString((255));
+
+        if (include_encapsulation) {
+            src.restoreAlignment(position);
+        }
+
+        instance_to_keyhash(endpoint_data, keyhash, sample);
     }
 
     // -----------------------------------------------------------------------
@@ -508,7 +606,7 @@ public class ContainerTypeSupport extends TypeSupportImpl {
         to the constructor below should be true.  Otherwise it should
         be false. */        
 
-        super(TYPE_NAME, false,ContainerTypeCode.VALUE,Container.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME,true,ContainerTypeCode.VALUE,Container.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
 
     }
 

@@ -18,8 +18,8 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class SunRadiation   implements Copyable, Serializable{
 
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
     public org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationData sunRadiationData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationData)org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationData.create();
 
     public SunRadiation() {
@@ -42,8 +42,8 @@ public class SunRadiation   implements Copyable, Serializable{
 
     public void clear() {
 
-        multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
         if (sunRadiationData != null) {
             sunRadiationData.clear();
         }
@@ -101,8 +101,8 @@ public class SunRadiation   implements Copyable, Serializable{
         SunRadiation typedSrc = (SunRadiation) src;
         SunRadiation typedDst = this;
 
-        typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.multiplier.copy_from(typedSrc.multiplier);
-        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
+        typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.multiplier.copy_from(typedSrc.multiplier);
+        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
         typedDst.sunRadiationData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationData) typedDst.sunRadiationData.copy_from(typedSrc.sunRadiationData);
 
         return this;

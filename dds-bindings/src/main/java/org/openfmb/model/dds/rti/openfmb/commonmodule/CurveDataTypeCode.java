@@ -18,13 +18,12 @@ public class  CurveDataTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[5];
+        StructMember sm[]=new StructMember[4];
 
         sm[__i]=new  StructMember("xvalue", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,0 , false);__i++;
-        sm[__i]=new  StructMember("curve", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeCode.VALUE,1 , false);__i++;
-        sm[__i]=new  StructMember("y1value", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,2 , false);__i++;
-        sm[__i]=new  StructMember("y2value", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,3 , false);__i++;
-        sm[__i]=new  StructMember("y3value", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,4 , false);__i++;
+        sm[__i]=new  StructMember("y1value", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,1 , false);__i++;
+        sm[__i]=new  StructMember("y2value", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,2 , false);__i++;
+        sm[__i]=new  StructMember("y3value", false, (short)-1,  false,(TypeCode) TypeCode.TC_FLOAT,3 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::commonmodule::CurveData",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
         return tc;

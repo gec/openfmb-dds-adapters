@@ -22,10 +22,10 @@ import com.greenenergycorp.openfmb.dds.mapping.xml.FlowDirection;
 import com.greenenergycorp.openfmb.dds.mapping.xml.PhaseCode;
 import com.greenenergycorp.openfmb.dds.mapping.xml.UnitMultiplier;
 import com.greenenergycorp.openfmb.dds.mapping.xml.UnitSymbol;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind;
 
 public class CommonConversions {
 
@@ -65,7 +65,7 @@ public class CommonConversions {
         } else if (xml == UnitSymbol.NEWTON) {
             return UnitSymbolKind.Newton;
         } else if (xml == UnitSymbol.NONE) {
-            return UnitSymbolKind.none;
+            return UnitSymbolKind.noUnit;
         } else if (xml == UnitSymbol.OHM) {
             return UnitSymbolKind.ohm;
         } else if (xml == UnitSymbol.PA) {
@@ -121,7 +121,7 @@ public class CommonConversions {
         } else if (xml == UnitMultiplier.NANO) {
             return UnitMultiplierKind.nano;
         } else if (xml == UnitMultiplier.NONE) {
-            return UnitMultiplierKind.none;
+            return UnitMultiplierKind.noMultiplier;
         } else if (xml == UnitMultiplier.PICO) {
             return UnitMultiplierKind.pico;
         } else if (xml == UnitMultiplier.TERA) {
@@ -147,7 +147,7 @@ public class CommonConversions {
         } else if (xml == FlowDirection.NET) {
             return FlowDirectionKind.net;
         } else if (xml == FlowDirection.NONE) {
-            return FlowDirectionKind.none;
+            return FlowDirectionKind.noDirection;
         } else if (xml == FlowDirection.Q_1_MINUS_Q_4) {
             return FlowDirectionKind.q1minusQ4;
         } else if (xml == FlowDirection.Q_1_PLUS_Q_2) {

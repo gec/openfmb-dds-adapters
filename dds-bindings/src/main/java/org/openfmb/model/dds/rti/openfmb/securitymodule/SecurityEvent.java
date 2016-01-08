@@ -16,18 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class SecurityEvent   implements Copyable, Serializable{
+public class SecurityEvent  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Event implements Copyable, Serializable{
 
-    public String mRID=  "" ; /* maximum length = (255) */
-    public String description=  "" ; /* maximum length = (255) */
     public String log=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
     public String severity=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
-    public String type=  "" ; /* maximum length = (255) */
-    public String value=  "" ; /* maximum length = (255) */
 
     public SecurityEvent() {
+
+        super();
 
     }
     public SecurityEvent (SecurityEvent other) {
@@ -47,14 +43,9 @@ public class SecurityEvent   implements Copyable, Serializable{
 
     public void clear() {
 
-        mRID=  ""; 
-        description=  ""; 
+        super.clear();
         log=  ""; 
-        name=  ""; 
         severity=  ""; 
-        timestamp= 0;
-        type=  ""; 
-        value=  ""; 
     }
 
     public boolean equals(Object o) {
@@ -63,34 +54,20 @@ public class SecurityEvent   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         SecurityEvent otherObj = (SecurityEvent)o;
 
-        if(!mRID.equals(otherObj.mRID)) {
-            return false;
-        }
-        if(!description.equals(otherObj.description)) {
-            return false;
-        }
         if(!log.equals(otherObj.log)) {
             return false;
         }
-        if(!name.equals(otherObj.name)) {
-            return false;
-        }
         if(!severity.equals(otherObj.severity)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
-        if(!type.equals(otherObj.type)) {
-            return false;
-        }
-        if(!value.equals(otherObj.value)) {
             return false;
         }
 
@@ -99,14 +76,10 @@ public class SecurityEvent   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += mRID.hashCode(); 
-        __result += description.hashCode(); 
+
+        __result = super.hashCode();
         __result += log.hashCode(); 
-        __result += name.hashCode(); 
         __result += severity.hashCode(); 
-        __result += (int)timestamp;
-        __result += type.hashCode(); 
-        __result += value.hashCode(); 
         return __result;
     }
 
@@ -128,15 +101,9 @@ public class SecurityEvent   implements Copyable, Serializable{
 
         SecurityEvent typedSrc = (SecurityEvent) src;
         SecurityEvent typedDst = this;
-
-        typedDst.mRID = typedSrc.mRID;
-        typedDst.description = typedSrc.description;
+        super.copy_from(typedSrc);
         typedDst.log = typedSrc.log;
-        typedDst.name = typedSrc.name;
         typedDst.severity = typedSrc.severity;
-        typedDst.timestamp = typedSrc.timestamp;
-        typedDst.type = typedSrc.type;
-        typedDst.value = typedSrc.value;
 
         return this;
     }
@@ -153,22 +120,12 @@ public class SecurityEvent   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("mRID: ").append(mRID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("description: ").append(description).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("log: ").append(log).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("severity: ").append(severity).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("type: ").append(type).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("value: ").append(value).append("\n");  
 
         return strBuffer.toString();
     }

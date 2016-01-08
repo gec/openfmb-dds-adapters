@@ -18,14 +18,11 @@ public class  RecloserTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[4];
+        ValueMember sm[]=new ValueMember[1];
 
-        sm[__i]=new  StructMember("mRID", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UuidTypeTypeCode.VALUE,0 , false);__i++;
-        sm[__i]=new  StructMember("description", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),1 , false);__i++;
-        sm[__i]=new  StructMember("name", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),2 , false);__i++;
-        sm[__i]=new  StructMember("normalOpen", false, (short)-1,  false,(TypeCode) TypeCode.TC_BOOLEAN,3 , false);__i++;
+        sm[__i]=new  ValueMember("normalOpen", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) TypeCode.TC_BOOLEAN,3 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::reclosermodule::Recloser",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::reclosermodule::Recloser",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeCode.VALUE, sm);        
         return tc;
     }
 }

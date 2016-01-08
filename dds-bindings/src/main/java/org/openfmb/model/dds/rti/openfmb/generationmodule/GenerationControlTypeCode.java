@@ -18,15 +18,11 @@ public class  GenerationControlTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[5];
+        ValueMember sm[]=new ValueMember[1];
 
-        sm[__i]=new  StructMember("issueID", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),0 , false);__i++;
-        sm[__i]=new  StructMember("name", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),1 , false);__i++;
-        sm[__i]=new  StructMember("endDeviceControlType", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeCode.VALUE,2 , false);__i++;
-        sm[__i]=new  StructMember("scheduledInterval", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeCode.VALUE,3 , false);__i++;
-        sm[__i]=new  StructMember("setPoints", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeCode.VALUE,4 , false);__i++;
+        sm[__i]=new  ValueMember("__dummy_prevent_empty_class", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) TypeCode.TC_OCTET,5 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::generationmodule::GenerationControl",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::generationmodule::GenerationControl",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeCode.VALUE, sm);        
         return tc;
     }
 }

@@ -20,8 +20,8 @@ public class  WindTypeCode {
         int __i=0;
         StructMember sm[]=new StructMember[3];
 
-        sm[__i]=new  StructMember("directionUnit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,0 , false);__i++;
-        sm[__i]=new  StructMember("speedUnit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,1 , false);__i++;
+        sm[__i]=new  StructMember("directionUnit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,0 , false);__i++;
+        sm[__i]=new  StructMember("speedUnit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,1 , false);__i++;
         sm[__i]=new  StructMember("windData", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfWindDataTypeCode.VALUE,2 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::weathermodule::Wind",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        

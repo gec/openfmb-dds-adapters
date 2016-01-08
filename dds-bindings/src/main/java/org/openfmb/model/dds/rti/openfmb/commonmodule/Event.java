@@ -16,16 +16,15 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class Event   implements Copyable, Serializable{
+public class Event  extends org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObject implements Copyable, Serializable{
 
-    public String mRID=  "" ; /* maximum length = (255) */
-    public String description=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
     public long timestamp= 0;
     public String type=  "" ; /* maximum length = (255) */
     public String value=  "" ; /* maximum length = (255) */
 
     public Event() {
+
+        super();
 
     }
     public Event (Event other) {
@@ -45,9 +44,7 @@ public class Event   implements Copyable, Serializable{
 
     public void clear() {
 
-        mRID=  ""; 
-        description=  ""; 
-        name=  ""; 
+        super.clear();
         timestamp= 0;
         type=  ""; 
         value=  ""; 
@@ -59,21 +56,16 @@ public class Event   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         Event otherObj = (Event)o;
 
-        if(!mRID.equals(otherObj.mRID)) {
-            return false;
-        }
-        if(!description.equals(otherObj.description)) {
-            return false;
-        }
-        if(!name.equals(otherObj.name)) {
-            return false;
-        }
         if(timestamp != otherObj.timestamp) {
             return false;
         }
@@ -89,9 +81,8 @@ public class Event   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += mRID.hashCode(); 
-        __result += description.hashCode(); 
-        __result += name.hashCode(); 
+
+        __result = super.hashCode();
         __result += (int)timestamp;
         __result += type.hashCode(); 
         __result += value.hashCode(); 
@@ -116,10 +107,7 @@ public class Event   implements Copyable, Serializable{
 
         Event typedSrc = (Event) src;
         Event typedDst = this;
-
-        typedDst.mRID = typedSrc.mRID;
-        typedDst.description = typedSrc.description;
-        typedDst.name = typedSrc.name;
+        super.copy_from(typedSrc);
         typedDst.timestamp = typedSrc.timestamp;
         typedDst.type = typedSrc.type;
         typedDst.value = typedSrc.value;
@@ -139,12 +127,8 @@ public class Event   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("mRID: ").append(mRID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("description: ").append(description).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("timestamp: ").append(timestamp).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        

@@ -16,15 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class RecloserStatus   implements Copyable, Serializable{
+public class RecloserStatus  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Status implements Copyable, Serializable{
 
     public boolean isBlocked= false;
-    public org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKind switchStatus = (org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKind)org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKind.create();
-    public long timestamp= 0;
-    public String value=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type)org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind switchStatus = (org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind)org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind.create();
 
     public RecloserStatus() {
+
+        super();
 
     }
     public RecloserStatus (RecloserStatus other) {
@@ -44,13 +43,9 @@ public class RecloserStatus   implements Copyable, Serializable{
 
     public void clear() {
 
+        super.clear();
         isBlocked= false;
-        switchStatus = org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKind.create();
-        timestamp= 0;
-        value=  ""; 
-        if (qualityFlag != null) {
-            qualityFlag.clear();
-        }
+        switchStatus = org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind.create();
     }
 
     public boolean equals(Object o) {
@@ -58,6 +53,10 @@ public class RecloserStatus   implements Copyable, Serializable{
         if (o == null) {
             return false;
         }        
+
+        if (!super.equals(o)) {
+            return false;
+        }
 
         if(getClass() != o.getClass()) {
             return false;
@@ -71,26 +70,16 @@ public class RecloserStatus   implements Copyable, Serializable{
         if(!switchStatus.equals(otherObj.switchStatus)) {
             return false;
         }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
-        if(!value.equals(otherObj.value)) {
-            return false;
-        }
-        if(!qualityFlag.equals(otherObj.qualityFlag)) {
-            return false;
-        }
 
         return true;
     }
 
     public int hashCode() {
         int __result = 0;
+
+        __result = super.hashCode();
         __result += (isBlocked == true)?1:0;
         __result += switchStatus.hashCode(); 
-        __result += (int)timestamp;
-        __result += value.hashCode(); 
-        __result += qualityFlag.hashCode(); 
         return __result;
     }
 
@@ -112,12 +101,9 @@ public class RecloserStatus   implements Copyable, Serializable{
 
         RecloserStatus typedSrc = (RecloserStatus) src;
         RecloserStatus typedDst = this;
-
+        super.copy_from(typedSrc);
         typedDst.isBlocked = typedSrc.isBlocked;
-        typedDst.switchStatus = (org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKind) typedDst.switchStatus.copy_from(typedSrc.switchStatus);
-        typedDst.timestamp = typedSrc.timestamp;
-        typedDst.value = typedSrc.value;
-        typedDst.qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type) typedDst.qualityFlag.copy_from(typedSrc.qualityFlag);
+        typedDst.switchStatus = (org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind) typedDst.switchStatus.copy_from(typedSrc.switchStatus);
 
         return this;
     }
@@ -134,14 +120,11 @@ public class RecloserStatus   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("isBlocked: ").append(isBlocked).append("\n");  
         strBuffer.append(switchStatus.toString("switchStatus ", indent+1));
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("value: ").append(value).append("\n");  
-        strBuffer.append(qualityFlag.toString("qualityFlag ", indent+1));
 
         return strBuffer.toString();
     }

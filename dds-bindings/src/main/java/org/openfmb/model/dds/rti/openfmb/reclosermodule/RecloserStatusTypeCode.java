@@ -18,15 +18,12 @@ public class  RecloserStatusTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[5];
+        ValueMember sm[]=new ValueMember[2];
 
-        sm[__i]=new  StructMember("isBlocked", false, (short)-1,  false,(TypeCode) TypeCode.TC_BOOLEAN,0 , false);__i++;
-        sm[__i]=new  StructMember("switchStatus", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeCode.VALUE,1 , false);__i++;
-        sm[__i]=new  StructMember("timestamp", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,2 , false);__i++;
-        sm[__i]=new  StructMember("value", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),3 , false);__i++;
-        sm[__i]=new  StructMember("qualityFlag", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeCode.VALUE,4 , false);__i++;
+        sm[__i]=new  ValueMember("isBlocked", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) TypeCode.TC_BOOLEAN,3 , false);__i++;
+        sm[__i]=new  ValueMember("switchStatus", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeCode.VALUE,4 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::reclosermodule::RecloserStatus",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::reclosermodule::RecloserStatus",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeCode.VALUE, sm);        
         return tc;
     }
 }

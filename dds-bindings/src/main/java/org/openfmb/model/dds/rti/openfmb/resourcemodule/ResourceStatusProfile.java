@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class ResourceStatusProfile   implements Copyable, Serializable{
+public class ResourceStatusProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.commonmodule.PowerSystemResource powerSystemResource = (org.openfmb.model.dds.rti.openfmb.commonmodule.PowerSystemResource)org.openfmb.model.dds.rti.openfmb.commonmodule.PowerSystemResource.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements measurements = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements)org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements.create();
+    public org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceStatusMeasurements measurements = (org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceStatusMeasurements)org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceStatusMeasurements.create();
 
     public ResourceStatusProfile() {
+
+        super();
 
     }
     public ResourceStatusProfile (ResourceStatusProfile other) {
@@ -43,8 +43,7 @@ public class ResourceStatusProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (powerSystemResource != null) {
             powerSystemResource.clear();
         }
@@ -59,18 +58,16 @@ public class ResourceStatusProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         ResourceStatusProfile otherObj = (ResourceStatusProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!powerSystemResource.equals(otherObj.powerSystemResource)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class ResourceStatusProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += powerSystemResource.hashCode(); 
         __result += measurements.hashCode(); 
         return __result;
@@ -108,11 +105,9 @@ public class ResourceStatusProfile   implements Copyable, Serializable{
 
         ResourceStatusProfile typedSrc = (ResourceStatusProfile) src;
         ResourceStatusProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.powerSystemResource = (org.openfmb.model.dds.rti.openfmb.commonmodule.PowerSystemResource) typedDst.powerSystemResource.copy_from(typedSrc.powerSystemResource);
-        typedDst.measurements = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements) typedDst.measurements.copy_from(typedSrc.measurements);
+        typedDst.measurements = (org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceStatusMeasurements) typedDst.measurements.copy_from(typedSrc.measurements);
 
         return this;
     }
@@ -129,10 +124,8 @@ public class ResourceStatusProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(powerSystemResource.toString("powerSystemResource ", indent+1));
         strBuffer.append(measurements.toString("measurements ", indent+1));
 

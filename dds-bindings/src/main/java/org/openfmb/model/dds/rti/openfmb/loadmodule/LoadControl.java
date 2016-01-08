@@ -16,15 +16,13 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class LoadControl   implements Copyable, Serializable{
+public class LoadControl  extends org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControl implements Copyable, Serializable{
 
-    public String issueID=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType endDeviceControlType = (org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType)org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval scheduledInterval = (org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval)org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval.create();
-    public org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadControlSetPoints setPoints = (org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadControlSetPoints)org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadControlSetPoints.create();
+    public byte __dummy_prevent_empty_class= 0;
 
     public LoadControl() {
+
+        super();
 
     }
     public LoadControl (LoadControl other) {
@@ -44,17 +42,8 @@ public class LoadControl   implements Copyable, Serializable{
 
     public void clear() {
 
-        issueID=  ""; 
-        name=  ""; 
-        if (endDeviceControlType != null) {
-            endDeviceControlType.clear();
-        }
-        if (scheduledInterval != null) {
-            scheduledInterval.clear();
-        }
-        if (setPoints != null) {
-            setPoints.clear();
-        }
+        super.clear();
+        __dummy_prevent_empty_class= 0;
     }
 
     public boolean equals(Object o) {
@@ -63,25 +52,17 @@ public class LoadControl   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         LoadControl otherObj = (LoadControl)o;
 
-        if(!issueID.equals(otherObj.issueID)) {
-            return false;
-        }
-        if(!name.equals(otherObj.name)) {
-            return false;
-        }
-        if(!endDeviceControlType.equals(otherObj.endDeviceControlType)) {
-            return false;
-        }
-        if(!scheduledInterval.equals(otherObj.scheduledInterval)) {
-            return false;
-        }
-        if(!setPoints.equals(otherObj.setPoints)) {
+        if(__dummy_prevent_empty_class != otherObj.__dummy_prevent_empty_class) {
             return false;
         }
 
@@ -90,11 +71,9 @@ public class LoadControl   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += issueID.hashCode(); 
-        __result += name.hashCode(); 
-        __result += endDeviceControlType.hashCode(); 
-        __result += scheduledInterval.hashCode(); 
-        __result += setPoints.hashCode(); 
+
+        __result = super.hashCode();
+        __result += (int)__dummy_prevent_empty_class;
         return __result;
     }
 
@@ -116,12 +95,8 @@ public class LoadControl   implements Copyable, Serializable{
 
         LoadControl typedSrc = (LoadControl) src;
         LoadControl typedDst = this;
-
-        typedDst.issueID = typedSrc.issueID;
-        typedDst.name = typedSrc.name;
-        typedDst.endDeviceControlType = (org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType) typedDst.endDeviceControlType.copy_from(typedSrc.endDeviceControlType);
-        typedDst.scheduledInterval = (org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval) typedDst.scheduledInterval.copy_from(typedSrc.scheduledInterval);
-        typedDst.setPoints = (org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadControlSetPoints) typedDst.setPoints.copy_from(typedSrc.setPoints);
+        super.copy_from(typedSrc);
+        typedDst.__dummy_prevent_empty_class = typedSrc.__dummy_prevent_empty_class;
 
         return this;
     }
@@ -138,13 +113,10 @@ public class LoadControl   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("issueID: ").append(issueID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
-        strBuffer.append(endDeviceControlType.toString("endDeviceControlType ", indent+1));
-        strBuffer.append(scheduledInterval.toString("scheduledInterval ", indent+1));
-        strBuffer.append(setPoints.toString("setPoints ", indent+1));
+        strBuffer.append("__dummy_prevent_empty_class: ").append(__dummy_prevent_empty_class).append("\n");  
 
         return strBuffer.toString();
     }

@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class BatteryReadingProfile   implements Copyable, Serializable{
+public class BatteryReadingProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem batterySystem = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem)org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem.create();
     public org.openfmb.model.dds.rti.openfmb.batterymodule.SequenceOfBatteryReadings readings = (org.openfmb.model.dds.rti.openfmb.batterymodule.SequenceOfBatteryReadings)org.openfmb.model.dds.rti.openfmb.batterymodule.SequenceOfBatteryReadings.create();
 
     public BatteryReadingProfile() {
+
+        super();
 
     }
     public BatteryReadingProfile (BatteryReadingProfile other) {
@@ -43,8 +43,7 @@ public class BatteryReadingProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (batterySystem != null) {
             batterySystem.clear();
         }
@@ -59,18 +58,16 @@ public class BatteryReadingProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         BatteryReadingProfile otherObj = (BatteryReadingProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!batterySystem.equals(otherObj.batterySystem)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class BatteryReadingProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += batterySystem.hashCode(); 
         __result += readings.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class BatteryReadingProfile   implements Copyable, Serializable{
 
         BatteryReadingProfile typedSrc = (BatteryReadingProfile) src;
         BatteryReadingProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.batterySystem = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem) typedDst.batterySystem.copy_from(typedSrc.batterySystem);
         typedDst.readings = (org.openfmb.model.dds.rti.openfmb.batterymodule.SequenceOfBatteryReadings) typedDst.readings.copy_from(typedSrc.readings);
 
@@ -129,10 +124,8 @@ public class BatteryReadingProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(batterySystem.toString("batterySystem ", indent+1));
         strBuffer.append(readings.toString("readings ", indent+1));
 

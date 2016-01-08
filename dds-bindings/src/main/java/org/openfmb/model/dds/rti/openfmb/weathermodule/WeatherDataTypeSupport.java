@@ -151,6 +151,8 @@ public class WeatherDataTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.HumidityTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SunRadiationTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
@@ -180,6 +182,8 @@ public class WeatherDataTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
+        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.HumidityTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
@@ -216,6 +220,8 @@ public class WeatherDataTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.interval );
+        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.source );
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.version );
         currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.HumidityTypeSupport.get_instance().get_serialized_sample_size(
@@ -280,6 +286,10 @@ public class WeatherDataTypeSupport extends TypeSupportImpl {
         if(serialize_sample) {
 
             WeatherData typedSrc = (WeatherData) src;
+
+            dst.writeString(typedSrc.interval,(255));
+
+            dst.writeString(typedSrc.source,(255));
 
             dst.writeString(typedSrc.version,(255));
 
@@ -356,6 +366,8 @@ public class WeatherDataTypeSupport extends TypeSupportImpl {
             WeatherData typedDst = (WeatherData) dst;
             typedDst.clear();      
             try{
+                typedDst.interval = src.readString((255));
+                typedDst.source = src.readString((255));
                 typedDst.version = src.readString((255));
                 typedDst.versionDateTime = src.readLong();
                 typedDst.humidity = (org.openfmb.model.dds.rti.openfmb.weathermodule.Humidity)org.openfmb.model.dds.rti.openfmb.weathermodule.HumidityTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.humidity, src, false, true, endpoint_plugin_qos);     
@@ -432,6 +444,10 @@ public class WeatherDataTypeSupport extends TypeSupportImpl {
         }
 
         if (skip_sample) {
+
+            src.skipString();
+
+            src.skipString();
 
             src.skipString();
 

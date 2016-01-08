@@ -150,12 +150,8 @@ public class SecurityEventTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EventTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
         if (include_encapsulation) {
@@ -182,12 +178,7 @@ public class SecurityEventTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EventTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
 
@@ -220,14 +211,11 @@ public class SecurityEventTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.mRID );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.description );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EventTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.log );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.severity );
-        currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.type );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.value );
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -283,21 +271,11 @@ public class SecurityEventTypeSupport extends TypeSupportImpl {
 
             SecurityEvent typedSrc = (SecurityEvent) src;
 
-            dst.writeString(typedSrc.mRID,(255));
-
-            dst.writeString(typedSrc.description,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.EventTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
             dst.writeString(typedSrc.log,(255));
 
-            dst.writeString(typedSrc.name,(255));
-
             dst.writeString(typedSrc.severity,(255));
-
-            dst.writeLong(typedSrc.timestamp);
-
-            dst.writeString(typedSrc.type,(255));
-
-            dst.writeString(typedSrc.value,(255));
         }
 
         if (serialize_encapsulation) {
@@ -361,15 +339,11 @@ public class SecurityEventTypeSupport extends TypeSupportImpl {
 
             SecurityEvent typedDst = (SecurityEvent) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.EventTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.mRID = src.readString((255));
-                typedDst.description = src.readString((255));
                 typedDst.log = src.readString((255));
-                typedDst.name = src.readString((255));
                 typedDst.severity = src.readString((255));
-                typedDst.timestamp = src.readLong();
-                typedDst.type = src.readString((255));
-                typedDst.value = src.readString((255));
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -441,18 +415,7 @@ public class SecurityEventTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
-
-            src.skipLong();
-
+            org.openfmb.model.dds.rti.openfmb.commonmodule.EventTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             src.skipString();
 
             src.skipString();

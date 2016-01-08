@@ -150,9 +150,8 @@ public class EventTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
@@ -180,9 +179,7 @@ public class EventTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
@@ -216,9 +213,9 @@ public class EventTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.mRID );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.description );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.type );
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.value );
@@ -277,11 +274,7 @@ public class EventTypeSupport extends TypeSupportImpl {
 
             Event typedSrc = (Event) src;
 
-            dst.writeString(typedSrc.mRID,(255));
-
-            dst.writeString(typedSrc.description,(255));
-
-            dst.writeString(typedSrc.name,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
             dst.writeLong(typedSrc.timestamp);
 
@@ -351,10 +344,9 @@ public class EventTypeSupport extends TypeSupportImpl {
 
             Event typedDst = (Event) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.mRID = src.readString((255));
-                typedDst.description = src.readString((255));
-                typedDst.name = src.readString((255));
                 typedDst.timestamp = src.readLong();
                 typedDst.type = src.readString((255));
                 typedDst.value = src.readString((255));
@@ -429,12 +421,7 @@ public class EventTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
-
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             src.skipLong();
 
             src.skipString();

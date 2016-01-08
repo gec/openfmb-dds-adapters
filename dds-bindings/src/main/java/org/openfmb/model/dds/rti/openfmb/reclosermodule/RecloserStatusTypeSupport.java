@@ -150,11 +150,10 @@ public class RecloserStatusTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -179,11 +178,9 @@ public class RecloserStatusTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -214,13 +211,12 @@ public class RecloserStatusTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment  +=  CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.switchStatus);
-        currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.value );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.qualityFlag);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -276,15 +272,11 @@ public class RecloserStatusTypeSupport extends TypeSupportImpl {
 
             RecloserStatus typedSrc = (RecloserStatus) src;
 
+            org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
+
             dst.writeBoolean(typedSrc.isBlocked);
 
-            org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.switchStatus, dst, false, encapsulation_id,true,endpoint_plugin_qos);
-
-            dst.writeLong(typedSrc.timestamp);
-
-            dst.writeString(typedSrc.value,(255));
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().serialize(endpoint_data, typedSrc.qualityFlag, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.switchStatus, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
 
         if (serialize_encapsulation) {
@@ -348,12 +340,11 @@ public class RecloserStatusTypeSupport extends TypeSupportImpl {
 
             RecloserStatus typedDst = (RecloserStatus) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
                 typedDst.isBlocked = src.readBoolean();
-                typedDst.switchStatus = (org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKind)org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.switchStatus, src, false, true, endpoint_plugin_qos);     
-                typedDst.timestamp = src.readLong();
-                typedDst.value = src.readString((255));
-                typedDst.qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type)org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.qualityFlag, src, false, true, endpoint_plugin_qos);     
+                typedDst.switchStatus = (org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind)org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.switchStatus, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -425,15 +416,10 @@ public class RecloserStatusTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
+            org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             src.skipBoolean();
 
-            org.openfmb.model.dds.rti.openfmb.reclosermodule.SwitchStatusKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
-            src.skipLong();
-
-            src.skipString();
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
         }
 

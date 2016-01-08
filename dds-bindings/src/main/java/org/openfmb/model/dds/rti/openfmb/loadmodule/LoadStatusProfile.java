@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class LoadStatusProfile   implements Copyable, Serializable{
+public class LoadStatusProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer energyConsumer = (org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer)org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements measurements = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements)org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements.create();
+    public org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadMeasurements measurements = (org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadMeasurements)org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadMeasurements.create();
 
     public LoadStatusProfile() {
+
+        super();
 
     }
     public LoadStatusProfile (LoadStatusProfile other) {
@@ -43,8 +43,7 @@ public class LoadStatusProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (energyConsumer != null) {
             energyConsumer.clear();
         }
@@ -59,18 +58,16 @@ public class LoadStatusProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         LoadStatusProfile otherObj = (LoadStatusProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!energyConsumer.equals(otherObj.energyConsumer)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class LoadStatusProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += energyConsumer.hashCode(); 
         __result += measurements.hashCode(); 
         return __result;
@@ -108,11 +105,9 @@ public class LoadStatusProfile   implements Copyable, Serializable{
 
         LoadStatusProfile typedSrc = (LoadStatusProfile) src;
         LoadStatusProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.energyConsumer = (org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumer) typedDst.energyConsumer.copy_from(typedSrc.energyConsumer);
-        typedDst.measurements = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurements) typedDst.measurements.copy_from(typedSrc.measurements);
+        typedDst.measurements = (org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadMeasurements) typedDst.measurements.copy_from(typedSrc.measurements);
 
         return this;
     }
@@ -129,10 +124,8 @@ public class LoadStatusProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(energyConsumer.toString("energyConsumer ", indent+1));
         strBuffer.append(measurements.toString("measurements ", indent+1));
 

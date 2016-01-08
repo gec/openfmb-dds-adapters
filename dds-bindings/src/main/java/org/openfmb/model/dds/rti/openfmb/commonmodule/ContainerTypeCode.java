@@ -20,7 +20,7 @@ public class  ContainerTypeCode {
         int __i=0;
         StructMember sm[]=new StructMember[2];
 
-        sm[__i]=new  StructMember("logicalDeviceID", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),0 , false);__i++;
+        sm[__i]=new  StructMember("logicalDeviceID", false, (short)-1, true,(TypeCode) new TypeCode(TCKind.TK_STRING,255),0 , false);__i++;
         sm[__i]=new  StructMember("timestamp", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,1 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::commonmodule::Container",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        

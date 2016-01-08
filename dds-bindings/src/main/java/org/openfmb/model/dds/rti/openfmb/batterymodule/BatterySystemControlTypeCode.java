@@ -18,16 +18,11 @@ public class  BatterySystemControlTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[6];
+        ValueMember sm[]=new ValueMember[1];
 
-        sm[__i]=new  StructMember("isIslanded", false, (short)-1,  false,(TypeCode) TypeCode.TC_BOOLEAN,0 , false);__i++;
-        sm[__i]=new  StructMember("issueID", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),1 , false);__i++;
-        sm[__i]=new  StructMember("name", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),2 , false);__i++;
-        sm[__i]=new  StructMember("endDeviceControlType", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeCode.VALUE,3 , false);__i++;
-        sm[__i]=new  StructMember("scheduledInterval", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeCode.VALUE,4 , false);__i++;
-        sm[__i]=new  StructMember("setPoints", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.batterymodule.SequenceOfBatterySystemControlSetPointsTypeCode.VALUE,5 , false);__i++;
+        sm[__i]=new  ValueMember("isIslanded", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) TypeCode.TC_BOOLEAN,5 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::batterymodule::BatterySystemControl",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::batterymodule::BatterySystemControl",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeCode.VALUE, sm);        
         return tc;
     }
 }

@@ -16,14 +16,13 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class GeneratingUnit   implements Copyable, Serializable{
+public class GeneratingUnit  extends org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObject implements Copyable, Serializable{
 
-    public String mRID=  "" ; /* maximum length = (255) */
-    public String description=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePower maxOperatingP = (org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePower)org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePower.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePower maxOperatingP = (org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePower)org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePower.create();
 
     public GeneratingUnit() {
+
+        super();
 
     }
     public GeneratingUnit (GeneratingUnit other) {
@@ -43,9 +42,7 @@ public class GeneratingUnit   implements Copyable, Serializable{
 
     public void clear() {
 
-        mRID=  ""; 
-        description=  ""; 
-        name=  ""; 
+        super.clear();
         if (maxOperatingP != null) {
             maxOperatingP.clear();
         }
@@ -57,21 +54,16 @@ public class GeneratingUnit   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         GeneratingUnit otherObj = (GeneratingUnit)o;
 
-        if(!mRID.equals(otherObj.mRID)) {
-            return false;
-        }
-        if(!description.equals(otherObj.description)) {
-            return false;
-        }
-        if(!name.equals(otherObj.name)) {
-            return false;
-        }
         if(!maxOperatingP.equals(otherObj.maxOperatingP)) {
             return false;
         }
@@ -81,9 +73,8 @@ public class GeneratingUnit   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += mRID.hashCode(); 
-        __result += description.hashCode(); 
-        __result += name.hashCode(); 
+
+        __result = super.hashCode();
         __result += maxOperatingP.hashCode(); 
         return __result;
     }
@@ -106,11 +97,8 @@ public class GeneratingUnit   implements Copyable, Serializable{
 
         GeneratingUnit typedSrc = (GeneratingUnit) src;
         GeneratingUnit typedDst = this;
-
-        typedDst.mRID = typedSrc.mRID;
-        typedDst.description = typedSrc.description;
-        typedDst.name = typedSrc.name;
-        typedDst.maxOperatingP = (org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePower) typedDst.maxOperatingP.copy_from(typedSrc.maxOperatingP);
+        super.copy_from(typedSrc);
+        typedDst.maxOperatingP = (org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePower) typedDst.maxOperatingP.copy_from(typedSrc.maxOperatingP);
 
         return this;
     }
@@ -127,12 +115,8 @@ public class GeneratingUnit   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("mRID: ").append(mRID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("description: ").append(description).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(maxOperatingP.toString("maxOperatingP ", indent+1));
 
         return strBuffer.toString();

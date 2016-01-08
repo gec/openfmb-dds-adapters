@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class BatteryEventProfile   implements Copyable, Serializable{
+public class BatteryEventProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryStatus batteryStatus = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryStatus)org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryStatus.create();
     public org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem batterySystem = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem)org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem.create();
 
     public BatteryEventProfile() {
+
+        super();
 
     }
     public BatteryEventProfile (BatteryEventProfile other) {
@@ -43,8 +43,7 @@ public class BatteryEventProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (batteryStatus != null) {
             batteryStatus.clear();
         }
@@ -59,18 +58,16 @@ public class BatteryEventProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         BatteryEventProfile otherObj = (BatteryEventProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!batteryStatus.equals(otherObj.batteryStatus)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class BatteryEventProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += batteryStatus.hashCode(); 
         __result += batterySystem.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class BatteryEventProfile   implements Copyable, Serializable{
 
         BatteryEventProfile typedSrc = (BatteryEventProfile) src;
         BatteryEventProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.batteryStatus = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatteryStatus) typedDst.batteryStatus.copy_from(typedSrc.batteryStatus);
         typedDst.batterySystem = (org.openfmb.model.dds.rti.openfmb.batterymodule.BatterySystem) typedDst.batterySystem.copy_from(typedSrc.batterySystem);
 
@@ -129,10 +124,8 @@ public class BatteryEventProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(batteryStatus.toString("batteryStatus ", indent+1));
         strBuffer.append(batterySystem.toString("batterySystem ", indent+1));
 

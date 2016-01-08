@@ -16,22 +16,22 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class Curve   implements Copyable, Serializable{
+public class Curve  extends org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObject implements Copyable, Serializable{
 
-    public String mRID=  "" ; /* maximum length = (255) */
     public org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKind curveStyle = (org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKind)org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKind.create();
-    public String description=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind xMultiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind xUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind y1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind y1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind y2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind y2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind y3Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind y3Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind xMultiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind xUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind y1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind y1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind y2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind y2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind y3Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind y3Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfCurveData curveData = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfCurveData)org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfCurveData.create();
 
     public Curve() {
+
+        super();
 
     }
     public Curve (Curve other) {
@@ -51,18 +51,19 @@ public class Curve   implements Copyable, Serializable{
 
     public void clear() {
 
-        mRID=  ""; 
+        super.clear();
         curveStyle = org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKind.create();
-        description=  ""; 
-        name=  ""; 
-        xMultiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        xUnit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        y1Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        y1Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        y2Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        y2Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        y3Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        y3Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        xMultiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        xUnit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        y1Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        y1Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        y2Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        y2Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        y3Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        y3Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        if (curveData != null) {
+            curveData.clear();
+        }
     }
 
     public boolean equals(Object o) {
@@ -71,22 +72,17 @@ public class Curve   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         Curve otherObj = (Curve)o;
 
-        if(!mRID.equals(otherObj.mRID)) {
-            return false;
-        }
         if(!curveStyle.equals(otherObj.curveStyle)) {
-            return false;
-        }
-        if(!description.equals(otherObj.description)) {
-            return false;
-        }
-        if(!name.equals(otherObj.name)) {
             return false;
         }
         if(!xMultiplier.equals(otherObj.xMultiplier)) {
@@ -113,16 +109,18 @@ public class Curve   implements Copyable, Serializable{
         if(!y3Unit.equals(otherObj.y3Unit)) {
             return false;
         }
+        if(!curveData.equals(otherObj.curveData)) {
+            return false;
+        }
 
         return true;
     }
 
     public int hashCode() {
         int __result = 0;
-        __result += mRID.hashCode(); 
+
+        __result = super.hashCode();
         __result += curveStyle.hashCode(); 
-        __result += description.hashCode(); 
-        __result += name.hashCode(); 
         __result += xMultiplier.hashCode(); 
         __result += xUnit.hashCode(); 
         __result += y1Multiplier.hashCode(); 
@@ -131,6 +129,7 @@ public class Curve   implements Copyable, Serializable{
         __result += y2Unit.hashCode(); 
         __result += y3Multiplier.hashCode(); 
         __result += y3Unit.hashCode(); 
+        __result += curveData.hashCode(); 
         return __result;
     }
 
@@ -152,19 +151,17 @@ public class Curve   implements Copyable, Serializable{
 
         Curve typedSrc = (Curve) src;
         Curve typedDst = this;
-
-        typedDst.mRID = typedSrc.mRID;
+        super.copy_from(typedSrc);
         typedDst.curveStyle = (org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKind) typedDst.curveStyle.copy_from(typedSrc.curveStyle);
-        typedDst.description = typedSrc.description;
-        typedDst.name = typedSrc.name;
-        typedDst.xMultiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.xMultiplier.copy_from(typedSrc.xMultiplier);
-        typedDst.xUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.xUnit.copy_from(typedSrc.xUnit);
-        typedDst.y1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.y1Multiplier.copy_from(typedSrc.y1Multiplier);
-        typedDst.y1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.y1Unit.copy_from(typedSrc.y1Unit);
-        typedDst.y2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.y2Multiplier.copy_from(typedSrc.y2Multiplier);
-        typedDst.y2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.y2Unit.copy_from(typedSrc.y2Unit);
-        typedDst.y3Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.y3Multiplier.copy_from(typedSrc.y3Multiplier);
-        typedDst.y3Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.y3Unit.copy_from(typedSrc.y3Unit);
+        typedDst.xMultiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.xMultiplier.copy_from(typedSrc.xMultiplier);
+        typedDst.xUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.xUnit.copy_from(typedSrc.xUnit);
+        typedDst.y1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.y1Multiplier.copy_from(typedSrc.y1Multiplier);
+        typedDst.y1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.y1Unit.copy_from(typedSrc.y1Unit);
+        typedDst.y2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.y2Multiplier.copy_from(typedSrc.y2Multiplier);
+        typedDst.y2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.y2Unit.copy_from(typedSrc.y2Unit);
+        typedDst.y3Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.y3Multiplier.copy_from(typedSrc.y3Multiplier);
+        typedDst.y3Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.y3Unit.copy_from(typedSrc.y3Unit);
+        typedDst.curveData = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfCurveData) typedDst.curveData.copy_from(typedSrc.curveData);
 
         return this;
     }
@@ -181,13 +178,9 @@ public class Curve   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("mRID: ").append(mRID).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(curveStyle.toString("curveStyle ", indent+1));
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("description: ").append(description).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
         strBuffer.append(xMultiplier.toString("xMultiplier ", indent+1));
         strBuffer.append(xUnit.toString("xUnit ", indent+1));
         strBuffer.append(y1Multiplier.toString("y1Multiplier ", indent+1));
@@ -196,6 +189,7 @@ public class Curve   implements Copyable, Serializable{
         strBuffer.append(y2Unit.toString("y2Unit ", indent+1));
         strBuffer.append(y3Multiplier.toString("y3Multiplier ", indent+1));
         strBuffer.append(y3Unit.toString("y3Unit ", indent+1));
+        strBuffer.append(curveData.toString("curveData ", indent+1));
 
         return strBuffer.toString();
     }

@@ -11,19 +11,18 @@ or consult the RTI Connext manual.
 
 package org.openfmb.model.dds.rti.openfmb.loadmodule;
 
-import com.rti.dds.infrastructure.*;
-import com.rti.dds.infrastructure.Copyable;
-import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
+import com.rti.dds.infrastructure.Copyable;
 
-public class EnergyConsumer   implements Copyable, Serializable{
+import java.io.Serializable;
 
-    public String mRID=  "" ; /* maximum length = (255) */
-    public String description=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
+public class EnergyConsumer  extends org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObject implements Copyable, Serializable{
+
     public String operatingLimit=  "" ; /* maximum length = (255) */
 
     public EnergyConsumer() {
+
+        super();
 
     }
     public EnergyConsumer (EnergyConsumer other) {
@@ -43,9 +42,7 @@ public class EnergyConsumer   implements Copyable, Serializable{
 
     public void clear() {
 
-        mRID=  ""; 
-        description=  ""; 
-        name=  ""; 
+        super.clear();
         operatingLimit=  ""; 
     }
 
@@ -55,21 +52,16 @@ public class EnergyConsumer   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         EnergyConsumer otherObj = (EnergyConsumer)o;
 
-        if(!mRID.equals(otherObj.mRID)) {
-            return false;
-        }
-        if(!description.equals(otherObj.description)) {
-            return false;
-        }
-        if(!name.equals(otherObj.name)) {
-            return false;
-        }
         if(!operatingLimit.equals(otherObj.operatingLimit)) {
             return false;
         }
@@ -79,9 +71,8 @@ public class EnergyConsumer   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += mRID.hashCode(); 
-        __result += description.hashCode(); 
-        __result += name.hashCode(); 
+
+        __result = super.hashCode();
         __result += operatingLimit.hashCode(); 
         return __result;
     }
@@ -104,10 +95,7 @@ public class EnergyConsumer   implements Copyable, Serializable{
 
         EnergyConsumer typedSrc = (EnergyConsumer) src;
         EnergyConsumer typedDst = this;
-
-        typedDst.mRID = typedSrc.mRID;
-        typedDst.description = typedSrc.description;
-        typedDst.name = typedSrc.name;
+        super.copy_from(typedSrc);
         typedDst.operatingLimit = typedSrc.operatingLimit;
 
         return this;
@@ -125,12 +113,8 @@ public class EnergyConsumer   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("mRID: ").append(mRID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("description: ").append(description).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("operatingLimit: ").append(operatingLimit).append("\n");  
 

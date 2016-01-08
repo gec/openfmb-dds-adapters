@@ -22,10 +22,10 @@ import com.greenenergycorp.openfmb.dds.mapping.xml.*;
 import com.greenenergycorp.openfmb.mapping.transform.MeasTransform;
 import com.greenenergycorp.openfmb.mapping.transform.TransformXmlLoader;
 import com.greenenergycorp.openfmb.mapping.xml.CommonConversions;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

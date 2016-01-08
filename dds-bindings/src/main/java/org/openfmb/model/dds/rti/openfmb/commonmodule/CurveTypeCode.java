@@ -18,22 +18,20 @@ public class  CurveTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[12];
+        ValueMember sm[]=new ValueMember[10];
 
-        sm[__i]=new  StructMember("mRID", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UuidTypeTypeCode.VALUE,0 , false);__i++;
-        sm[__i]=new  StructMember("curveStyle", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKindTypeCode.VALUE,1 , false);__i++;
-        sm[__i]=new  StructMember("description", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),2 , false);__i++;
-        sm[__i]=new  StructMember("name", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),3 , false);__i++;
-        sm[__i]=new  StructMember("xMultiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,4 , false);__i++;
-        sm[__i]=new  StructMember("xUnit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,5 , false);__i++;
-        sm[__i]=new  StructMember("y1Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,6 , false);__i++;
-        sm[__i]=new  StructMember("y1Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,7 , false);__i++;
-        sm[__i]=new  StructMember("y2Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,8 , false);__i++;
-        sm[__i]=new  StructMember("y2Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,9 , false);__i++;
-        sm[__i]=new  StructMember("y3Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,10 , false);__i++;
-        sm[__i]=new  StructMember("y3Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,11 , false);__i++;
+        sm[__i]=new  ValueMember("curveStyle", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.CurveStyleKindTypeCode.VALUE,3 , false);__i++;
+        sm[__i]=new  ValueMember("xMultiplier", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,4 , false);__i++;
+        sm[__i]=new  ValueMember("xUnit", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,5 , false);__i++;
+        sm[__i]=new  ValueMember("y1Multiplier", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,6 , false);__i++;
+        sm[__i]=new  ValueMember("y1Unit", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,7 , false);__i++;
+        sm[__i]=new  ValueMember("y2Multiplier", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,8 , false);__i++;
+        sm[__i]=new  ValueMember("y2Unit", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,9 , false);__i++;
+        sm[__i]=new  ValueMember("y3Multiplier", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,10 , false);__i++;
+        sm[__i]=new  ValueMember("y3Unit", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,11 , false);__i++;
+        sm[__i]=new  ValueMember("curveData", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfCurveDataTypeCode.VALUE,12 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::commonmodule::Curve",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::commonmodule::Curve",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeCode.VALUE, sm);        
         return tc;
     }
 }

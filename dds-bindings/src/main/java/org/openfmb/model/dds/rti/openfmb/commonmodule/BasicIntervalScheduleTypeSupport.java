@@ -151,10 +151,10 @@ public class BasicIntervalScheduleTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -180,10 +180,10 @@ public class BasicIntervalScheduleTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -215,13 +215,13 @@ public class BasicIntervalScheduleTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value1Multiplier);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value1Unit);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value2Multiplier);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value2Unit);
 
         if (include_encapsulation) {
@@ -280,13 +280,13 @@ public class BasicIntervalScheduleTypeSupport extends TypeSupportImpl {
 
             dst.writeLong(typedSrc.startTime);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value1Multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value1Multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value1Unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value1Unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value2Multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value2Multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value2Unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value2Unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
 
         if (serialize_encapsulation) {
@@ -352,10 +352,10 @@ public class BasicIntervalScheduleTypeSupport extends TypeSupportImpl {
             typedDst.clear();      
             try{
                 typedDst.startTime = src.readLong();
-                typedDst.value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value1Multiplier, src, false, true, endpoint_plugin_qos);     
-                typedDst.value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value1Unit, src, false, true, endpoint_plugin_qos);     
-                typedDst.value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value2Multiplier, src, false, true, endpoint_plugin_qos);     
-                typedDst.value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value2Unit, src, false, true, endpoint_plugin_qos);     
+                typedDst.value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value1Multiplier, src, false, true, endpoint_plugin_qos);     
+                typedDst.value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value1Unit, src, false, true, endpoint_plugin_qos);     
+                typedDst.value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value2Multiplier, src, false, true, endpoint_plugin_qos);     
+                typedDst.value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value2Unit, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -429,13 +429,13 @@ public class BasicIntervalScheduleTypeSupport extends TypeSupportImpl {
 
             src.skipLong();
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
         }
 

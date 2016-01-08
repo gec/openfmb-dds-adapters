@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class GenerationForecastProfile   implements Copyable, Serializable{
+public class GenerationForecastProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.commonmodule.ForecastSchedule forecastSchedule = (org.openfmb.model.dds.rti.openfmb.commonmodule.ForecastSchedule)org.openfmb.model.dds.rti.openfmb.commonmodule.ForecastSchedule.create();
     public org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit generatingUnit = (org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit)org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit.create();
 
     public GenerationForecastProfile() {
+
+        super();
 
     }
     public GenerationForecastProfile (GenerationForecastProfile other) {
@@ -43,8 +43,7 @@ public class GenerationForecastProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (forecastSchedule != null) {
             forecastSchedule.clear();
         }
@@ -59,18 +58,16 @@ public class GenerationForecastProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         GenerationForecastProfile otherObj = (GenerationForecastProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!forecastSchedule.equals(otherObj.forecastSchedule)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class GenerationForecastProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += forecastSchedule.hashCode(); 
         __result += generatingUnit.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class GenerationForecastProfile   implements Copyable, Serializable{
 
         GenerationForecastProfile typedSrc = (GenerationForecastProfile) src;
         GenerationForecastProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.forecastSchedule = (org.openfmb.model.dds.rti.openfmb.commonmodule.ForecastSchedule) typedDst.forecastSchedule.copy_from(typedSrc.forecastSchedule);
         typedDst.generatingUnit = (org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit) typedDst.generatingUnit.copy_from(typedSrc.generatingUnit);
 
@@ -129,10 +124,8 @@ public class GenerationForecastProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(forecastSchedule.toString("forecastSchedule ", indent+1));
         strBuffer.append(generatingUnit.toString("generatingUnit ", indent+1));
 

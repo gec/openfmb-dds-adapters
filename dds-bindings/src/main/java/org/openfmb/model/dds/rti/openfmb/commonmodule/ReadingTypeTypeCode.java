@@ -20,11 +20,11 @@ public class  ReadingTypeTypeCode {
         int __i=0;
         StructMember sm[]=new StructMember[5];
 
-        sm[__i]=new  StructMember("multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,0 , false);__i++;
+        sm[__i]=new  StructMember("multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,0 , false);__i++;
         sm[__i]=new  StructMember("name", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),1 , false);__i++;
-        sm[__i]=new  StructMember("unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,2 , false);__i++;
-        sm[__i]=new  StructMember("flowDirection", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.flowdirection.FlowDirectionKindTypeCode.VALUE,3 , false);__i++;
-        sm[__i]=new  StructMember("phases", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.phasecode.PhaseCodeKindTypeCode.VALUE,4 , false);__i++;
+        sm[__i]=new  StructMember("unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,2 , false);__i++;
+        sm[__i]=new  StructMember("flowDirection", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.FlowDirectionKindTypeCode.VALUE,3 , false);__i++;
+        sm[__i]=new  StructMember("phases", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.PhaseCodeKindTypeCode.VALUE,4 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::commonmodule::ReadingType",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
         return tc;

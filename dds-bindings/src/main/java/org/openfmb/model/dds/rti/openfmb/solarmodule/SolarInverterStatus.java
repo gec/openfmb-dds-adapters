@@ -16,14 +16,13 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class SolarInverterStatus   implements Copyable, Serializable{
+public class SolarInverterStatus  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Status implements Copyable, Serializable{
 
     public boolean isConnected= false;
-    public long timestamp= 0;
-    public String value=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type)org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type.create();
 
     public SolarInverterStatus() {
+
+        super();
 
     }
     public SolarInverterStatus (SolarInverterStatus other) {
@@ -43,12 +42,8 @@ public class SolarInverterStatus   implements Copyable, Serializable{
 
     public void clear() {
 
+        super.clear();
         isConnected= false;
-        timestamp= 0;
-        value=  ""; 
-        if (qualityFlag != null) {
-            qualityFlag.clear();
-        }
     }
 
     public boolean equals(Object o) {
@@ -56,6 +51,10 @@ public class SolarInverterStatus   implements Copyable, Serializable{
         if (o == null) {
             return false;
         }        
+
+        if (!super.equals(o)) {
+            return false;
+        }
 
         if(getClass() != o.getClass()) {
             return false;
@@ -66,25 +65,15 @@ public class SolarInverterStatus   implements Copyable, Serializable{
         if(isConnected != otherObj.isConnected) {
             return false;
         }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
-        if(!value.equals(otherObj.value)) {
-            return false;
-        }
-        if(!qualityFlag.equals(otherObj.qualityFlag)) {
-            return false;
-        }
 
         return true;
     }
 
     public int hashCode() {
         int __result = 0;
+
+        __result = super.hashCode();
         __result += (isConnected == true)?1:0;
-        __result += (int)timestamp;
-        __result += value.hashCode(); 
-        __result += qualityFlag.hashCode(); 
         return __result;
     }
 
@@ -106,11 +95,8 @@ public class SolarInverterStatus   implements Copyable, Serializable{
 
         SolarInverterStatus typedSrc = (SolarInverterStatus) src;
         SolarInverterStatus typedDst = this;
-
+        super.copy_from(typedSrc);
         typedDst.isConnected = typedSrc.isConnected;
-        typedDst.timestamp = typedSrc.timestamp;
-        typedDst.value = typedSrc.value;
-        typedDst.qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type) typedDst.qualityFlag.copy_from(typedSrc.qualityFlag);
 
         return this;
     }
@@ -127,13 +113,10 @@ public class SolarInverterStatus   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("isConnected: ").append(isConnected).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("value: ").append(value).append("\n");  
-        strBuffer.append(qualityFlag.toString("qualityFlag ", indent+1));
 
         return strBuffer.toString();
     }

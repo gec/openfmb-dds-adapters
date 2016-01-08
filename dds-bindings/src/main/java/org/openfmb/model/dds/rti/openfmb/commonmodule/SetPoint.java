@@ -19,8 +19,8 @@ import com.rti.dds.cdr.CdrHelper;
 public class SetPoint   implements Copyable, Serializable{
 
     public String controlType=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
     public float value= 0;
 
     public SetPoint() {
@@ -44,8 +44,8 @@ public class SetPoint   implements Copyable, Serializable{
     public void clear() {
 
         controlType=  ""; 
-        multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
         value= 0;
     }
 
@@ -106,8 +106,8 @@ public class SetPoint   implements Copyable, Serializable{
         SetPoint typedDst = this;
 
         typedDst.controlType = typedSrc.controlType;
-        typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.multiplier.copy_from(typedSrc.multiplier);
-        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
+        typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.multiplier.copy_from(typedSrc.multiplier);
+        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
         typedDst.value = typedSrc.value;
 
         return this;

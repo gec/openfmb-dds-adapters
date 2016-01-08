@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class SolarEventProfile   implements Copyable, Serializable{
+public class SolarEventProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter solarInverter = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter)org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter.create();
     public org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverterStatus solarInverterStatus = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverterStatus)org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverterStatus.create();
 
     public SolarEventProfile() {
+
+        super();
 
     }
     public SolarEventProfile (SolarEventProfile other) {
@@ -43,8 +43,7 @@ public class SolarEventProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (solarInverter != null) {
             solarInverter.clear();
         }
@@ -59,18 +58,16 @@ public class SolarEventProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         SolarEventProfile otherObj = (SolarEventProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!solarInverter.equals(otherObj.solarInverter)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class SolarEventProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += solarInverter.hashCode(); 
         __result += solarInverterStatus.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class SolarEventProfile   implements Copyable, Serializable{
 
         SolarEventProfile typedSrc = (SolarEventProfile) src;
         SolarEventProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.solarInverter = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter) typedDst.solarInverter.copy_from(typedSrc.solarInverter);
         typedDst.solarInverterStatus = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverterStatus) typedDst.solarInverterStatus.copy_from(typedSrc.solarInverterStatus);
 
@@ -129,10 +124,8 @@ public class SolarEventProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(solarInverter.toString("solarInverter ", indent+1));
         strBuffer.append(solarInverterStatus.toString("solarInverterStatus ", indent+1));
 

@@ -151,7 +151,6 @@ public class CurveDataTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
@@ -180,7 +179,6 @@ public class CurveDataTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
@@ -215,8 +213,6 @@ public class CurveDataTypeSupport extends TypeSupportImpl {
         } 
 
         currentAlignment  +=  CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.curve);
         currentAlignment  +=  CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment);
         currentAlignment  +=  CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment);
         currentAlignment  +=  CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment);
@@ -276,8 +272,6 @@ public class CurveDataTypeSupport extends TypeSupportImpl {
             CurveData typedSrc = (CurveData) src;
 
             dst.writeFloat(typedSrc.xvalue);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeSupport.get_instance().serialize(endpoint_data, typedSrc.curve, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
             dst.writeFloat(typedSrc.y1value);
 
@@ -349,7 +343,6 @@ public class CurveDataTypeSupport extends TypeSupportImpl {
             typedDst.clear();      
             try{
                 typedDst.xvalue = src.readFloat();
-                typedDst.curve = (org.openfmb.model.dds.rti.openfmb.commonmodule.Curve)org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.curve, src, false, true, endpoint_plugin_qos);     
                 typedDst.y1value = src.readFloat();
                 typedDst.y2value = src.readFloat();
                 typedDst.y3value = src.readFloat();
@@ -425,8 +418,6 @@ public class CurveDataTypeSupport extends TypeSupportImpl {
         if (skip_sample) {
 
             src.skipFloat();
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.CurveTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
             src.skipFloat();
 

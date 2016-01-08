@@ -150,8 +150,8 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -177,8 +177,7 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
@@ -210,8 +209,9 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.logicalDeviceID );
-        currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.weatherData);
 
@@ -244,7 +244,9 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_key_max_size(
+            endpoint_data,
+            false,encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -268,9 +270,7 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
             WeatherDataProfile typedSrc = (WeatherDataProfile) src;
 
-            dst.writeString(typedSrc.logicalDeviceID,(255));
-
-            dst.writeLong(typedSrc.timestamp);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().serialize(endpoint_data, typedSrc.weatherData, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
@@ -308,8 +308,8 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
         if (serialize_key) {
 
             WeatherDataProfile typedSrc = (WeatherDataProfile) src;    
-
-            dst.writeString(typedSrc.logicalDeviceID,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialize_key(
+                endpoint_data, src, dst, false, encapsulation_id, true, endpoint_plugin_qos);
 
         }
 
@@ -337,9 +337,9 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
             WeatherDataProfile typedDst = (WeatherDataProfile) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.logicalDeviceID = src.readString((255));
-                typedDst.timestamp = src.readLong();
                 typedDst.weatherData = (org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherData)org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.weatherData, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -386,7 +386,8 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
             WeatherDataProfile typedDst = (WeatherDataProfile) dst;
 
-            typedDst.logicalDeviceID = src.readString((255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().deserialize_key_sample(
+                endpoint_data, dst, src, false, true, endpoint_plugin_qos);
 
         }
         if (deserialize_encapsulation) {
@@ -412,10 +413,7 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipLong();
-
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
         }
@@ -446,9 +444,9 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
             WeatherDataProfile typedDst = (WeatherDataProfile) sample;
 
-            typedDst.logicalDeviceID = src.readString((255));
-
-            src.skipLong();
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialized_sample_to_key(endpoint_data,sample,
+            src,false, true,
+            endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.weathermodule.WeatherDataTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
@@ -470,7 +468,7 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
         = (WeatherDataProfile) instance;
         WeatherDataProfile typedSrc
         = (WeatherDataProfile) key;
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
+        org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().key_to_instance(endpoint_data,instance,key);
 
     }
 
@@ -484,7 +482,7 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
         = (WeatherDataProfile)key;
         WeatherDataProfile typedSrc
         = (WeatherDataProfile) instance;
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
+        org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().instance_to_key(endpoint_data,key,instance);
 
     }
 
@@ -549,8 +547,9 @@ public class WeatherDataProfileTypeSupport extends TypeSupportImpl {
 
             position = src.resetAlignment();
         }
-
-        typedDst.logicalDeviceID = src.readString((255));
+        org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialized_sample_to_key(endpoint_data,sample,
+        src, false, true,
+        endpoint_plugin_qos);
 
         if (include_encapsulation) {
             src.restoreAlignment(position);

@@ -18,6 +18,8 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class WeatherData   implements Copyable, Serializable{
 
+    public String interval=  "" ; /* maximum length = (255) */
+    public String source=  "" ; /* maximum length = (255) */
     public String version=  "" ; /* maximum length = (255) */
     public long versionDateTime= 0;
     public org.openfmb.model.dds.rti.openfmb.weathermodule.Humidity humidity = (org.openfmb.model.dds.rti.openfmb.weathermodule.Humidity)org.openfmb.model.dds.rti.openfmb.weathermodule.Humidity.create();
@@ -45,6 +47,8 @@ public class WeatherData   implements Copyable, Serializable{
 
     public void clear() {
 
+        interval=  ""; 
+        source=  ""; 
         version=  ""; 
         versionDateTime= 0;
         if (humidity != null) {
@@ -73,6 +77,12 @@ public class WeatherData   implements Copyable, Serializable{
 
         WeatherData otherObj = (WeatherData)o;
 
+        if(!interval.equals(otherObj.interval)) {
+            return false;
+        }
+        if(!source.equals(otherObj.source)) {
+            return false;
+        }
         if(!version.equals(otherObj.version)) {
             return false;
         }
@@ -97,6 +107,8 @@ public class WeatherData   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
+        __result += interval.hashCode(); 
+        __result += source.hashCode(); 
         __result += version.hashCode(); 
         __result += (int)versionDateTime;
         __result += humidity.hashCode(); 
@@ -125,6 +137,8 @@ public class WeatherData   implements Copyable, Serializable{
         WeatherData typedSrc = (WeatherData) src;
         WeatherData typedDst = this;
 
+        typedDst.interval = typedSrc.interval;
+        typedDst.source = typedSrc.source;
         typedDst.version = typedSrc.version;
         typedDst.versionDateTime = typedSrc.versionDateTime;
         typedDst.humidity = (org.openfmb.model.dds.rti.openfmb.weathermodule.Humidity) typedDst.humidity.copy_from(typedSrc.humidity);
@@ -147,6 +161,10 @@ public class WeatherData   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("interval: ").append(interval).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("source: ").append(source).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("version: ").append(version).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        

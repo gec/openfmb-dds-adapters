@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class RecloserControlProfile   implements Copyable, Serializable{
+public class RecloserControlProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser recloser = (org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser)org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser.create();
     public org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControl recloserControl = (org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControl)org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControl.create();
 
     public RecloserControlProfile() {
+
+        super();
 
     }
     public RecloserControlProfile (RecloserControlProfile other) {
@@ -43,8 +43,7 @@ public class RecloserControlProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (recloser != null) {
             recloser.clear();
         }
@@ -59,18 +58,16 @@ public class RecloserControlProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         RecloserControlProfile otherObj = (RecloserControlProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!recloser.equals(otherObj.recloser)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class RecloserControlProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += recloser.hashCode(); 
         __result += recloserControl.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class RecloserControlProfile   implements Copyable, Serializable{
 
         RecloserControlProfile typedSrc = (RecloserControlProfile) src;
         RecloserControlProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.recloser = (org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser) typedDst.recloser.copy_from(typedSrc.recloser);
         typedDst.recloserControl = (org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControl) typedDst.recloserControl.copy_from(typedSrc.recloserControl);
 
@@ -129,10 +124,8 @@ public class RecloserControlProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(recloser.toString("recloser ", indent+1));
         strBuffer.append(recloserControl.toString("recloserControl ", indent+1));
 

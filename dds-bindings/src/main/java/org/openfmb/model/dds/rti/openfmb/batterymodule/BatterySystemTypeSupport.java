@@ -150,9 +150,9 @@ public class BatterySystemTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
+        currentAlignment += CdrPrimitiveType.BYTE.getMaxSizeSerialized(currentAlignment );
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -177,9 +177,8 @@ public class BatterySystemTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
+        currentAlignment += CdrPrimitiveType.BYTE.getMaxSizeSerialized(currentAlignment );
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -210,9 +209,10 @@ public class BatterySystemTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.mRID );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.description );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
+        currentAlignment  +=  CdrPrimitiveType.BYTE.getMaxSizeSerialized(currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -268,11 +268,9 @@ public class BatterySystemTypeSupport extends TypeSupportImpl {
 
             BatterySystem typedSrc = (BatterySystem) src;
 
-            dst.writeString(typedSrc.mRID,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
-            dst.writeString(typedSrc.description,(255));
-
-            dst.writeString(typedSrc.name,(255));
+            dst.writeByte(typedSrc.__dummy_prevent_empty_class);
         }
 
         if (serialize_encapsulation) {
@@ -336,10 +334,10 @@ public class BatterySystemTypeSupport extends TypeSupportImpl {
 
             BatterySystem typedDst = (BatterySystem) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.mRID = src.readString((255));
-                typedDst.description = src.readString((255));
-                typedDst.name = src.readString((255));
+                typedDst.__dummy_prevent_empty_class = src.readByte();
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -411,11 +409,8 @@ public class BatterySystemTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            src.skipByte();
 
         }
 

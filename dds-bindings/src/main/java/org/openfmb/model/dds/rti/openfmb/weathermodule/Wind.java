@@ -18,8 +18,8 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class Wind   implements Copyable, Serializable{
 
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind directionUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind speedUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind directionUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind speedUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
     public org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfWindData windData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfWindData)org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfWindData.create();
 
     public Wind() {
@@ -42,8 +42,8 @@ public class Wind   implements Copyable, Serializable{
 
     public void clear() {
 
-        directionUnit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        speedUnit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        directionUnit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        speedUnit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
         if (windData != null) {
             windData.clear();
         }
@@ -101,8 +101,8 @@ public class Wind   implements Copyable, Serializable{
         Wind typedSrc = (Wind) src;
         Wind typedDst = this;
 
-        typedDst.directionUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.directionUnit.copy_from(typedSrc.directionUnit);
-        typedDst.speedUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.speedUnit.copy_from(typedSrc.speedUnit);
+        typedDst.directionUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.directionUnit.copy_from(typedSrc.directionUnit);
+        typedDst.speedUnit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.speedUnit.copy_from(typedSrc.speedUnit);
         typedDst.windData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfWindData) typedDst.windData.copy_from(typedSrc.windData);
 
         return this;

@@ -16,13 +16,13 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class SecurityEventProfile   implements Copyable, Serializable{
+public class SecurityEventProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.securitymodule.SecurityEvent securityEvent = (org.openfmb.model.dds.rti.openfmb.securitymodule.SecurityEvent)org.openfmb.model.dds.rti.openfmb.securitymodule.SecurityEvent.create();
 
     public SecurityEventProfile() {
+
+        super();
 
     }
     public SecurityEventProfile (SecurityEventProfile other) {
@@ -42,8 +42,7 @@ public class SecurityEventProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (securityEvent != null) {
             securityEvent.clear();
         }
@@ -55,18 +54,16 @@ public class SecurityEventProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         SecurityEventProfile otherObj = (SecurityEventProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!securityEvent.equals(otherObj.securityEvent)) {
             return false;
         }
@@ -76,8 +73,8 @@ public class SecurityEventProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += securityEvent.hashCode(); 
         return __result;
     }
@@ -100,9 +97,7 @@ public class SecurityEventProfile   implements Copyable, Serializable{
 
         SecurityEventProfile typedSrc = (SecurityEventProfile) src;
         SecurityEventProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.securityEvent = (org.openfmb.model.dds.rti.openfmb.securitymodule.SecurityEvent) typedDst.securityEvent.copy_from(typedSrc.securityEvent);
 
         return this;
@@ -120,10 +115,8 @@ public class SecurityEventProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(securityEvent.toString("securityEvent ", indent+1));
 
         return strBuffer.toString();

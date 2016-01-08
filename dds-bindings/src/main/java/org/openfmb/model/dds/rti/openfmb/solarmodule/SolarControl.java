@@ -16,16 +16,13 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class SolarControl   implements Copyable, Serializable{
+public class SolarControl  extends org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControl implements Copyable, Serializable{
 
     public boolean isIslanded= false;
-    public String issueID=  "" ; /* maximum length = (255) */
-    public String name=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType endDeviceControlType = (org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType)org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval scheduledInterval = (org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval)org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval.create();
-    public org.openfmb.model.dds.rti.openfmb.solarmodule.SequenceOfSolarControlSetPoints setPoints = (org.openfmb.model.dds.rti.openfmb.solarmodule.SequenceOfSolarControlSetPoints)org.openfmb.model.dds.rti.openfmb.solarmodule.SequenceOfSolarControlSetPoints.create();
 
     public SolarControl() {
+
+        super();
 
     }
     public SolarControl (SolarControl other) {
@@ -45,18 +42,8 @@ public class SolarControl   implements Copyable, Serializable{
 
     public void clear() {
 
+        super.clear();
         isIslanded= false;
-        issueID=  ""; 
-        name=  ""; 
-        if (endDeviceControlType != null) {
-            endDeviceControlType.clear();
-        }
-        if (scheduledInterval != null) {
-            scheduledInterval.clear();
-        }
-        if (setPoints != null) {
-            setPoints.clear();
-        }
     }
 
     public boolean equals(Object o) {
@@ -64,6 +51,10 @@ public class SolarControl   implements Copyable, Serializable{
         if (o == null) {
             return false;
         }        
+
+        if (!super.equals(o)) {
+            return false;
+        }
 
         if(getClass() != o.getClass()) {
             return false;
@@ -74,33 +65,15 @@ public class SolarControl   implements Copyable, Serializable{
         if(isIslanded != otherObj.isIslanded) {
             return false;
         }
-        if(!issueID.equals(otherObj.issueID)) {
-            return false;
-        }
-        if(!name.equals(otherObj.name)) {
-            return false;
-        }
-        if(!endDeviceControlType.equals(otherObj.endDeviceControlType)) {
-            return false;
-        }
-        if(!scheduledInterval.equals(otherObj.scheduledInterval)) {
-            return false;
-        }
-        if(!setPoints.equals(otherObj.setPoints)) {
-            return false;
-        }
 
         return true;
     }
 
     public int hashCode() {
         int __result = 0;
+
+        __result = super.hashCode();
         __result += (isIslanded == true)?1:0;
-        __result += issueID.hashCode(); 
-        __result += name.hashCode(); 
-        __result += endDeviceControlType.hashCode(); 
-        __result += scheduledInterval.hashCode(); 
-        __result += setPoints.hashCode(); 
         return __result;
     }
 
@@ -122,13 +95,8 @@ public class SolarControl   implements Copyable, Serializable{
 
         SolarControl typedSrc = (SolarControl) src;
         SolarControl typedDst = this;
-
+        super.copy_from(typedSrc);
         typedDst.isIslanded = typedSrc.isIslanded;
-        typedDst.issueID = typedSrc.issueID;
-        typedDst.name = typedSrc.name;
-        typedDst.endDeviceControlType = (org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType) typedDst.endDeviceControlType.copy_from(typedSrc.endDeviceControlType);
-        typedDst.scheduledInterval = (org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval) typedDst.scheduledInterval.copy_from(typedSrc.scheduledInterval);
-        typedDst.setPoints = (org.openfmb.model.dds.rti.openfmb.solarmodule.SequenceOfSolarControlSetPoints) typedDst.setPoints.copy_from(typedSrc.setPoints);
 
         return this;
     }
@@ -145,15 +113,10 @@ public class SolarControl   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("isIslanded: ").append(isIslanded).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("issueID: ").append(issueID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("name: ").append(name).append("\n");  
-        strBuffer.append(endDeviceControlType.toString("endDeviceControlType ", indent+1));
-        strBuffer.append(scheduledInterval.toString("scheduledInterval ", indent+1));
-        strBuffer.append(setPoints.toString("setPoints ", indent+1));
 
         return strBuffer.toString();
     }

@@ -22,8 +22,8 @@ import com.greenenergycorp.openfmb.dds.mapping.xml.OpenFMBMapping;
 import com.greenenergycorp.openfmb.mapping.transform.MeasTransform;
 import com.greenenergycorp.openfmb.mapping.transform.TransformXmlLoader;
 import com.greenenergycorp.openfmb.mapping.xml.CommonConversions;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind;
 
 import java.util.ArrayList;
 import java.util.List;

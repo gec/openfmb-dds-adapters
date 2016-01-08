@@ -18,14 +18,12 @@ public class  LoadStatusProfileTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[4];
+        ValueMember sm[]=new ValueMember[2];
 
-        sm[__i]=new  StructMember("logicalDeviceID", false, (short)-1, true,(TypeCode) new TypeCode(TCKind.TK_STRING,255),0 , false);__i++;
-        sm[__i]=new  StructMember("timestamp", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,1 , false);__i++;
-        sm[__i]=new  StructMember("energyConsumer", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumerTypeCode.VALUE,2 , false);__i++;
-        sm[__i]=new  StructMember("measurements", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfStringMeasurementsTypeCode.VALUE,3 , false);__i++;
+        sm[__i]=new  ValueMember("energyConsumer", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.loadmodule.EnergyConsumerTypeCode.VALUE,2 , false);__i++;
+        sm[__i]=new  ValueMember("measurements", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.loadmodule.SequenceOfLoadMeasurementsTypeCode.VALUE,3 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::loadmodule::LoadStatusProfile",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::loadmodule::LoadStatusProfile",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeCode.VALUE, sm);        
         return tc;
     }
 }

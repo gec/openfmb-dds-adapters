@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class SolarControlProfile   implements Copyable, Serializable{
+public class SolarControlProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.solarmodule.SolarControl solarControl = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarControl)org.openfmb.model.dds.rti.openfmb.solarmodule.SolarControl.create();
     public org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter solarInverter = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter)org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter.create();
 
     public SolarControlProfile() {
+
+        super();
 
     }
     public SolarControlProfile (SolarControlProfile other) {
@@ -43,8 +43,7 @@ public class SolarControlProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (solarControl != null) {
             solarControl.clear();
         }
@@ -59,18 +58,16 @@ public class SolarControlProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         SolarControlProfile otherObj = (SolarControlProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!solarControl.equals(otherObj.solarControl)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class SolarControlProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += solarControl.hashCode(); 
         __result += solarInverter.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class SolarControlProfile   implements Copyable, Serializable{
 
         SolarControlProfile typedSrc = (SolarControlProfile) src;
         SolarControlProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.solarControl = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarControl) typedDst.solarControl.copy_from(typedSrc.solarControl);
         typedDst.solarInverter = (org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter) typedDst.solarInverter.copy_from(typedSrc.solarInverter);
 
@@ -129,10 +124,8 @@ public class SolarControlProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(solarControl.toString("solarControl ", indent+1));
         strBuffer.append(solarInverter.toString("solarInverter ", indent+1));
 

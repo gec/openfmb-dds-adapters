@@ -18,7 +18,7 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class Temperature   implements Copyable, Serializable{
 
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
     public org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureData temperatureData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureData)org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureData.create();
 
     public Temperature() {
@@ -41,7 +41,7 @@ public class Temperature   implements Copyable, Serializable{
 
     public void clear() {
 
-        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
         if (temperatureData != null) {
             temperatureData.clear();
         }
@@ -95,7 +95,7 @@ public class Temperature   implements Copyable, Serializable{
         Temperature typedSrc = (Temperature) src;
         Temperature typedDst = this;
 
-        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
+        typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.unit.copy_from(typedSrc.unit);
         typedDst.temperatureData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureData) typedDst.temperatureData.copy_from(typedSrc.temperatureData);
 
         return this;

@@ -21,10 +21,10 @@ public class  BasicIntervalScheduleTypeCode {
         StructMember sm[]=new StructMember[5];
 
         sm[__i]=new  StructMember("startTime", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,0 , false);__i++;
-        sm[__i]=new  StructMember("value1Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,1 , false);__i++;
-        sm[__i]=new  StructMember("value1Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,2 , false);__i++;
-        sm[__i]=new  StructMember("value2Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,3 , false);__i++;
-        sm[__i]=new  StructMember("value2Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,4 , false);__i++;
+        sm[__i]=new  StructMember("value1Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,1 , false);__i++;
+        sm[__i]=new  StructMember("value1Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,2 , false);__i++;
+        sm[__i]=new  StructMember("value2Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeCode.VALUE,3 , false);__i++;
+        sm[__i]=new  StructMember("value2Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,4 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::commonmodule::BasicIntervalSchedule",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
         return tc;

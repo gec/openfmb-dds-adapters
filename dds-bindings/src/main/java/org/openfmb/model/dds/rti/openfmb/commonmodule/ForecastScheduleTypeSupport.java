@@ -150,11 +150,8 @@ public class ForecastScheduleTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
         currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePointsTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
@@ -182,11 +179,7 @@ public class ForecastScheduleTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
         currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
         currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePointsTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
@@ -220,15 +213,9 @@ public class ForecastScheduleTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value1Multiplier);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value1Unit);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value2Multiplier);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.value2Unit);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.version );
         currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePointsTypeSupport.get_instance().get_serialized_sample_size(
@@ -288,15 +275,7 @@ public class ForecastScheduleTypeSupport extends TypeSupportImpl {
 
             ForecastSchedule typedSrc = (ForecastSchedule) src;
 
-            dst.writeLong(typedSrc.startTime);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value1Multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value1Unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value2Multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.value2Unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
             dst.writeString(typedSrc.version,(255));
 
@@ -366,12 +345,9 @@ public class ForecastScheduleTypeSupport extends TypeSupportImpl {
 
             ForecastSchedule typedDst = (ForecastSchedule) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.startTime = src.readLong();
-                typedDst.value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value1Multiplier, src, false, true, endpoint_plugin_qos);     
-                typedDst.value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value1Unit, src, false, true, endpoint_plugin_qos);     
-                typedDst.value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value2Multiplier, src, false, true, endpoint_plugin_qos);     
-                typedDst.value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.value2Unit, src, false, true, endpoint_plugin_qos);     
                 typedDst.version = src.readString((255));
                 typedDst.versionDateTime = src.readLong();
                 typedDst.irregularTimePoints = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePoints)org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePointsTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.irregularTimePoints, src, false, true, endpoint_plugin_qos);     
@@ -446,16 +422,7 @@ public class ForecastScheduleTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipLong();
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
+            org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             src.skipString();
 
             src.skipLong();

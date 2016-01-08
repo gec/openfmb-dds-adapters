@@ -18,18 +18,17 @@
  */
 package com.greenenergycorp.openfmb.mapping.control;
 
+import com.greenenergycorp.openfmb.dds.DdsParticipant;
+import com.greenenergycorp.openfmb.dds.handle.RecloserControlProfileHandle;
 import com.rti.dds.infrastructure.InstanceHandle_t;
 import com.rti.dds.publication.DataWriter;
 import com.rti.dds.publication.Publisher;
 import com.rti.dds.topic.Topic;
-import com.greenenergycorp.openfmb.dds.DdsParticipant;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.SetPoint;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
-import org.openfmb.model.dds.rti.openfmb.reclosermodule.*;
-import com.greenenergycorp.openfmb.dds.handle.RecloserControlProfileHandle;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.*;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControl;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControlProfile;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserControlProfileDataWriter;
 
 import java.io.IOException;
 
@@ -87,7 +86,7 @@ public class RecloserControlTester {
             setPoint.multiplier = UnitMultiplierKind.milli;
             setPoint.value = 100.5f;
 
-            final SequenceOfRecloserControlSetPoints setPoints = new SequenceOfRecloserControlSetPoints();
+            final SequenceOfEndDeviceControlSetPoints setPoints = new SequenceOfEndDeviceControlSetPoints();
             setPoints.userData.add(setPoint);
 
             final DateTimeInterval dateTimeInterval = new DateTimeInterval();

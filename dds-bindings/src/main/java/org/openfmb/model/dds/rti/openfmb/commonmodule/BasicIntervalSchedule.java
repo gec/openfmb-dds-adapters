@@ -19,10 +19,10 @@ import com.rti.dds.cdr.CdrHelper;
 public class BasicIntervalSchedule   implements Copyable, Serializable{
 
     public long startTime= 0;
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
 
     public BasicIntervalSchedule() {
 
@@ -45,10 +45,10 @@ public class BasicIntervalSchedule   implements Copyable, Serializable{
     public void clear() {
 
         startTime= 0;
-        value1Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        value1Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        value2Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        value2Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        value1Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        value1Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
+        value2Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind.create();
+        value2Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind.create();
     }
 
     public boolean equals(Object o) {
@@ -112,10 +112,10 @@ public class BasicIntervalSchedule   implements Copyable, Serializable{
         BasicIntervalSchedule typedDst = this;
 
         typedDst.startTime = typedSrc.startTime;
-        typedDst.value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.value1Multiplier.copy_from(typedSrc.value1Multiplier);
-        typedDst.value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.value1Unit.copy_from(typedSrc.value1Unit);
-        typedDst.value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.value2Multiplier.copy_from(typedSrc.value2Multiplier);
-        typedDst.value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.value2Unit.copy_from(typedSrc.value2Unit);
+        typedDst.value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.value1Multiplier.copy_from(typedSrc.value1Multiplier);
+        typedDst.value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.value1Unit.copy_from(typedSrc.value1Unit);
+        typedDst.value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind) typedDst.value2Multiplier.copy_from(typedSrc.value2Multiplier);
+        typedDst.value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind) typedDst.value2Unit.copy_from(typedSrc.value2Unit);
 
         return this;
     }

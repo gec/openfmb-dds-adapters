@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class ResourceReadingProfile   implements Copyable, Serializable{
+public class ResourceReadingProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
-    public org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter meter = (org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter)org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter.create();
+    public org.openfmb.model.dds.rti.openfmb.commonmodule.Meter meter = (org.openfmb.model.dds.rti.openfmb.commonmodule.Meter)org.openfmb.model.dds.rti.openfmb.commonmodule.Meter.create();
     public org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadings readings = (org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadings)org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadings.create();
 
     public ResourceReadingProfile() {
+
+        super();
 
     }
     public ResourceReadingProfile (ResourceReadingProfile other) {
@@ -43,8 +43,7 @@ public class ResourceReadingProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (meter != null) {
             meter.clear();
         }
@@ -59,18 +58,16 @@ public class ResourceReadingProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         ResourceReadingProfile otherObj = (ResourceReadingProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!meter.equals(otherObj.meter)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class ResourceReadingProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += meter.hashCode(); 
         __result += readings.hashCode(); 
         return __result;
@@ -108,10 +105,8 @@ public class ResourceReadingProfile   implements Copyable, Serializable{
 
         ResourceReadingProfile typedSrc = (ResourceReadingProfile) src;
         ResourceReadingProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
-        typedDst.meter = (org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter) typedDst.meter.copy_from(typedSrc.meter);
+        super.copy_from(typedSrc);
+        typedDst.meter = (org.openfmb.model.dds.rti.openfmb.commonmodule.Meter) typedDst.meter.copy_from(typedSrc.meter);
         typedDst.readings = (org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadings) typedDst.readings.copy_from(typedSrc.readings);
 
         return this;
@@ -129,10 +124,8 @@ public class ResourceReadingProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(meter.toString("meter ", indent+1));
         strBuffer.append(readings.toString("readings ", indent+1));
 

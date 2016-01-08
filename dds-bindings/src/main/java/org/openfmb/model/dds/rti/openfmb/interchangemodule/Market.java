@@ -1,0 +1,225 @@
+
+
+/*
+WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
+This file was generated from .idl using "rtiddsgen".
+The rtiddsgen tool is part of the RTI Connext distribution.
+For more information, type 'rtiddsgen -help' at a command shell
+or consult the RTI Connext manual.
+*/
+
+package org.openfmb.model.dds.rti.openfmb.interchangemodule;
+
+import com.rti.dds.infrastructure.*;
+import com.rti.dds.infrastructure.Copyable;
+import java.io.Serializable;
+import com.rti.dds.cdr.CdrHelper;
+
+public class Market  extends org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObject implements Copyable, Serializable{
+
+    public long actualEnd= 0;
+    public long actualStart= 0;
+    public boolean dst= false;
+    public long end= 0;
+    public String localTimeZone=  "" ; /* maximum length = (255) */
+    public long start= 0;
+    public String status=  "" ; /* maximum length = (255) */
+    public float timeIntervalLength= 0;
+    public long tradingDay= 0;
+    public String tradingPeriod=  "" ; /* maximum length = (255) */
+    public org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketFactors marketFactors = (org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketFactors)org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketFactors.create();
+    public org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketRuns marketRuns = (org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketRuns)org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketRuns.create();
+
+    public Market() {
+
+        super();
+
+    }
+    public Market (Market other) {
+
+        this();
+        copy_from(other);
+    }
+
+    public static Object create() {
+
+        Market self;
+        self = new  Market();
+        self.clear();
+        return self;
+
+    }
+
+    public void clear() {
+
+        super.clear();
+        actualEnd= 0;
+        actualStart= 0;
+        dst= false;
+        end= 0;
+        localTimeZone=  ""; 
+        start= 0;
+        status=  ""; 
+        timeIntervalLength= 0;
+        tradingDay= 0;
+        tradingPeriod=  ""; 
+        if (marketFactors != null) {
+            marketFactors.clear();
+        }
+        if (marketRuns != null) {
+            marketRuns.clear();
+        }
+    }
+
+    public boolean equals(Object o) {
+
+        if (o == null) {
+            return false;
+        }        
+
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        if(getClass() != o.getClass()) {
+            return false;
+        }
+
+        Market otherObj = (Market)o;
+
+        if(actualEnd != otherObj.actualEnd) {
+            return false;
+        }
+        if(actualStart != otherObj.actualStart) {
+            return false;
+        }
+        if(dst != otherObj.dst) {
+            return false;
+        }
+        if(end != otherObj.end) {
+            return false;
+        }
+        if(!localTimeZone.equals(otherObj.localTimeZone)) {
+            return false;
+        }
+        if(start != otherObj.start) {
+            return false;
+        }
+        if(!status.equals(otherObj.status)) {
+            return false;
+        }
+        if(timeIntervalLength != otherObj.timeIntervalLength) {
+            return false;
+        }
+        if(tradingDay != otherObj.tradingDay) {
+            return false;
+        }
+        if(!tradingPeriod.equals(otherObj.tradingPeriod)) {
+            return false;
+        }
+        if(!marketFactors.equals(otherObj.marketFactors)) {
+            return false;
+        }
+        if(!marketRuns.equals(otherObj.marketRuns)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public int hashCode() {
+        int __result = 0;
+
+        __result = super.hashCode();
+        __result += (int)actualEnd;
+        __result += (int)actualStart;
+        __result += (dst == true)?1:0;
+        __result += (int)end;
+        __result += localTimeZone.hashCode(); 
+        __result += (int)start;
+        __result += status.hashCode(); 
+        __result += (int)timeIntervalLength;
+        __result += (int)tradingDay;
+        __result += tradingPeriod.hashCode(); 
+        __result += marketFactors.hashCode(); 
+        __result += marketRuns.hashCode(); 
+        return __result;
+    }
+
+    /**
+    * This is the implementation of the <code>Copyable</code> interface.
+    * This method will perform a deep copy of <code>src</code>
+    * This method could be placed into <code>MarketTypeSupport</code>
+    * rather than here by using the <code>-noCopyable</code> option
+    * to rtiddsgen.
+    * 
+    * @param src The Object which contains the data to be copied.
+    * @return Returns <code>this</code>.
+    * @exception NullPointerException If <code>src</code> is null.
+    * @exception ClassCastException If <code>src</code> is not the 
+    * same type as <code>this</code>.
+    * @see com.rti.dds.infrastructure.Copyable#copy_from(java.lang.Object)
+    */
+    public Object copy_from(Object src) {
+
+        Market typedSrc = (Market) src;
+        Market typedDst = this;
+        super.copy_from(typedSrc);
+        typedDst.actualEnd = typedSrc.actualEnd;
+        typedDst.actualStart = typedSrc.actualStart;
+        typedDst.dst = typedSrc.dst;
+        typedDst.end = typedSrc.end;
+        typedDst.localTimeZone = typedSrc.localTimeZone;
+        typedDst.start = typedSrc.start;
+        typedDst.status = typedSrc.status;
+        typedDst.timeIntervalLength = typedSrc.timeIntervalLength;
+        typedDst.tradingDay = typedSrc.tradingDay;
+        typedDst.tradingPeriod = typedSrc.tradingPeriod;
+        typedDst.marketFactors = (org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketFactors) typedDst.marketFactors.copy_from(typedSrc.marketFactors);
+        typedDst.marketRuns = (org.openfmb.model.dds.rti.openfmb.interchangemodule.SequenceOfMarketRuns) typedDst.marketRuns.copy_from(typedSrc.marketRuns);
+
+        return this;
+    }
+
+    public String toString(){
+        return toString("", 0);
+    }
+
+    public String toString(String desc, int indent) {
+        StringBuffer strBuffer = new StringBuffer();        
+
+        if (desc != null) {
+            CdrHelper.printIndent(strBuffer, indent);
+            strBuffer.append(desc).append(":\n");
+        }
+
+        strBuffer.append(super.toString("",indent));
+
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("actualEnd: ").append(actualEnd).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("actualStart: ").append(actualStart).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("dst: ").append(dst).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("end: ").append(end).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("localTimeZone: ").append(localTimeZone).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("start: ").append(start).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("status: ").append(status).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("timeIntervalLength: ").append(timeIntervalLength).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("tradingDay: ").append(tradingDay).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);        
+        strBuffer.append("tradingPeriod: ").append(tradingPeriod).append("\n");  
+        strBuffer.append(marketFactors.toString("marketFactors ", indent+1));
+        strBuffer.append(marketRuns.toString("marketRuns ", indent+1));
+
+        return strBuffer.toString();
+    }
+
+}

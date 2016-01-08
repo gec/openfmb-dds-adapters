@@ -16,18 +16,15 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class ForecastSchedule   implements Copyable, Serializable{
+public class ForecastSchedule  extends org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalSchedule implements Copyable, Serializable{
 
-    public long startTime= 0;
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
     public String version=  "" ; /* maximum length = (255) */
     public long versionDateTime= 0;
     public org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePoints irregularTimePoints = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePoints)org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePoints.create();
 
     public ForecastSchedule() {
+
+        super();
 
     }
     public ForecastSchedule (ForecastSchedule other) {
@@ -47,11 +44,7 @@ public class ForecastSchedule   implements Copyable, Serializable{
 
     public void clear() {
 
-        startTime= 0;
-        value1Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        value1Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
-        value2Multiplier = org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind.create();
-        value2Unit = org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind.create();
+        super.clear();
         version=  ""; 
         versionDateTime= 0;
         if (irregularTimePoints != null) {
@@ -65,27 +58,16 @@ public class ForecastSchedule   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         ForecastSchedule otherObj = (ForecastSchedule)o;
 
-        if(startTime != otherObj.startTime) {
-            return false;
-        }
-        if(!value1Multiplier.equals(otherObj.value1Multiplier)) {
-            return false;
-        }
-        if(!value1Unit.equals(otherObj.value1Unit)) {
-            return false;
-        }
-        if(!value2Multiplier.equals(otherObj.value2Multiplier)) {
-            return false;
-        }
-        if(!value2Unit.equals(otherObj.value2Unit)) {
-            return false;
-        }
         if(!version.equals(otherObj.version)) {
             return false;
         }
@@ -101,11 +83,8 @@ public class ForecastSchedule   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += (int)startTime;
-        __result += value1Multiplier.hashCode(); 
-        __result += value1Unit.hashCode(); 
-        __result += value2Multiplier.hashCode(); 
-        __result += value2Unit.hashCode(); 
+
+        __result = super.hashCode();
         __result += version.hashCode(); 
         __result += (int)versionDateTime;
         __result += irregularTimePoints.hashCode(); 
@@ -130,12 +109,7 @@ public class ForecastSchedule   implements Copyable, Serializable{
 
         ForecastSchedule typedSrc = (ForecastSchedule) src;
         ForecastSchedule typedDst = this;
-
-        typedDst.startTime = typedSrc.startTime;
-        typedDst.value1Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.value1Multiplier.copy_from(typedSrc.value1Multiplier);
-        typedDst.value1Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.value1Unit.copy_from(typedSrc.value1Unit);
-        typedDst.value2Multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind) typedDst.value2Multiplier.copy_from(typedSrc.value2Multiplier);
-        typedDst.value2Unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind) typedDst.value2Unit.copy_from(typedSrc.value2Unit);
+        super.copy_from(typedSrc);
         typedDst.version = typedSrc.version;
         typedDst.versionDateTime = typedSrc.versionDateTime;
         typedDst.irregularTimePoints = (org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePoints) typedDst.irregularTimePoints.copy_from(typedSrc.irregularTimePoints);
@@ -155,12 +129,8 @@ public class ForecastSchedule   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("startTime: ").append(startTime).append("\n");  
-        strBuffer.append(value1Multiplier.toString("value1Multiplier ", indent+1));
-        strBuffer.append(value1Unit.toString("value1Unit ", indent+1));
-        strBuffer.append(value2Multiplier.toString("value2Multiplier ", indent+1));
-        strBuffer.append(value2Unit.toString("value2Unit ", indent+1));
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("version: ").append(version).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        

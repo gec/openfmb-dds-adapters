@@ -16,14 +16,14 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class GenerationReadingProfile   implements Copyable, Serializable{
+public class GenerationReadingProfile  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Container implements Copyable, Serializable{
 
-    public String logicalDeviceID=  "" ; /* maximum length = (255) */
-    public long timestamp= 0;
     public org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit generatingUnit = (org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit)org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit.create();
     public org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationReadings readings = (org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationReadings)org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationReadings.create();
 
     public GenerationReadingProfile() {
+
+        super();
 
     }
     public GenerationReadingProfile (GenerationReadingProfile other) {
@@ -43,8 +43,7 @@ public class GenerationReadingProfile   implements Copyable, Serializable{
 
     public void clear() {
 
-        logicalDeviceID=  ""; 
-        timestamp= 0;
+        super.clear();
         if (generatingUnit != null) {
             generatingUnit.clear();
         }
@@ -59,18 +58,16 @@ public class GenerationReadingProfile   implements Copyable, Serializable{
             return false;
         }        
 
+        if (!super.equals(o)) {
+            return false;
+        }
+
         if(getClass() != o.getClass()) {
             return false;
         }
 
         GenerationReadingProfile otherObj = (GenerationReadingProfile)o;
 
-        if(!logicalDeviceID.equals(otherObj.logicalDeviceID)) {
-            return false;
-        }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
         if(!generatingUnit.equals(otherObj.generatingUnit)) {
             return false;
         }
@@ -83,8 +80,8 @@ public class GenerationReadingProfile   implements Copyable, Serializable{
 
     public int hashCode() {
         int __result = 0;
-        __result += logicalDeviceID.hashCode(); 
-        __result += (int)timestamp;
+
+        __result = super.hashCode();
         __result += generatingUnit.hashCode(); 
         __result += readings.hashCode(); 
         return __result;
@@ -108,9 +105,7 @@ public class GenerationReadingProfile   implements Copyable, Serializable{
 
         GenerationReadingProfile typedSrc = (GenerationReadingProfile) src;
         GenerationReadingProfile typedDst = this;
-
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
-        typedDst.timestamp = typedSrc.timestamp;
+        super.copy_from(typedSrc);
         typedDst.generatingUnit = (org.openfmb.model.dds.rti.openfmb.generationmodule.GeneratingUnit) typedDst.generatingUnit.copy_from(typedSrc.generatingUnit);
         typedDst.readings = (org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationReadings) typedDst.readings.copy_from(typedSrc.readings);
 
@@ -129,10 +124,8 @@ public class GenerationReadingProfile   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("logicalDeviceID: ").append(logicalDeviceID).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
+        strBuffer.append(super.toString("",indent));
+
         strBuffer.append(generatingUnit.toString("generatingUnit ", indent+1));
         strBuffer.append(readings.toString("readings ", indent+1));
 

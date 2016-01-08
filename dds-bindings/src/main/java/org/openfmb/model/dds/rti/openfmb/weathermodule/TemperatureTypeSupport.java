@@ -150,7 +150,7 @@ public class TemperatureTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -176,7 +176,7 @@ public class TemperatureTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
@@ -208,7 +208,7 @@ public class TemperatureTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.unit);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.temperatureData);
@@ -267,7 +267,7 @@ public class TemperatureTypeSupport extends TypeSupportImpl {
 
             Temperature typedSrc = (Temperature) src;
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeSupport.get_instance().serialize(endpoint_data, typedSrc.temperatureData, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
@@ -334,7 +334,7 @@ public class TemperatureTypeSupport extends TypeSupportImpl {
             Temperature typedDst = (Temperature) dst;
             typedDst.clear();      
             try{
-                typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.unit, src, false, true, endpoint_plugin_qos);     
+                typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.unit, src, false, true, endpoint_plugin_qos);     
                 typedDst.temperatureData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureData)org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.temperatureData, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -407,7 +407,7 @@ public class TemperatureTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 

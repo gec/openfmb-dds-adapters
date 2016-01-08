@@ -19,8 +19,8 @@
 package com.greenenergycorp.openfmb.mapping;
 
 
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind;
 
 /**
  * Abstract base class for OpenFMB controls associated with a particular mapped device.

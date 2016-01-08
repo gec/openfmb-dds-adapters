@@ -18,12 +18,16 @@
  */
 package com.greenenergycorp.openfmb.mapping.device;
 
-import com.rti.dds.infrastructure.InstanceHandle_t;
-import org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type;
-import org.openfmb.model.dds.rti.openfmb.reclosermodule.*;
 import com.greenenergycorp.openfmb.mapping.DeviceAdapter;
 import com.greenenergycorp.openfmb.mapping.MeasValue;
 import com.greenenergycorp.openfmb.mapping.ReadingId;
+import com.rti.dds.infrastructure.InstanceHandle_t;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.SwitchStatusKind;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventProfile;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventProfileDataWriter;
+import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

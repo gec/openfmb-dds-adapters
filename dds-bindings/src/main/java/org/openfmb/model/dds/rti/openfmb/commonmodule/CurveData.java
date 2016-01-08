@@ -19,7 +19,6 @@ import com.rti.dds.cdr.CdrHelper;
 public class CurveData   implements Copyable, Serializable{
 
     public float xvalue= 0;
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.Curve curve = (org.openfmb.model.dds.rti.openfmb.commonmodule.Curve)org.openfmb.model.dds.rti.openfmb.commonmodule.Curve.create();
     public float y1value= 0;
     public float y2value= 0;
     public float y3value= 0;
@@ -45,9 +44,6 @@ public class CurveData   implements Copyable, Serializable{
     public void clear() {
 
         xvalue= 0;
-        if (curve != null) {
-            curve.clear();
-        }
         y1value= 0;
         y2value= 0;
         y3value= 0;
@@ -68,9 +64,6 @@ public class CurveData   implements Copyable, Serializable{
         if(xvalue != otherObj.xvalue) {
             return false;
         }
-        if(!curve.equals(otherObj.curve)) {
-            return false;
-        }
         if(y1value != otherObj.y1value) {
             return false;
         }
@@ -87,7 +80,6 @@ public class CurveData   implements Copyable, Serializable{
     public int hashCode() {
         int __result = 0;
         __result += (int)xvalue;
-        __result += curve.hashCode(); 
         __result += (int)y1value;
         __result += (int)y2value;
         __result += (int)y3value;
@@ -114,7 +106,6 @@ public class CurveData   implements Copyable, Serializable{
         CurveData typedDst = this;
 
         typedDst.xvalue = typedSrc.xvalue;
-        typedDst.curve = (org.openfmb.model.dds.rti.openfmb.commonmodule.Curve) typedDst.curve.copy_from(typedSrc.curve);
         typedDst.y1value = typedSrc.y1value;
         typedDst.y2value = typedSrc.y2value;
         typedDst.y3value = typedSrc.y3value;
@@ -136,7 +127,6 @@ public class CurveData   implements Copyable, Serializable{
 
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("xvalue: ").append(xvalue).append("\n");  
-        strBuffer.append(curve.toString("curve ", indent+1));
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("y1value: ").append(y1value).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        

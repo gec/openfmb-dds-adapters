@@ -16,17 +16,16 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class BatteryStatus   implements Copyable, Serializable{
+public class BatteryStatus  extends org.openfmb.model.dds.rti.openfmb.commonmodule.Status implements Copyable, Serializable{
 
     public boolean isCharging= false;
     public boolean isConnected= false;
     public String mode=  "" ; /* maximum length = (255) */
     public float stateOfCharge= 0;
-    public long timestamp= 0;
-    public String value=  "" ; /* maximum length = (255) */
-    public org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type)org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type.create();
 
     public BatteryStatus() {
+
+        super();
 
     }
     public BatteryStatus (BatteryStatus other) {
@@ -46,15 +45,11 @@ public class BatteryStatus   implements Copyable, Serializable{
 
     public void clear() {
 
+        super.clear();
         isCharging= false;
         isConnected= false;
         mode=  ""; 
         stateOfCharge= 0;
-        timestamp= 0;
-        value=  ""; 
-        if (qualityFlag != null) {
-            qualityFlag.clear();
-        }
     }
 
     public boolean equals(Object o) {
@@ -62,6 +57,10 @@ public class BatteryStatus   implements Copyable, Serializable{
         if (o == null) {
             return false;
         }        
+
+        if (!super.equals(o)) {
+            return false;
+        }
 
         if(getClass() != o.getClass()) {
             return false;
@@ -81,28 +80,18 @@ public class BatteryStatus   implements Copyable, Serializable{
         if(stateOfCharge != otherObj.stateOfCharge) {
             return false;
         }
-        if(timestamp != otherObj.timestamp) {
-            return false;
-        }
-        if(!value.equals(otherObj.value)) {
-            return false;
-        }
-        if(!qualityFlag.equals(otherObj.qualityFlag)) {
-            return false;
-        }
 
         return true;
     }
 
     public int hashCode() {
         int __result = 0;
+
+        __result = super.hashCode();
         __result += (isCharging == true)?1:0;
         __result += (isConnected == true)?1:0;
         __result += mode.hashCode(); 
         __result += (int)stateOfCharge;
-        __result += (int)timestamp;
-        __result += value.hashCode(); 
-        __result += qualityFlag.hashCode(); 
         return __result;
     }
 
@@ -124,14 +113,11 @@ public class BatteryStatus   implements Copyable, Serializable{
 
         BatteryStatus typedSrc = (BatteryStatus) src;
         BatteryStatus typedDst = this;
-
+        super.copy_from(typedSrc);
         typedDst.isCharging = typedSrc.isCharging;
         typedDst.isConnected = typedSrc.isConnected;
         typedDst.mode = typedSrc.mode;
         typedDst.stateOfCharge = typedSrc.stateOfCharge;
-        typedDst.timestamp = typedSrc.timestamp;
-        typedDst.value = typedSrc.value;
-        typedDst.qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type) typedDst.qualityFlag.copy_from(typedSrc.qualityFlag);
 
         return this;
     }
@@ -148,6 +134,8 @@ public class BatteryStatus   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
+        strBuffer.append(super.toString("",indent));
+
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("isCharging: ").append(isCharging).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        
@@ -156,11 +144,6 @@ public class BatteryStatus   implements Copyable, Serializable{
         strBuffer.append("mode: ").append(mode).append("\n");  
         CdrHelper.printIndent(strBuffer, indent+1);        
         strBuffer.append("stateOfCharge: ").append(stateOfCharge).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("timestamp: ").append(timestamp).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("value: ").append(value).append("\n");  
-        strBuffer.append(qualityFlag.toString("qualityFlag ", indent+1));
 
         return strBuffer.toString();
     }

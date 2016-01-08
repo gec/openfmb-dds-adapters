@@ -18,18 +18,13 @@ public class  ForecastScheduleTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[8];
+        ValueMember sm[]=new ValueMember[3];
 
-        sm[__i]=new  StructMember("startTime", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,0 , false);__i++;
-        sm[__i]=new  StructMember("value1Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,1 , false);__i++;
-        sm[__i]=new  StructMember("value1Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,2 , false);__i++;
-        sm[__i]=new  StructMember("value2Multiplier", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeCode.VALUE,3 , false);__i++;
-        sm[__i]=new  StructMember("value2Unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,4 , false);__i++;
-        sm[__i]=new  StructMember("version", false, (short)-1,  false,(TypeCode) new TypeCode(TCKind.TK_STRING,255),5 , false);__i++;
-        sm[__i]=new  StructMember("versionDateTime", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,6 , false);__i++;
-        sm[__i]=new  StructMember("irregularTimePoints", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePointsTypeCode.VALUE,7 , false);__i++;
+        sm[__i]=new  ValueMember("version", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) new TypeCode(TCKind.TK_STRING,255),5 , false);__i++;
+        sm[__i]=new  ValueMember("versionDateTime", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeTypeTypeCode.VALUE,6 , false);__i++;
+        sm[__i]=new  ValueMember("irregularTimePoints", false, (short)-1,  false,PUBLIC_MEMBER.VALUE,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.SequenceOfForecastScheduleIrregularTimePointsTypeCode.VALUE,7 , false);__i++;
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::commonmodule::ForecastSchedule",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_value_tc("openfmb::commonmodule::ForecastSchedule",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY, VM_NONE.VALUE,org.openfmb.model.dds.rti.openfmb.commonmodule.BasicIntervalScheduleTypeCode.VALUE, sm);        
         return tc;
     }
 }

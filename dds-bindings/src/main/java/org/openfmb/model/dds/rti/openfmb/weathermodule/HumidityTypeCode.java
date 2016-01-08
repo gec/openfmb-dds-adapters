@@ -20,7 +20,7 @@ public class  HumidityTypeCode {
         int __i=0;
         StructMember sm[]=new StructMember[2];
 
-        sm[__i]=new  StructMember("unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,0 , false);__i++;
+        sm[__i]=new  StructMember("unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,0 , false);__i++;
         sm[__i]=new  StructMember("humidityData", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfHumidityDataTypeCode.VALUE,1 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::weathermodule::Humidity",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        

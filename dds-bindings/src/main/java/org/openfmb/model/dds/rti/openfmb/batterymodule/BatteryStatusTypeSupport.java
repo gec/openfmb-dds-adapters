@@ -150,13 +150,12 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -181,13 +180,11 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment );
         currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
         currentAlignment += CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -218,14 +215,13 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
 
         } 
 
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
         currentAlignment  +=  CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment);
         currentAlignment  +=  CdrPrimitiveType.BOOLEAN.getMaxSizeSerialized(currentAlignment);
         currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.mode );
         currentAlignment  +=  CdrPrimitiveType.FLOAT.getMaxSizeSerialized(currentAlignment);
-        currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.value );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.qualityFlag);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -281,6 +277,8 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
 
             BatteryStatus typedSrc = (BatteryStatus) src;
 
+            org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
+
             dst.writeBoolean(typedSrc.isCharging);
 
             dst.writeBoolean(typedSrc.isConnected);
@@ -288,12 +286,6 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
             dst.writeString(typedSrc.mode,(255));
 
             dst.writeFloat(typedSrc.stateOfCharge);
-
-            dst.writeLong(typedSrc.timestamp);
-
-            dst.writeString(typedSrc.value,(255));
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().serialize(endpoint_data, typedSrc.qualityFlag, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
 
         if (serialize_encapsulation) {
@@ -357,14 +349,13 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
 
             BatteryStatus typedDst = (BatteryStatus) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
                 typedDst.isCharging = src.readBoolean();
                 typedDst.isConnected = src.readBoolean();
                 typedDst.mode = src.readString((255));
                 typedDst.stateOfCharge = src.readFloat();
-                typedDst.timestamp = src.readLong();
-                typedDst.value = src.readString((255));
-                typedDst.qualityFlag = (org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16Type)org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.qualityFlag, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -436,6 +427,7 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
+            org.openfmb.model.dds.rti.openfmb.commonmodule.StatusTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
             src.skipBoolean();
 
             src.skipBoolean();
@@ -443,12 +435,6 @@ public class BatteryStatusTypeSupport extends TypeSupportImpl {
             src.skipString();
 
             src.skipFloat();
-
-            src.skipLong();
-
-            src.skipString();
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.HexBinary16TypeTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
         }
 

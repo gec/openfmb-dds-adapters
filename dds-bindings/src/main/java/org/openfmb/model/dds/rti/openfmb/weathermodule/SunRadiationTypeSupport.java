@@ -150,8 +150,8 @@ public class SunRadiationTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationDataTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -177,8 +177,8 @@ public class SunRadiationTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationDataTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
@@ -210,9 +210,9 @@ public class SunRadiationTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.multiplier);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.unit);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationDataTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.sunRadiationData);
@@ -271,9 +271,9 @@ public class SunRadiationTypeSupport extends TypeSupportImpl {
 
             SunRadiation typedSrc = (SunRadiation) src;
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.multiplier, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().serialize(endpoint_data, typedSrc.unit, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationDataTypeSupport.get_instance().serialize(endpoint_data, typedSrc.sunRadiationData, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
@@ -340,8 +340,8 @@ public class SunRadiationTypeSupport extends TypeSupportImpl {
             SunRadiation typedDst = (SunRadiation) dst;
             typedDst.clear();      
             try{
-                typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.multiplier, src, false, true, endpoint_plugin_qos);     
-                typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.unit, src, false, true, endpoint_plugin_qos);     
+                typedDst.multiplier = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.multiplier, src, false, true, endpoint_plugin_qos);     
+                typedDst.unit = (org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKind)org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.unit, src, false, true, endpoint_plugin_qos);     
                 typedDst.sunRadiationData = (org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationData)org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationDataTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.sunRadiationData, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -414,9 +414,9 @@ public class SunRadiationTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitmultiplier.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitMultiplierKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
-            org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfSunRadiationDataTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 

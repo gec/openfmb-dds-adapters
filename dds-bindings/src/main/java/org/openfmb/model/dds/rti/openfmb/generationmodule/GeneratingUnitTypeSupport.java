@@ -150,10 +150,9 @@ public class GeneratingUnitTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePowerTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePowerTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -178,10 +177,8 @@ public class GeneratingUnitTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePowerTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePowerTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -212,10 +209,10 @@ public class GeneratingUnitTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.mRID );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.description );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePowerTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePowerTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.maxOperatingP);
 
         if (include_encapsulation) {
@@ -272,13 +269,9 @@ public class GeneratingUnitTypeSupport extends TypeSupportImpl {
 
             GeneratingUnit typedSrc = (GeneratingUnit) src;
 
-            dst.writeString(typedSrc.mRID,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
-            dst.writeString(typedSrc.description,(255));
-
-            dst.writeString(typedSrc.name,(255));
-
-            org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePowerTypeSupport.get_instance().serialize(endpoint_data, typedSrc.maxOperatingP, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePowerTypeSupport.get_instance().serialize(endpoint_data, typedSrc.maxOperatingP, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
 
         if (serialize_encapsulation) {
@@ -342,11 +335,10 @@ public class GeneratingUnitTypeSupport extends TypeSupportImpl {
 
             GeneratingUnit typedDst = (GeneratingUnit) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.mRID = src.readString((255));
-                typedDst.description = src.readString((255));
-                typedDst.name = src.readString((255));
-                typedDst.maxOperatingP = (org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePower)org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePowerTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.maxOperatingP, src, false, true, endpoint_plugin_qos);     
+                typedDst.maxOperatingP = (org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePower)org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePowerTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.maxOperatingP, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -418,13 +410,8 @@ public class GeneratingUnitTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipString();
-
-            src.skipString();
-
-            org.openfmb.model.dds.rti.openfmb.generationmodule.ActivePowerTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObjectTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ActivePowerTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
         }
 

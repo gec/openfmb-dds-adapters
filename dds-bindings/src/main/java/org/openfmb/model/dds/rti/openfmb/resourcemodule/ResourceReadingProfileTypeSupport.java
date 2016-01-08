@@ -150,9 +150,9 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -178,9 +178,8 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
@@ -212,9 +211,10 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.logicalDeviceID );
-        currentAlignment  +=  CdrPrimitiveType.LONG.getMaxSizeSerialized(currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().get_serialized_sample_size(
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.meter);
         currentAlignment += org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().get_serialized_sample_size(
             endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.readings);
@@ -248,7 +248,9 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().get_serialized_key_max_size(
+            endpoint_data,
+            false,encapsulation_id,currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -272,11 +274,9 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
             ResourceReadingProfile typedSrc = (ResourceReadingProfile) src;
 
-            dst.writeString(typedSrc.logicalDeviceID,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
-            dst.writeLong(typedSrc.timestamp);
-
-            org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().serialize(endpoint_data, typedSrc.meter, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().serialize(endpoint_data, typedSrc.meter, dst, false, encapsulation_id,true,endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().serialize(endpoint_data, typedSrc.readings, dst, false, encapsulation_id,true,endpoint_plugin_qos);
         }
@@ -314,8 +314,8 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
         if (serialize_key) {
 
             ResourceReadingProfile typedSrc = (ResourceReadingProfile) src;    
-
-            dst.writeString(typedSrc.logicalDeviceID,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialize_key(
+                endpoint_data, src, dst, false, encapsulation_id, true, endpoint_plugin_qos);
 
         }
 
@@ -343,10 +343,10 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
             ResourceReadingProfile typedDst = (ResourceReadingProfile) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.logicalDeviceID = src.readString((255));
-                typedDst.timestamp = src.readLong();
-                typedDst.meter = (org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter)org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.meter, src, false, true, endpoint_plugin_qos);     
+                typedDst.meter = (org.openfmb.model.dds.rti.openfmb.commonmodule.Meter)org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.meter, src, false, true, endpoint_plugin_qos);     
                 typedDst.readings = (org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadings)org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.readings, src, false, true, endpoint_plugin_qos);     
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -393,7 +393,8 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
             ResourceReadingProfile typedDst = (ResourceReadingProfile) dst;
 
-            typedDst.logicalDeviceID = src.readString((255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().deserialize_key_sample(
+                endpoint_data, dst, src, false, true, endpoint_plugin_qos);
 
         }
         if (deserialize_encapsulation) {
@@ -419,11 +420,8 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipLong();
-
-            org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
@@ -455,11 +453,11 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
             ResourceReadingProfile typedDst = (ResourceReadingProfile) sample;
 
-            typedDst.logicalDeviceID = src.readString((255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialized_sample_to_key(endpoint_data,sample,
+            src,false, true,
+            endpoint_plugin_qos);
 
-            src.skipLong();
-
-            org.openfmb.model.dds.rti.openfmb.resourcemodule.MeterTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.MeterTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
             org.openfmb.model.dds.rti.openfmb.resourcemodule.SequenceOfResourceReadingsTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
 
@@ -481,7 +479,7 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
         = (ResourceReadingProfile) instance;
         ResourceReadingProfile typedSrc
         = (ResourceReadingProfile) key;
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
+        org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().key_to_instance(endpoint_data,instance,key);
 
     }
 
@@ -495,7 +493,7 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
         = (ResourceReadingProfile)key;
         ResourceReadingProfile typedSrc
         = (ResourceReadingProfile) instance;
-        typedDst.logicalDeviceID = typedSrc.logicalDeviceID;
+        org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().instance_to_key(endpoint_data,key,instance);
 
     }
 
@@ -560,8 +558,9 @@ public class ResourceReadingProfileTypeSupport extends TypeSupportImpl {
 
             position = src.resetAlignment();
         }
-
-        typedDst.logicalDeviceID = src.readString((255));
+        org.openfmb.model.dds.rti.openfmb.commonmodule.ContainerTypeSupport.get_instance().serialized_sample_to_key(endpoint_data,sample,
+        src, false, true,
+        endpoint_plugin_qos);
 
         if (include_encapsulation) {
             src.restoreAlignment(position);

@@ -20,7 +20,7 @@ public class  TemperatureTypeCode {
         int __i=0;
         StructMember sm[]=new StructMember[2];
 
-        sm[__i]=new  StructMember("unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.unitsymbol.UnitSymbolKindTypeCode.VALUE,0 , false);__i++;
+        sm[__i]=new  StructMember("unit", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.commonmodule.UnitSymbolKindTypeCode.VALUE,0 , false);__i++;
         sm[__i]=new  StructMember("temperatureData", false, (short)-1,  false,(TypeCode) org.openfmb.model.dds.rti.openfmb.weathermodule.SequenceOfTemperatureDataTypeCode.VALUE,1 , false);__i++;
 
         tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("openfmb::weathermodule::Temperature",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm);        

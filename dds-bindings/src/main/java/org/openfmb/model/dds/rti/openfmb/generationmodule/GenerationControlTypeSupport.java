@@ -150,11 +150,9 @@ public class GenerationControlTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, ((255))+1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeSupport.get_instance().get_serialized_sample_max_size(endpoint_data,false,encapsulation_id,currentAlignment);
+
+        currentAlignment += CdrPrimitiveType.BYTE.getMaxSizeSerialized(currentAlignment );
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -179,11 +177,8 @@ public class GenerationControlTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += CdrPrimitiveType.getStringMaxSizeSerialized(currentAlignment, 1);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false, encapsulation_id,currentAlignment);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeSupport.get_instance().get_serialized_sample_min_size(endpoint_data,false,encapsulation_id,currentAlignment);
+        currentAlignment += CdrPrimitiveType.BYTE.getMaxSizeSerialized(currentAlignment );
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -214,14 +209,10 @@ public class GenerationControlTypeSupport extends TypeSupportImpl {
 
         } 
 
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.issueID );
-        currentAlignment  +=  CdrPrimitiveType.getStringSerializedSize(currentAlignment , typedSrc.name );
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.endDeviceControlType);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.scheduledInterval);
-        currentAlignment += org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeSupport.get_instance().get_serialized_sample_size(
-            endpoint_data,false,encapsulation_id,currentAlignment,typedSrc.setPoints);
+        currentAlignment += org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeSupport.get_instance().get_serialized_sample_size(
+            endpoint_data,false,encapsulation_id,currentAlignment,sample);
+
+        currentAlignment  +=  CdrPrimitiveType.BYTE.getMaxSizeSerialized(currentAlignment);
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -277,15 +268,9 @@ public class GenerationControlTypeSupport extends TypeSupportImpl {
 
             GenerationControl typedSrc = (GenerationControl) src;
 
-            dst.writeString(typedSrc.issueID,(255));
+            org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeSupport.get_instance().serialize(endpoint_data,src,dst,false,encapsulation_id,serialize_sample,endpoint_plugin_qos);
 
-            dst.writeString(typedSrc.name,(255));
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeSupport.get_instance().serialize(endpoint_data, typedSrc.endDeviceControlType, dst, false, encapsulation_id,true,endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeSupport.get_instance().serialize(endpoint_data, typedSrc.scheduledInterval, dst, false, encapsulation_id,true,endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeSupport.get_instance().serialize(endpoint_data, typedSrc.setPoints, dst, false, encapsulation_id,true,endpoint_plugin_qos);
+            dst.writeByte(typedSrc.__dummy_prevent_empty_class);
         }
 
         if (serialize_encapsulation) {
@@ -349,12 +334,10 @@ public class GenerationControlTypeSupport extends TypeSupportImpl {
 
             GenerationControl typedDst = (GenerationControl) dst;
             typedDst.clear();      
+            org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeSupport.get_instance().deserialize_sample(endpoint_data,dst,src,false,deserialize_sample,endpoint_plugin_qos);
+
             try{
-                typedDst.issueID = src.readString((255));
-                typedDst.name = src.readString((255));
-                typedDst.endDeviceControlType = (org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlType)org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.endDeviceControlType, src, false, true, endpoint_plugin_qos);     
-                typedDst.scheduledInterval = (org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeInterval)org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.scheduledInterval, src, false, true, endpoint_plugin_qos);     
-                typedDst.setPoints = (org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPoints)org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeSupport.get_instance().deserialize_sample(endpoint_data, typedDst.setPoints, src, false, true, endpoint_plugin_qos);     
+                typedDst.__dummy_prevent_empty_class = src.readByte();
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
                     throw new RETCODE_ERROR("Error deserializing sample! Remainder: " + src.available() + "\n" +
@@ -426,15 +409,8 @@ public class GenerationControlTypeSupport extends TypeSupportImpl {
 
         if (skip_sample) {
 
-            src.skipString();
-
-            src.skipString();
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.commonmodule.DateTimeIntervalTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
-
-            org.openfmb.model.dds.rti.openfmb.generationmodule.SequenceOfGenerationControlSetPointsTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            org.openfmb.model.dds.rti.openfmb.commonmodule.EndDeviceControlTypeSupport.get_instance().skip(endpoint_data, src, false, true, endpoint_plugin_qos);
+            src.skipByte();
 
         }
 

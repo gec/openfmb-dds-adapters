@@ -31,7 +31,7 @@ import org.openfmb.model.dds.rti.openfmb.loadmodule.LoadReadingProfileDataWriter
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.Recloser;
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserEventProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.reclosermodule.RecloserReadingProfileDataWriter;
-import org.openfmb.model.dds.rti.openfmb.resourcemodule.Meter;
+import org.openfmb.model.dds.rti.openfmb.commonmodule.Meter;
 import org.openfmb.model.dds.rti.openfmb.resourcemodule.ResourceReadingProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarEventProfileDataWriter;
 import org.openfmb.model.dds.rti.openfmb.solarmodule.SolarInverter;
