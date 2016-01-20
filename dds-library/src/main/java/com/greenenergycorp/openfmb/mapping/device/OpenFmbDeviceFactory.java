@@ -73,7 +73,7 @@ public class OpenFmbDeviceFactory {
                 registeredTypes.add(handle.typeName());
             }
 
-            final Topic registered = participant.registerTopic(topic, handle.typeName(), true);
+            final Topic registered = participant.registerTopic(topic, handle.typeName(), false);
             topicMap.put(topic, registered);
             return registered;
         }

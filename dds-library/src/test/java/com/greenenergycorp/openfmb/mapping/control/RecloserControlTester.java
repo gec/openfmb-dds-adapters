@@ -37,7 +37,7 @@ public class RecloserControlTester {
 
     public static void main(String[] args) throws Exception {
 
-        final boolean reliable = true;
+        final boolean reliable = false;
 
         DdsParticipant participant = DdsParticipant.create();
 
