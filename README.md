@@ -11,11 +11,11 @@ XML file as a program parameter.
 
 For the Modbus adapter:
 
-    java -cp openfmb-dds-modbus-adapter-0.0.3-SNAPSHOT-jar-with-dependencies.jar com.greenenergycorp.openfmb.dds.modbus.OpenFmbModbusAdapter modbus_config.xml
+    java -cp openfmb-dds-modbus-adapter-0.0.3-jar-with-dependencies.jar com.greenenergycorp.openfmb.dds.modbus.OpenFmbModbusAdapter modbus_config.xml
 
 For the DNP3 adapter:
 
-    java -cp openfmb-dds-dnp3-adapter-0.0.3-SNAPSHOT-jar-with-dependencies.jar com.greenenergycorp.openfmb.dds.dnp3.OpenFmbDnpAdapter dnp3_config.xml
+    java -cp openfmb-dds-dnp3-adapter-0.0.3-jar-with-dependencies.jar com.greenenergycorp.openfmb.dds.dnp3.OpenFmbDnpAdapter dnp3_config.xml
 
 
 Project Layout
