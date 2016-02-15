@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.greenenergycorp.openfmb</groupId>
         <artifactId>openfmb-microgrid-parent</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.4-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -42,12 +42,12 @@
         <dependency>
             <groupId>com.greenenergycorp.openfmb</groupId>
             <artifactId>openfmb-dds-adapter-xml</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.openfmb</groupId>
             <artifactId>openfmb-model-dds-rti</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
