@@ -11,10 +11,10 @@ or consult the RTI Connext manual.
 
 package org.openfmb.model.dds.rti.openfmb.loadmodule;
 
-import com.rti.dds.cdr.CdrHelper;
+import com.rti.dds.infrastructure.*;
 import com.rti.dds.infrastructure.Copyable;
-
 import java.io.Serializable;
+import com.rti.dds.cdr.CdrHelper;
 
 public class EnergyConsumer  extends org.openfmb.model.dds.rti.openfmb.commonmodule.IdentifiedObject implements Copyable, Serializable{
 

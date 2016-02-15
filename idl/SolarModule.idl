@@ -1,0 +1,67 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module solarmodule {
+
+	struct SolarCapability {
+		float ahrRtg;   
+		string qualityFlag;   
+		openfmb::commonmodule::DateTimeType timestamp;
+		float voltage;
+		float wRtgMaxVal;   
+		float wRtgMinVal;   
+	};
+	//@top-level false
+
+	struct SolarInverter : openfmb::commonmodule::IdentifiedObject {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct SolarInverterStatus : openfmb::commonmodule::Status {
+		boolean isConnected;  
+	};
+	//@top-level false
+
+	struct SolarCapabilityProfile :openfmb::commonmodule::Container {
+		SolarCapability solarCapability; 
+		SolarInverter solarInverter; 
+	};
+	#pragma keylist SolarCapabilityProfile logicalDeviceID
+
+	struct SolarControl : openfmb::commonmodule::EndDeviceControl {
+		boolean isIslanded;   
+	};
+	//@top-level false
+
+	struct SolarControlProfile : openfmb::commonmodule::Container {
+		SolarControl solarControl; 
+		SolarInverter solarInverter; 
+	};
+	#pragma keylist SolarControlProfile logicalDeviceID
+
+	struct SolarEventProfile : openfmb::commonmodule::Container {
+		SolarInverter solarInverter; 
+		SolarInverterStatus solarInverterStatus; 
+	};
+	#pragma keylist SolarEventProfile logicalDeviceID
+
+	struct SolarForecastProfile : openfmb::commonmodule::Container {
+		openfmb::commonmodule::ForecastSchedule forecastSchedule; 
+		SolarInverter solarInverter;
+	};
+	#pragma keylist SolarForecastProfile logicalDeviceID
+
+	const unsigned long MaxLengthSolarReadings = 100;
+	typedef sequence<openfmb::commonmodule::Reading, MaxLengthSolarReadings> SequenceOfSolarReadings;
+
+	struct SolarReadingProfile : openfmb::commonmodule::Container {
+		SequenceOfSolarReadings readings; 
+		SolarInverter solarInverter; 
+	};
+	#pragma keylist SolarReadingProfile logicalDeviceID
+
+};
+
+}; // openfmb

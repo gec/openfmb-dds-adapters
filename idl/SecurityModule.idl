@@ -1,0 +1,20 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module securitymodule {
+
+	struct SecurityEvent : openfmb::commonmodule::Event {
+		string log;   
+		string severity;   
+	};
+	//@top-level false
+
+	struct SecurityEventProfile : openfmb::commonmodule::Container {
+		SecurityEvent securityEvent; 
+	};
+	#pragma keylist SecurityEventProfile logicalDeviceID
+
+};
+
+}; // openfmb

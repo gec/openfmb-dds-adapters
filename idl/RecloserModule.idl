@@ -1,0 +1,46 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module reclosermodule {
+
+	struct Recloser : openfmb::commonmodule::IdentifiedObject {
+		boolean normalOpen;   
+	};
+	//@top-level false
+
+	struct RecloserControl : openfmb::commonmodule::EndDeviceControl {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct RecloserControlProfile : openfmb::commonmodule::Container {
+		Recloser recloser; 
+		RecloserControl recloserControl; 
+	};
+	#pragma keylist RecloserControlProfile logicalDeviceID
+
+	struct RecloserStatus : openfmb::commonmodule::Status {
+		boolean isBlocked;
+		openfmb::commonmodule::SwitchStatusKind switchStatus;
+	};
+	//@top-level false
+
+	struct RecloserEventProfile : openfmb::commonmodule::Container {
+		Recloser recloser; 
+		RecloserStatus recloserStatus; 
+	};
+	#pragma keylist RecloserEventProfile logicalDeviceID
+
+	const unsigned long MaxLengthRecloserReadings = 100;
+	typedef sequence<openfmb::commonmodule::Reading, MaxLengthRecloserReadings> SequenceOfRecloserReadings;
+
+	struct RecloserReadingProfile : openfmb::commonmodule::Container {
+		Recloser recloser; 
+		SequenceOfRecloserReadings readings; 
+	};
+	#pragma keylist RecloserReadingProfile logicalDeviceID
+
+};
+
+}; // openfmb

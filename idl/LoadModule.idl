@@ -1,0 +1,51 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module loadmodule {
+
+	struct EnergyConsumer : openfmb::commonmodule::IdentifiedObject {
+		string operatingLimit;   
+	};
+	//@top-level false
+
+	struct LoadControl : openfmb::commonmodule::EndDeviceControl {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct LoadControlProfile : openfmb::commonmodule::Container {
+		EnergyConsumer energyConsumer; 
+		LoadControl loadControl; 
+	};
+	#pragma keylist LoadControlProfile logicalDeviceID
+
+	struct LoadForecastProfile : openfmb::commonmodule::Container {
+		EnergyConsumer energyConsumer; 
+		openfmb::commonmodule::ForecastSchedule forecastSchedule; 
+	};
+	#pragma keylist LoadForecastProfile logicalDeviceID
+
+	
+	const unsigned long MaxLengthLoadReadings = 100;
+	typedef sequence<openfmb::commonmodule::Reading, MaxLengthLoadReadings> SequenceOfLoadReadings;
+
+	struct LoadReadingProfile : openfmb::commonmodule::Container {
+		EnergyConsumer energyConsumer; 
+		SequenceOfLoadReadings readings;
+	};
+	#pragma keylist LoadReadingProfile logicalDeviceID
+
+	
+	const unsigned long MaxLengthLoadMeasurements = 100;
+	typedef sequence<openfmb::commonmodule::StringMeasurement, MaxLengthLoadMeasurements> SequenceOfLoadMeasurements;
+	
+	struct LoadStatusProfile : openfmb::commonmodule::Container {
+		EnergyConsumer energyConsumer; 
+		SequenceOfLoadMeasurements measurements;
+	};
+	#pragma keylist LoadStatusProfile logicalDeviceID
+	
+};
+
+}; // openfmb

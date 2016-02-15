@@ -1,0 +1,89 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module weathermodule {
+	
+	struct HumidityData {
+		openfmb::commonmodule::DateTimeType timestamp;
+		float value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthHumidityData = 100;
+	typedef sequence<HumidityData, MaxLengthHumidityData> SequenceOfHumidityData;
+	
+	struct Humidity {
+		openfmb::commonmodule::UnitSymbolKind unit;
+		SequenceOfHumidityData humidityData;
+	};
+	//@top-level false
+	
+	struct SunRadiationData {
+		openfmb::commonmodule::DateTimeType timestamp;
+		float value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthSunRadiationData = 100;
+	typedef sequence<SunRadiationData, MaxLengthSunRadiationData> SequenceOfSunRadiationData;
+	
+	struct SunRadiation {
+		openfmb::commonmodule::UnitMultiplierKind multiplier;
+		openfmb::commonmodule::UnitSymbolKind unit;
+		SequenceOfSunRadiationData sunRadiationData;
+	};
+	//@top-level false
+	
+	struct TemperatureData {
+		openfmb::commonmodule::DateTimeType timestamp;
+		float value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthTemperatureData = 100;
+	typedef sequence<TemperatureData, MaxLengthTemperatureData> SequenceOfTemperatureData;
+	
+	struct Temperature {
+		openfmb::commonmodule::UnitSymbolKind unit;
+		SequenceOfTemperatureData temperatureData;
+	};
+	//@top-level false
+	
+	struct WindData {
+		openfmb::commonmodule::DateTimeType timestamp;
+		float windDirection;
+		float windSpeed;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthWindData = 100;
+	typedef sequence<WindData, MaxLengthWindData> SequenceOfWindData;
+	
+	struct Wind {
+		openfmb::commonmodule::UnitSymbolKind directionUnit;
+		openfmb::commonmodule::UnitSymbolKind speedUnit;
+		SequenceOfWindData windData;
+	};
+	//@top-level false
+	
+	struct WeatherData {
+		string interval;
+		string source;
+		string version;
+		openfmb::commonmodule::DateTimeType versionDateTime;
+		Humidity humidity;
+		SunRadiation sunRadiation;
+		Temperature temperature;
+		Wind wind;
+	};
+	//@top-level false
+
+	struct WeatherDataProfile : openfmb::commonmodule::Container {
+		WeatherData weatherData;
+	};
+	#pragma keylist WeatherDataProfile logicalDeviceID
+
+};
+
+}; // openfmb

@@ -6,4 +6,8 @@ if [ -z "$RTIDDSGEN" ]; then
 fi
 
 rm -rf dds-bindings/src/main/java/*
-$RTIDDSGEN -d dds-bindings/src/main/java/ -language Java -package org.openfmb.model.dds.rti idl/OpenFMB.idl
+for i in `ls idl/*.idl`; do
+    echo "$i"
+    $RTIDDSGEN -d dds-bindings/src/main/java/ -language Java -package org.openfmb.model.dds.rti -I idl/ $i
+done
+

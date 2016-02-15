@@ -1,0 +1,67 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module interchangemodule {
+
+	struct MarketFactors {
+		openfmb::commonmodule::DateTimeType intervalEndTime;  
+		openfmb::commonmodule::DateTimeType intervalStartTime;  
+	};
+	//@top-level false
+
+	struct MarketRun {
+		openfmb::commonmodule::ExecutionTypeKind executionType;
+		openfmb::commonmodule::DateTimeType marketEndTime;  
+		string marketID;  
+		string marketRunID;  
+		openfmb::commonmodule::DateTimeType marketStartTime;  
+		openfmb::commonmodule::MarketTypeKind marketType;  
+	};
+	//@top-level false
+
+	const unsigned long MaxLengthMarketFactors = 100;
+	typedef sequence<MarketFactors, MaxLengthMarketFactors> SequenceOfMarketFactors;
+
+	const unsigned long MaxLengthMarketRuns = 100;
+	typedef sequence<MarketRun, MaxLengthMarketRuns> SequenceOfMarketRuns;
+
+	struct Market : openfmb::commonmodule::IdentifiedObject {
+		openfmb::commonmodule::DateTimeType actualEnd;   
+		openfmb::commonmodule::DateTimeType actualStart;   
+		boolean dst;   
+		openfmb::commonmodule::DateTimeType end;   
+		string localTimeZone;   
+		openfmb::commonmodule::DateTimeType start;   
+		string status;   
+		float timeIntervalLength;   
+		openfmb::commonmodule::DateTimeType tradingDay;   
+		string tradingPeriod;   
+		SequenceOfMarketFactors marketFactors;
+		SequenceOfMarketRuns marketRuns;
+	};
+	//@top-level false
+
+	struct OptimizedMicroGridMarket : Market {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct InterchangeSchedule : openfmb::commonmodule::Curve {
+		openfmb::commonmodule::InterTieDirectionKind directionType;   
+		openfmb::commonmodule::MarketProductTypeKind energyType;
+		long intervalLength;
+		openfmb::commonmodule::EnergyProductTypeKind scheduleType;
+		OptimizedMicroGridMarket optimizedMicroGridMarket;   
+	};
+	//@top-level false
+
+	struct InterchangeScheduleProfile : openfmb::commonmodule::Container {
+		InterchangeSchedule interchangeSchedule; 
+		openfmb::commonmodule::PowerSystemResource powerSystemResource; 
+	};
+	#pragma keylist InterchangeScheduleProfile scheduleID
+
+};
+
+}; // openfmb

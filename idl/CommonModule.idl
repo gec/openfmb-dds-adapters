@@ -1,0 +1,331 @@
+module openfmb {
+
+module commonmodule {
+
+	typedef string UuidType;
+
+	// milliseconds since Jan 1 1970 UTC
+	typedef long long DateTimeType;
+
+	// These two produce the same structure but this way we control the name of the internal field
+	//typedef octet HexBinary16[2];
+	struct HexBinary16Type {
+	    octet data[2];
+	};
+	//@top-level false
+
+	enum UnitMultiplierKind {
+	    centi,
+	    deci,
+	    Giga,
+	    kilo,
+	    Mega,
+	    milli,
+	    micro,
+	    nano,
+	    noMultiplier,
+	    pico,
+	    Tera
+	};
+
+	enum UnitSymbolKind {
+	    Amp,
+	    deg,
+	    degC,
+	    degF,
+	    Farad,
+	    gram,
+	    hour,
+	    Henry,
+	    Hz,
+	    Joule,
+	    meter,
+	    m2,
+	    m3,
+	    min,
+	    mph,
+	    Newton,
+	    noUnit,
+	    ohm,
+	    Pa,
+	    rad,
+	    Siemens,
+	    sec,
+	    V,
+	    VA,
+	    VAh,
+	    VAr,
+	    VArh,
+	    W,
+	    Wh,
+	    WPerM2,
+	    wPerVA
+	};
+
+	enum FlowDirectionKind {
+	    forward,
+	    lagging,
+	    leading,
+	    net,
+	    noDirection,
+	    q1minusQ4,
+	    q1plusQ2,
+	    q1plusQ3,
+	    q1plusQ4,
+	    q2minusQ3,
+	    q2plusQ3,
+	    q2plusQ4,
+	    q3minusQ2,
+	    q3plusQ4,
+	    quadrant1,
+	    quadrant2,
+	    quadrant3,
+	    quadrant4,
+	    reverse,
+	    total,
+	    totalByPhase
+	};
+
+	enum PhaseCodeKind {
+	    A,
+	    AB,
+	    ABC,
+	    ABCN,
+	    ABN,
+	    AC,
+	    ACN,
+	    AN,
+	    B,
+	    BC,
+	    BCN,
+	    BN,
+	    C,
+	    CN,
+	    N,
+	    noPhase,
+	    s1,
+	    s12,
+	    s12N,
+	    s1N,
+	    s2,
+	    s2N
+	};
+
+	struct IdentifiedObject {
+		UuidType mRID;   
+		string description;   
+		string name;   
+	};
+	//@top-level false
+
+	struct Container {
+		string logicalDeviceID; //@key
+		DateTimeType timestamp; 
+	};
+	//@top-level false
+
+	struct ActivePower {
+		UnitMultiplierKind multiplier;   
+		UnitSymbolKind unit;   
+		float value;   
+	};
+	//@top-level false
+
+	struct BasicIntervalSchedule {
+		DateTimeType startTime;   
+		UnitMultiplierKind value1Multiplier;   
+		UnitSymbolKind value1Unit;   
+		UnitMultiplierKind value2Multiplier;   
+		UnitSymbolKind value2Unit;   
+	};
+	//@top-level false
+
+	struct DateTimeInterval {
+		DateTimeType end;  
+		DateTimeType start;  
+	};
+	//@top-level false
+
+	struct SetPoint {
+		string controlType;  
+		UnitMultiplierKind multiplier;  
+		UnitSymbolKind unit;  
+		float value;  
+	};
+	//@top-level false
+
+	struct ReadingType {
+		UnitMultiplierKind multiplier;  
+		string name;  
+		UnitSymbolKind unit;  
+		FlowDirectionKind flowDirection;  
+		PhaseCodeKind phases;  
+	};
+	//@top-level false
+
+	struct Reading {
+		string source;  
+		float value;
+		HexBinary16Type qualityFlag;  
+		ReadingType readingType;
+		DateTimeInterval timePeriod;  
+	};
+	//@top-level false
+
+	enum CurveStyleKind {
+	    constantYValue,
+	    straightLineYValues
+	};
+
+	struct CurveData {
+		float xvalue;   
+		float y1value;   
+		float y2value;   
+		float y3value;   
+	};
+	//@top-level false
+
+	const unsigned long MaxLengthCurveData = 100;
+	typedef sequence<CurveData, MaxLengthCurveData> SequenceOfCurveData;
+
+	struct Curve : IdentifiedObject {
+		CurveStyleKind curveStyle;   
+		UnitMultiplierKind xMultiplier;   
+		UnitSymbolKind xUnit;   
+		UnitMultiplierKind y1Multiplier;   
+		UnitSymbolKind y1Unit;   
+		UnitMultiplierKind y2Multiplier;   
+		UnitSymbolKind y2Unit;   
+		UnitMultiplierKind y3Multiplier;   
+		UnitSymbolKind y3Unit;
+		SequenceOfCurveData curveData;
+	};
+	//@top-level false
+
+	struct EndDeviceControlType {
+		string action;  
+		string type;  
+	};
+	//@top-level false
+
+	const unsigned long MaxLengthEndDeviceControlSetPoints = 100;
+	typedef sequence<SetPoint, MaxLengthEndDeviceControlSetPoints> SequenceOfEndDeviceControlSetPoints;
+
+	struct EndDeviceControl {
+		string issueID;   
+		string name;   
+		EndDeviceControlType endDeviceControlType;   
+		DateTimeInterval scheduledInterval;   
+		SequenceOfEndDeviceControlSetPoints setPoints;   
+	};
+	//@top-level false
+
+	struct Event : IdentifiedObject {
+		DateTimeType timestamp;   
+		string type;   
+		string value;   
+	};
+	//@top-level false
+
+	struct PowerSystemResource : IdentifiedObject {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct Meter : IdentifiedObject {
+		PowerSystemResource powerSystemResource;   
+	};
+	//@top-level false
+
+	struct IrregularTimePoint {
+		float value1;  
+		float value2;  
+	};
+	//@top-level false
+
+	const unsigned long MaxLengthForecastScheduleIrregularTimePoints = 100;
+	typedef sequence<IrregularTimePoint, MaxLengthForecastScheduleIrregularTimePoints> SequenceOfForecastScheduleIrregularTimePoints;
+
+	struct ForecastSchedule : BasicIntervalSchedule {
+		string version;   
+		DateTimeType versionDateTime;   
+		SequenceOfForecastScheduleIrregularTimePoints irregularTimePoints;
+	};
+	//@top-level false
+
+	struct Status {
+		DateTimeType timestamp;   
+		string value;   
+		HexBinary16Type qualityFlag;   
+	};
+	//@top-level false
+	
+	struct StringMeasurementValue {
+		string value;
+		DateTimeType timestamp;   
+		HexBinary16Type qualityFlag;   
+		string source;
+	};
+	//@top-level false
+	
+	struct StringMeasurement {
+		UuidType mRID;  
+		string description;
+		string measurementType;
+		string name;
+		PhaseCodeKind phases;  
+		UnitSymbolKind unit;  
+		UnitMultiplierKind multiplier;  
+		StringMeasurementValue value;
+	};
+	//@top-level false
+	
+	const unsigned long MaxLengthStringMeasurements = 100;
+	typedef sequence<StringMeasurement, MaxLengthStringMeasurements> SequenceOfStringMeasurements;
+	
+	enum InterTieDirectionKind {
+	    E,
+	    I,
+	    NETZERO
+	};
+
+	enum EnergyProductTypeKind {
+	    DYN,
+	    FIRM,
+	    NFRM,
+	    WHL
+	};
+
+	enum ExecutionTypeKind {
+	    DA,
+	    HASP,
+	    RTD,
+	    RTPD
+	};
+
+	enum MarketProductTypeKind {
+	    EN,
+	    LFU,
+	    NR,
+	    RC,
+	    RD,
+	    REG,
+	    RU,
+	    SR
+	};
+
+	enum MarketTypeKind {
+	    DAM,
+	    HAM,
+	    RTM,
+	    RUC
+	};
+
+	enum SwitchStatusKind {
+	    Closed,
+	    Open
+	};
+
+};
+
+}; // openfmb

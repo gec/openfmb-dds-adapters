@@ -1,0 +1,48 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module batterymodule {
+
+	struct BatterySystem : openfmb::commonmodule::IdentifiedObject {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct BatterySystemControl : openfmb::commonmodule::EndDeviceControl {
+		boolean isIslanded;  
+	};
+	//@top-level false
+	
+	struct BatteryControlProfile : openfmb::commonmodule::Container {
+		BatterySystem batterySystem; 
+		BatterySystemControl batterySystemControl; 
+	};
+	#pragma keylist BatteryControlProfile logicalDeviceID
+
+	struct BatteryStatus : openfmb::commonmodule::Status {
+		boolean isCharging;  
+		boolean isConnected;  
+		string mode;  
+		float stateOfCharge;  
+	};
+	//@top-level false
+
+	struct BatteryEventProfile : openfmb::commonmodule::Container {
+		BatteryStatus batteryStatus; 
+		BatterySystem batterySystem; 
+	};
+	#pragma keylist BatteryEventProfile logicalDeviceID
+
+	const unsigned long MaxLengthBatteryReadings = 100;
+	typedef sequence<openfmb::commonmodule::Reading, MaxLengthBatteryReadings> SequenceOfBatteryReadings;
+
+	struct BatteryReadingProfile : openfmb::commonmodule::Container {
+		BatterySystem batterySystem; 
+		SequenceOfBatteryReadings readings; 
+	};
+	#pragma keylist BatteryReadingProfile logicalDeviceID
+
+};
+
+}; // openfmb

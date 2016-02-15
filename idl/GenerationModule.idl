@@ -1,0 +1,52 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module generationmodule {
+
+	struct GeneratingUnit : openfmb::commonmodule::IdentifiedObject {
+		openfmb::commonmodule::ActivePower maxOperatingP;   
+	};
+	//@top-level false
+
+	struct GenerationControl : openfmb::commonmodule::EndDeviceControl {
+		octet __dummy_prevent_empty_class;
+	};
+	//@top-level false
+
+	struct GenerationControlProfile : openfmb::commonmodule::Container {
+		GeneratingUnit generatingUnit; 
+		GenerationControl generationControl; 
+	};
+	#pragma keylist GenerationControlProfile logicalDeviceID
+
+	struct GenerationStatus : openfmb::commonmodule::Status {
+		boolean isAutoOn;  
+		boolean isConnected;  
+	};
+	//@top-level false
+
+	struct GenerationEventProfile : openfmb::commonmodule::Container {
+		GeneratingUnit generatingUnit; 
+		GenerationStatus generationStatus; 
+	};
+	#pragma keylist GenerationEventProfile logicalDeviceID
+
+	struct GenerationForecastProfile : openfmb::commonmodule::Container {
+		openfmb::commonmodule::ForecastSchedule forecastSchedule; 
+		GeneratingUnit generatingUnit; 
+	};
+	#pragma keylist GenerationForecastProfile logicalDeviceID
+
+	const unsigned long MaxLengthGenerationReadings = 100;
+	typedef sequence<openfmb::commonmodule::Reading, MaxLengthGenerationReadings> SequenceOfGenerationReadings;
+
+	struct GenerationReadingProfile : openfmb::commonmodule::Container {
+		GeneratingUnit generatingUnit; 
+		SequenceOfGenerationReadings readings;
+	};
+	#pragma keylist GenerationReadingProfile logicalDeviceID
+
+};
+
+}; // openfmb

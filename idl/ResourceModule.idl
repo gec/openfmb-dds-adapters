@@ -1,0 +1,27 @@
+#include <CommonModule.idl>
+
+module openfmb {
+
+module resourcemodule {
+
+	const unsigned long MaxLengthResourceReadings = 100;
+	typedef sequence<openfmb::commonmodule::Reading, MaxLengthResourceReadings> SequenceOfResourceReadings;
+
+	struct ResourceReadingProfile : openfmb::commonmodule::Container {
+		openfmb::commonmodule::Meter meter; 
+		SequenceOfResourceReadings readings;
+	};
+	#pragma keylist ResourceReadingProfile logicalDeviceID
+	
+	const unsigned long MaxLengthResourceStatusMeasurements = 100;
+	typedef sequence<openfmb::commonmodule::StringMeasurement, MaxLengthResourceStatusMeasurements> SequenceOfResourceStatusMeasurements;
+
+	struct ResourceStatusProfile : openfmb::commonmodule::Container {
+		openfmb::commonmodule::PowerSystemResource powerSystemResource;   
+		SequenceOfResourceStatusMeasurements measurements;
+	};
+	#pragma keylist ResourceStatusProfile logicalDeviceID
+	
+};
+
+}; // openfmb
